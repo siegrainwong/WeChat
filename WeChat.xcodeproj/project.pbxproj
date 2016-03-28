@@ -9,10 +9,8 @@
 /* Begin PBXBuildFile section */
 		F9E072DC1CA90BD800468EDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DB1CA90BD800468EDC /* main.m */; };
 		F9E072DF1CA90BD800468EDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DE1CA90BD800468EDC /* AppDelegate.m */; };
-		F9E072E21CA90BD800468EDC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072E11CA90BD800468EDC /* ViewController.m */; };
 		F9E072E51CA90BD800468EDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E072E31CA90BD800468EDC /* Main.storyboard */; };
 		F9E072E81CA90BD800468EDC /* WeChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9E072E61CA90BD800468EDC /* WeChat.xcdatamodeld */; };
-		F9E072EA1CA90BD800468EDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9E072E91CA90BD800468EDC /* Assets.xcassets */; };
 		F9E072ED1CA90BD800468EDC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E072EB1CA90BD800468EDC /* LaunchScreen.storyboard */; };
 		F9E072F81CA90BD800468EDC /* WeChatTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072F71CA90BD800468EDC /* WeChatTests.m */; };
 		F9E073031CA90BD800468EDC /* WeChatUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073021CA90BD800468EDC /* WeChatUITests.m */; };
@@ -67,6 +65,12 @@
 		F9E0737D1CA90D6200468EDC /* pic8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9E0734A1CA90D6200468EDC /* pic8.jpg */; };
 		F9E0737E1CA90D6200468EDC /* picon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9E0734B1CA90D6200468EDC /* picon.jpg */; };
 		F9E0737F1CA90D6200468EDC /* tx.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F9E0734C1CA90D6200468EDC /* tx.jpeg */; };
+		F9E073981CA915BC00468EDC /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073971CA915BC00468EDC /* BaseViewController.m */; };
+		F9E0739B1CA9160D00468EDC /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E0739A1CA9160D00468EDC /* AddressBookViewController.m */; };
+		F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E0739D1CA9161500468EDC /* ChatViewController.m */; };
+		F9E073A11CA9161F00468EDC /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073A01CA9161F00468EDC /* FoundViewController.m */; };
+		F9E073A41CA9162800468EDC /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073A31CA9162800468EDC /* MeViewController.m */; };
+		F9E073A71CA9167300468EDC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073A61CA9167300468EDC /* MainTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,11 +95,8 @@
 		F9E072DB1CA90BD800468EDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F9E072DD1CA90BD800468EDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F9E072DE1CA90BD800468EDC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F9E072E01CA90BD800468EDC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F9E072E11CA90BD800468EDC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F9E072E41CA90BD800468EDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F9E072E71CA90BD800468EDC /* WeChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeChat.xcdatamodel; sourceTree = "<group>"; };
-		F9E072E91CA90BD800468EDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F9E072EC1CA90BD800468EDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F9E072EE1CA90BD800468EDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9E072F31CA90BD800468EDC /* WeChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +156,19 @@
 		F9E0734A1CA90D6200468EDC /* pic8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pic8.jpg; sourceTree = "<group>"; };
 		F9E0734B1CA90D6200468EDC /* picon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = picon.jpg; sourceTree = "<group>"; };
 		F9E0734C1CA90D6200468EDC /* tx.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tx.jpeg; sourceTree = "<group>"; };
+		F9E073961CA915BC00468EDC /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		F9E073971CA915BC00468EDC /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		F9E073991CA9160D00468EDC /* AddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookViewController.h; sourceTree = "<group>"; };
+		F9E0739A1CA9160D00468EDC /* AddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewController.m; sourceTree = "<group>"; };
+		F9E0739C1CA9161500468EDC /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
+		F9E0739D1CA9161500468EDC /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
+		F9E0739F1CA9161F00468EDC /* FoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundViewController.h; sourceTree = "<group>"; };
+		F9E073A01CA9161F00468EDC /* FoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundViewController.m; sourceTree = "<group>"; };
+		F9E073A21CA9162800468EDC /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
+		F9E073A31CA9162800468EDC /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
+		F9E073A51CA9167300468EDC /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		F9E073A61CA9167300468EDC /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
+		F9E073A91CA925B600468EDC /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,8 +219,12 @@
 		F9E072D91CA90BD800468EDC /* WeChat */ = {
 			isa = PBXGroup;
 			children = (
+				F9E073941CA9156800468EDC /* Main */,
+				F9E073841CA9155900468EDC /* AddressBook */,
+				F9E073881CA9155900468EDC /* Chat */,
+				F9E0738C1CA9155900468EDC /* Found */,
+				F9E073901CA9155900468EDC /* Me */,
 				F9E073101CA90C8400468EDC /* Model */,
-				F9E073801CA90F1300468EDC /* Contoller */,
 				F9E073111CA90C9500468EDC /* Others */,
 				F9E072DA1CA90BD800468EDC /* Supporting Files */,
 			);
@@ -216,6 +234,7 @@
 		F9E072DA1CA90BD800468EDC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F9E073161CA90D6200468EDC /* Images */,
 				F9E072EE1CA90BD800468EDC /* Info.plist */,
 				F9E072DB1CA90BD800468EDC /* main.m */,
 			);
@@ -251,10 +270,8 @@
 		F9E073111CA90C9500468EDC /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				F9E073161CA90D6200468EDC /* Images */,
 				F9E072DD1CA90BD800468EDC /* AppDelegate.h */,
 				F9E072DE1CA90BD800468EDC /* AppDelegate.m */,
-				F9E072E91CA90BD800468EDC /* Assets.xcassets */,
 			);
 			name = Others;
 			sourceTree = "<group>";
@@ -341,15 +358,167 @@
 			path = TimeLineImages;
 			sourceTree = "<group>";
 		};
-		F9E073801CA90F1300468EDC /* Contoller */ = {
+		F9E073841CA9155900468EDC /* AddressBook */ = {
 			isa = PBXGroup;
 			children = (
-				F9E072E01CA90BD800468EDC /* ViewController.h */,
-				F9E072E11CA90BD800468EDC /* ViewController.m */,
+				F9E073851CA9155900468EDC /* Controller */,
+				F9E073861CA9155900468EDC /* Model */,
+				F9E073871CA9155900468EDC /* View */,
+			);
+			name = AddressBook;
+			path = Addressbook;
+			sourceTree = "<group>";
+		};
+		F9E073851CA9155900468EDC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F9E073991CA9160D00468EDC /* AddressBookViewController.h */,
+				F9E0739A1CA9160D00468EDC /* AddressBookViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F9E073861CA9155900468EDC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F9E073871CA9155900468EDC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F9E073881CA9155900468EDC /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				F9E073891CA9155900468EDC /* Controller */,
+				F9E0738A1CA9155900468EDC /* Model */,
+				F9E0738B1CA9155900468EDC /* View */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		F9E073891CA9155900468EDC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F9E0739C1CA9161500468EDC /* ChatViewController.h */,
+				F9E0739D1CA9161500468EDC /* ChatViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F9E0738A1CA9155900468EDC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F9E0738B1CA9155900468EDC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F9E0738C1CA9155900468EDC /* Found */ = {
+			isa = PBXGroup;
+			children = (
+				F9E0738D1CA9155900468EDC /* Controller */,
+				F9E0738E1CA9155900468EDC /* Model */,
+				F9E0738F1CA9155900468EDC /* View */,
+			);
+			path = Found;
+			sourceTree = "<group>";
+		};
+		F9E0738D1CA9155900468EDC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F9E0739F1CA9161F00468EDC /* FoundViewController.h */,
+				F9E073A01CA9161F00468EDC /* FoundViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F9E0738E1CA9155900468EDC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F9E0738F1CA9155900468EDC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F9E073901CA9155900468EDC /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				F9E073911CA9155900468EDC /* Controller */,
+				F9E073921CA9155900468EDC /* Model */,
+				F9E073931CA9155900468EDC /* View */,
+			);
+			path = Me;
+			sourceTree = "<group>";
+		};
+		F9E073911CA9155900468EDC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F9E073A21CA9162800468EDC /* MeViewController.h */,
+				F9E073A31CA9162800468EDC /* MeViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F9E073921CA9155900468EDC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F9E073931CA9155900468EDC /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F9E073941CA9156800468EDC /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F9E073A81CA925A400468EDC /* Constants */,
+				F9E073951CA9157400468EDC /* Controller */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		F9E073951CA9157400468EDC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				F9E072E31CA90BD800468EDC /* Main.storyboard */,
 				F9E072EB1CA90BD800468EDC /* LaunchScreen.storyboard */,
+				F9E073961CA915BC00468EDC /* BaseViewController.h */,
+				F9E073971CA915BC00468EDC /* BaseViewController.m */,
+				F9E073A51CA9167300468EDC /* MainTabBarController.h */,
+				F9E073A61CA9167300468EDC /* MainTabBarController.m */,
 			);
-			name = Contoller;
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		F9E073A81CA925A400468EDC /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				F9E073A91CA925B600468EDC /* Constants.h */,
+			);
+			name = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -485,7 +654,6 @@
 				F9E073751CA90D6200468EDC /* pic0.jpg in Resources */,
 				F9E0736B1CA90D6200468EDC /* Discover.xcassets in Resources */,
 				F9E073781CA90D6200468EDC /* pic3.jpg in Resources */,
-				F9E072EA1CA90BD800468EDC /* Assets.xcassets in Resources */,
 				F9E0736C1CA90D6200468EDC /* Home.xcassets in Resources */,
 				F9E0735E1CA90D6200468EDC /* 3.jpg in Resources */,
 				F9E0736F1CA90D6200468EDC /* test0.jpg in Resources */,
@@ -536,9 +704,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9E072E21CA90BD800468EDC /* ViewController.m in Sources */,
+				F9E073A41CA9162800468EDC /* MeViewController.m in Sources */,
+				F9E073981CA915BC00468EDC /* BaseViewController.m in Sources */,
+				F9E0739B1CA9160D00468EDC /* AddressBookViewController.m in Sources */,
+				F9E073A11CA9161F00468EDC /* FoundViewController.m in Sources */,
 				F9E072DF1CA90BD800468EDC /* AppDelegate.m in Sources */,
+				F9E073A71CA9167300468EDC /* MainTabBarController.m in Sources */,
 				F9E072DC1CA90BD800468EDC /* main.m in Sources */,
+				F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */,
 				F9E072E81CA90BD800468EDC /* WeChat.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

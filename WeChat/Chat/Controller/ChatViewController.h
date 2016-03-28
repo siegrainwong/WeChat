@@ -1,15 +1,14 @@
 //
-//  ViewController.h
+//  ChatViewController.h
 //  WeChat
 //
 //  Created by Siegrain on 16/3/28.
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
+#import "BaseViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface ChatViewController : BaseViewController
 
 @end
-
