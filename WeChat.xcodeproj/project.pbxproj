@@ -206,12 +206,8 @@
 			isa = PBXGroup;
 			children = (
 				F9E073101CA90C8400468EDC /* Model */,
+				F9E073801CA90F1300468EDC /* Contoller */,
 				F9E073111CA90C9500468EDC /* Others */,
-				F9E072E01CA90BD800468EDC /* ViewController.h */,
-				F9E072E11CA90BD800468EDC /* ViewController.m */,
-				F9E072E31CA90BD800468EDC /* Main.storyboard */,
-				F9E072EB1CA90BD800468EDC /* LaunchScreen.storyboard */,
-				F9E072EE1CA90BD800468EDC /* Info.plist */,
 				F9E072DA1CA90BD800468EDC /* Supporting Files */,
 			);
 			path = WeChat;
@@ -220,6 +216,7 @@
 		F9E072DA1CA90BD800468EDC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F9E072EE1CA90BD800468EDC /* Info.plist */,
 				F9E072DB1CA90BD800468EDC /* main.m */,
 			);
 			name = "Supporting Files";
@@ -342,6 +339,17 @@
 				F9E0734B1CA90D6200468EDC /* picon.jpg */,
 			);
 			path = TimeLineImages;
+			sourceTree = "<group>";
+		};
+		F9E073801CA90F1300468EDC /* Contoller */ = {
+			isa = PBXGroup;
+			children = (
+				F9E072E01CA90BD800468EDC /* ViewController.h */,
+				F9E072E11CA90BD800468EDC /* ViewController.m */,
+				F9E072E31CA90BD800468EDC /* Main.storyboard */,
+				F9E072EB1CA90BD800468EDC /* LaunchScreen.storyboard */,
+			);
+			name = Contoller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
