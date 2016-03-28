@@ -113,7 +113,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
   if (section == 0)
     return 15;
 
-  return 10;
+  return 5;
 }
 
 @end
