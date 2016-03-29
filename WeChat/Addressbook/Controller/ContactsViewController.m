@@ -6,6 +6,7 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
+#import "ContactsTableViewCell.h"
 #import "ContactsViewController.h"
 #import "UIImage+RandomImage.h"
 #import "YSMChineseSort/Pod/Classes/NSArray+SortContact.h"
@@ -97,28 +98,28 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
   static NSString* identifier = @"contactsCellIdentifier";
-  UITableViewCell* cell =
+  ContactsTableViewCell* cell =
     [tableView dequeueReusableCellWithIdentifier:identifier];
+  cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                  reuseIdentifier:identifier];
+    cell = [[ContactsTableViewCell alloc] init];
+    [cell setRestorationIdentifier:identifier];
   }
 
   return cell;
 }
 
 - (void)tableView:(UITableView*)tableView
-  willDisplayCell:(UITableViewCell*)cell
+  willDisplayCell:(ContactsTableViewCell*)cell
 forRowAtIndexPath:(NSIndexPath*)indexPath
 {
   if (indexPath.section == 0) {
-    cell.imageView.image =
-      [UIImage imageNamed:self.firstSectionData[indexPath.row][0]];
-    cell.textLabel.text = self.firstSectionData[indexPath.row][1];
+    cell.avatar = [UIImage imageNamed:self.firstSectionData[indexPath.row][0]];
+    cell.name = self.firstSectionData[indexPath.row][1];
   } else {
-    cell.imageView.image = [UIImage randromImageInPath:@"Images/cell_icons"];
-    cell.textLabel.text = self.contacts[indexPath.section - 1][indexPath.row];
+    cell.avatar = [UIImage randromImageInPath:@"Images/cell_icons"];
+    cell.name = self.contacts[indexPath.section - 1][indexPath.row];
   }
 }
 
