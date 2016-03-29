@@ -19,7 +19,7 @@
   ChatViewController* chatVC = [[ChatViewController alloc] init];
   chatVC.title = @"微信";
 
-  AddressBookViewController* addbkVC = [[AddressBookViewController alloc] init];
+  ContactsViewController* addbkVC = [[ContactsViewController alloc] init];
   addbkVC.title = @"通讯录";
 
   FoundViewController* foundVC = [[FoundViewController alloc] init];

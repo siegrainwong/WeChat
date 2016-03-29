@@ -1,0 +1,13 @@
+PODS:
+  - PinYin4Objc (1.1.1)
+  - YSMChineseSort (0.1.1):
+    - PinYin4Objc (~> 1.1.1)
+
+DEPENDENCIES:
+  - YSMChineseSort (~> 0.1.0)
+
+SPEC CHECKSUMS:
+  PinYin4Objc: 3fa9673610368330e2dfb688b1d19a35c3930a78
+  YSMChineseSort: ef532bfe993ff1b4dc9bcd644ead1a43b2632b88
+
+COCOAPODS: 0.39.0

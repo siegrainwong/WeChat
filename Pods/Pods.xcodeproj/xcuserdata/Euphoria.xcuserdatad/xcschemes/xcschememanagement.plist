@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>PinYin4Objc.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>YSMChineseSort-YSMChineseSort.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>YSMChineseSort.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>0CCBBF4BAA3FA48F98623D8875DC1DA7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8D8326168D55874F608125DB1E477811</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>942E73519761F7FE16DB24996587C095</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ABD631EC825B19C0E937C0C34C682D60</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

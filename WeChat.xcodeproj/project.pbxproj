@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86CBF868FAB45515D068AC17 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29031F3F901A2B3953BCC850 /* libPods.a */; };
 		F9E072DC1CA90BD800468EDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DB1CA90BD800468EDC /* main.m */; };
 		F9E072DF1CA90BD800468EDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DE1CA90BD800468EDC /* AppDelegate.m */; };
 		F9E072E51CA90BD800468EDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E072E31CA90BD800468EDC /* Main.storyboard */; };
@@ -66,11 +67,13 @@
 		F9E0737E1CA90D6200468EDC /* picon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9E0734B1CA90D6200468EDC /* picon.jpg */; };
 		F9E0737F1CA90D6200468EDC /* tx.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = F9E0734C1CA90D6200468EDC /* tx.jpeg */; };
 		F9E073981CA915BC00468EDC /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073971CA915BC00468EDC /* BaseViewController.m */; };
-		F9E0739B1CA9160D00468EDC /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E0739A1CA9160D00468EDC /* AddressBookViewController.m */; };
+		F9E0739B1CA9160D00468EDC /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E0739A1CA9160D00468EDC /* ContactsViewController.m */; };
 		F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E0739D1CA9161500468EDC /* ChatViewController.m */; };
 		F9E073A11CA9161F00468EDC /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073A01CA9161F00468EDC /* FoundViewController.m */; };
 		F9E073A41CA9162800468EDC /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073A31CA9162800468EDC /* MeViewController.m */; };
 		F9E073A71CA9167300468EDC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073A61CA9167300468EDC /* MainTabBarController.m */; };
+		F9E073AC1CA96AF000468EDC /* MeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073AB1CA96AF000468EDC /* MeTableViewCell.m */; };
+		F9E073AF1CA96B1E00468EDC /* PersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073AE1CA96B1E00468EDC /* PersonModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +94,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		29031F3F901A2B3953BCC850 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9EA824567924F7CE92751CEC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		D173503D2BF6FCA5B3A2572B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F9E072D71CA90BD700468EDC /* WeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E072DB1CA90BD800468EDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F9E072DD1CA90BD800468EDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -158,8 +164,8 @@
 		F9E0734C1CA90D6200468EDC /* tx.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = tx.jpeg; sourceTree = "<group>"; };
 		F9E073961CA915BC00468EDC /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		F9E073971CA915BC00468EDC /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		F9E073991CA9160D00468EDC /* AddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookViewController.h; sourceTree = "<group>"; };
-		F9E0739A1CA9160D00468EDC /* AddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewController.m; sourceTree = "<group>"; };
+		F9E073991CA9160D00468EDC /* ContactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
+		F9E0739A1CA9160D00468EDC /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		F9E0739C1CA9161500468EDC /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		F9E0739D1CA9161500468EDC /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		F9E0739F1CA9161F00468EDC /* FoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundViewController.h; sourceTree = "<group>"; };
@@ -169,6 +175,10 @@
 		F9E073A51CA9167300468EDC /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
 		F9E073A61CA9167300468EDC /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 		F9E073A91CA925B600468EDC /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		F9E073AA1CA96AF000468EDC /* MeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeTableViewCell.h; sourceTree = "<group>"; };
+		F9E073AB1CA96AF000468EDC /* MeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeTableViewCell.m; sourceTree = "<group>"; };
+		F9E073AD1CA96B1E00468EDC /* PersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonModel.h; sourceTree = "<group>"; };
+		F9E073AE1CA96B1E00468EDC /* PersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86CBF868FAB45515D068AC17 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +207,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		27AA5EEE73E2D030EC30623E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29031F3F901A2B3953BCC850 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		78AA709169FD646866E8EF4B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9EA824567924F7CE92751CEC /* Pods.debug.xcconfig */,
+				D173503D2BF6FCA5B3A2572B /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F9E072CE1CA90BD700468EDC = {
 			isa = PBXGroup;
 			children = (
@@ -203,6 +231,8 @@
 				F9E072F61CA90BD800468EDC /* WeChatTests */,
 				F9E073011CA90BD800468EDC /* WeChatUITests */,
 				F9E072D81CA90BD700468EDC /* Products */,
+				78AA709169FD646866E8EF4B /* Pods */,
+				27AA5EEE73E2D030EC30623E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -220,7 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				F9E073941CA9156800468EDC /* Main */,
-				F9E073841CA9155900468EDC /* AddressBook */,
+				F9E073841CA9155900468EDC /* Contacts */,
 				F9E073881CA9155900468EDC /* Chat */,
 				F9E0738C1CA9155900468EDC /* Found */,
 				F9E073901CA9155900468EDC /* Me */,
@@ -358,22 +388,22 @@
 			path = TimeLineImages;
 			sourceTree = "<group>";
 		};
-		F9E073841CA9155900468EDC /* AddressBook */ = {
+		F9E073841CA9155900468EDC /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
 				F9E073851CA9155900468EDC /* Controller */,
 				F9E073861CA9155900468EDC /* Model */,
 				F9E073871CA9155900468EDC /* View */,
 			);
-			name = AddressBook;
+			name = Contacts;
 			path = Addressbook;
 			sourceTree = "<group>";
 		};
 		F9E073851CA9155900468EDC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F9E073991CA9160D00468EDC /* AddressBookViewController.h */,
-				F9E0739A1CA9160D00468EDC /* AddressBookViewController.m */,
+				F9E073991CA9160D00468EDC /* ContactsViewController.h */,
+				F9E0739A1CA9160D00468EDC /* ContactsViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -480,6 +510,8 @@
 		F9E073921CA9155900468EDC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F9E073AD1CA96B1E00468EDC /* PersonModel.h */,
+				F9E073AE1CA96B1E00468EDC /* PersonModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -487,6 +519,8 @@
 		F9E073931CA9155900468EDC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F9E073AA1CA96AF000468EDC /* MeTableViewCell.h */,
+				F9E073AB1CA96AF000468EDC /* MeTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -528,9 +562,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F9E073071CA90BD800468EDC /* Build configuration list for PBXNativeTarget "WeChat" */;
 			buildPhases = (
+				62362DF950E0FB12455FC92E /* Check Pods Manifest.lock */,
 				F9E072D31CA90BD700468EDC /* Sources */,
 				F9E072D41CA90BD700468EDC /* Frameworks */,
 				F9E072D51CA90BD700468EDC /* Resources */,
+				AEB0604AED47EA0CF650C9F9 /* Embed Pods Frameworks */,
+				DAB53D6020512D14D127718D /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -699,6 +736,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		62362DF950E0FB12455FC92E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AEB0604AED47EA0CF650C9F9 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAB53D6020512D14D127718D /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F9E072D31CA90BD700468EDC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -706,9 +791,11 @@
 			files = (
 				F9E073A41CA9162800468EDC /* MeViewController.m in Sources */,
 				F9E073981CA915BC00468EDC /* BaseViewController.m in Sources */,
-				F9E0739B1CA9160D00468EDC /* AddressBookViewController.m in Sources */,
+				F9E073AF1CA96B1E00468EDC /* PersonModel.m in Sources */,
+				F9E0739B1CA9160D00468EDC /* ContactsViewController.m in Sources */,
 				F9E073A11CA9161F00468EDC /* FoundViewController.m in Sources */,
 				F9E072DF1CA90BD800468EDC /* AppDelegate.m in Sources */,
+				F9E073AC1CA96AF000468EDC /* MeTableViewCell.m in Sources */,
 				F9E073A71CA9167300468EDC /* MainTabBarController.m in Sources */,
 				F9E072DC1CA90BD800468EDC /* main.m in Sources */,
 				F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */,
@@ -849,23 +936,27 @@
 		};
 		F9E073081CA90BD800468EDC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9EA824567924F7CE92751CEC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WeChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Siegrain.WeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)";
 			};
 			name = Debug;
 		};
 		F9E073091CA90BD800468EDC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D173503D2BF6FCA5B3A2572B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = WeChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Siegrain.WeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)";
 			};
 			name = Release;
 		};
@@ -936,6 +1027,7 @@
 				F9E073091CA90BD800468EDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F9E0730A1CA90BD800468EDC /* Build configuration list for PBXNativeTarget "WeChatTests" */ = {
 			isa = XCConfigurationList;
@@ -944,6 +1036,7 @@
 				F9E0730C1CA90BD800468EDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F9E0730D1CA90BD800468EDC /* Build configuration list for PBXNativeTarget "WeChatUITests" */ = {
 			isa = XCConfigurationList;
@@ -952,6 +1045,7 @@
 				F9E0730F1CA90BD800468EDC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

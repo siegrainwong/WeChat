@@ -9,6 +9,6 @@
 #import "BaseViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface AddressBookViewController : BaseViewController
+@interface ContactsViewController : BaseViewController
 
 @end
