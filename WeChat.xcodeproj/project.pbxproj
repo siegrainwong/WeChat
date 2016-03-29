@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		86CBF868FAB45515D068AC17 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29031F3F901A2B3953BCC850 /* libPods.a */; };
+		F91775A81CAA68D800557A45 /* UIImage+RandomImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F91775A71CAA68D800557A45 /* UIImage+RandomImage.m */; };
 		F9E072DC1CA90BD800468EDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DB1CA90BD800468EDC /* main.m */; };
 		F9E072DF1CA90BD800468EDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DE1CA90BD800468EDC /* AppDelegate.m */; };
 		F9E072E51CA90BD800468EDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E072E31CA90BD800468EDC /* Main.storyboard */; };
@@ -97,6 +98,8 @@
 		29031F3F901A2B3953BCC850 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EA824567924F7CE92751CEC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D173503D2BF6FCA5B3A2572B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F91775A61CAA68D800557A45 /* UIImage+RandomImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RandomImage.h"; sourceTree = "<group>"; };
+		F91775A71CAA68D800557A45 /* UIImage+RandomImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RandomImage.m"; sourceTree = "<group>"; };
 		F9E072D71CA90BD700468EDC /* WeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E072DB1CA90BD800468EDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F9E072DD1CA90BD800468EDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -224,6 +227,42 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F91775A21CAA684700557A45 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F9E073941CA9156800468EDC /* Main */,
+				F9E073841CA9155900468EDC /* Contacts */,
+				F9E073881CA9155900468EDC /* Chat */,
+				F9E0738C1CA9155900468EDC /* Found */,
+				F9E073901CA9155900468EDC /* Me */,
+				F9E073101CA90C8400468EDC /* Model */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		F91775A31CAA685800557A45 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
+		F91775A41CAA687F00557A45 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		F91775A51CAA68A500557A45 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				F91775A61CAA68D800557A45 /* UIImage+RandomImage.h */,
+				F91775A71CAA68D800557A45 /* UIImage+RandomImage.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		F9E072CE1CA90BD700468EDC = {
 			isa = PBXGroup;
 			children = (
@@ -249,12 +288,10 @@
 		F9E072D91CA90BD800468EDC /* WeChat */ = {
 			isa = PBXGroup;
 			children = (
-				F9E073941CA9156800468EDC /* Main */,
-				F9E073841CA9155900468EDC /* Contacts */,
-				F9E073881CA9155900468EDC /* Chat */,
-				F9E0738C1CA9155900468EDC /* Found */,
-				F9E073901CA9155900468EDC /* Me */,
-				F9E073101CA90C8400468EDC /* Model */,
+				F91775A51CAA68A500557A45 /* Category */,
+				F91775A41CAA687F00557A45 /* Common */,
+				F91775A31CAA685800557A45 /* Utility */,
+				F91775A21CAA684700557A45 /* Classes */,
 				F9E073111CA90C9500468EDC /* Others */,
 				F9E072DA1CA90BD800468EDC /* Supporting Files */,
 			);
@@ -789,6 +826,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F91775A81CAA68D800557A45 /* UIImage+RandomImage.m in Sources */,
 				F9E073A41CA9162800468EDC /* MeViewController.m in Sources */,
 				F9E073981CA915BC00468EDC /* BaseViewController.m in Sources */,
 				F9E073AF1CA96B1E00468EDC /* PersonModel.m in Sources */,

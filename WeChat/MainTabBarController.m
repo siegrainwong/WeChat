@@ -6,8 +6,8 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
-#import "AddressBookViewController.h"
 #import "ChatViewController.h"
+#import "ContactsViewController.h"
 #import "FoundViewController.h"
 #import "MainTabBarController.h"
 #import "MeViewController.h"
