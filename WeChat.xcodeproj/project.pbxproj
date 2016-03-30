@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		86CBF868FAB45515D068AC17 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29031F3F901A2B3953BCC850 /* libPods.a */; };
+		F90B416B1CABC45600ECF391 /* GlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B416A1CABC45600ECF391 /* GlassView.m */; };
+		F90B416D1CABCE1E00ECF391 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B416C1CABCE1E00ECF391 /* Constants.m */; };
+		F90B41701CABFF5400ECF391 /* SearchResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B416F1CABFF5400ECF391 /* SearchResultsController.m */; };
+		F90B41731CAC1DC700ECF391 /* NSString+Pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B41721CAC1DC700ECF391 /* NSString+Pinyin.m */; };
 		F91775A81CAA68D800557A45 /* UIImage+RandomImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F91775A71CAA68D800557A45 /* UIImage+RandomImage.m */; };
 		F91775AB1CAA7EF900557A45 /* ContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F91775AA1CAA7EF900557A45 /* ContactsTableViewCell.m */; };
 		F9E072DC1CA90BD800468EDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DB1CA90BD800468EDC /* main.m */; };
@@ -99,6 +103,13 @@
 		29031F3F901A2B3953BCC850 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EA824567924F7CE92751CEC /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		D173503D2BF6FCA5B3A2572B /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F90B41691CABC45600ECF391 /* GlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlassView.h; sourceTree = "<group>"; };
+		F90B416A1CABC45600ECF391 /* GlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlassView.m; sourceTree = "<group>"; };
+		F90B416C1CABCE1E00ECF391 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		F90B416E1CABFF5400ECF391 /* SearchResultsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsController.h; sourceTree = "<group>"; };
+		F90B416F1CABFF5400ECF391 /* SearchResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsController.m; sourceTree = "<group>"; };
+		F90B41711CAC1DC700ECF391 /* NSString+Pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Pinyin.h"; sourceTree = "<group>"; };
+		F90B41721CAC1DC700ECF391 /* NSString+Pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Pinyin.m"; sourceTree = "<group>"; };
 		F91775A61CAA68D800557A45 /* UIImage+RandomImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RandomImage.h"; sourceTree = "<group>"; };
 		F91775A71CAA68D800557A45 /* UIImage+RandomImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RandomImage.m"; sourceTree = "<group>"; };
 		F91775A91CAA7EF900557A45 /* ContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTableViewCell.h; sourceTree = "<group>"; };
@@ -253,6 +264,9 @@
 		F91775A41CAA687F00557A45 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F9E073A81CA925A400468EDC /* Constants */,
+				F90B41691CABC45600ECF391 /* GlassView.h */,
+				F90B416A1CABC45600ECF391 /* GlassView.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -262,6 +276,8 @@
 			children = (
 				F91775A61CAA68D800557A45 /* UIImage+RandomImage.h */,
 				F91775A71CAA68D800557A45 /* UIImage+RandomImage.m */,
+				F90B41711CAC1DC700ECF391 /* NSString+Pinyin.h */,
+				F90B41721CAC1DC700ECF391 /* NSString+Pinyin.m */,
 			);
 			name = Category;
 			sourceTree = "<group>";
@@ -444,6 +460,8 @@
 			children = (
 				F9E073991CA9160D00468EDC /* ContactsViewController.h */,
 				F9E0739A1CA9160D00468EDC /* ContactsViewController.m */,
+				F90B416E1CABFF5400ECF391 /* SearchResultsController.h */,
+				F90B416F1CABFF5400ECF391 /* SearchResultsController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -570,7 +588,6 @@
 		F9E073941CA9156800468EDC /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				F9E073A81CA925A400468EDC /* Constants */,
 				F9E073951CA9157400468EDC /* Controller */,
 			);
 			name = Main;
@@ -593,6 +610,7 @@
 			isa = PBXGroup;
 			children = (
 				F9E073A91CA925B600468EDC /* Constants.h */,
+				F90B416C1CABCE1E00ECF391 /* Constants.m */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -831,15 +849,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F90B41701CABFF5400ECF391 /* SearchResultsController.m in Sources */,
 				F91775A81CAA68D800557A45 /* UIImage+RandomImage.m in Sources */,
 				F9E073A41CA9162800468EDC /* MeViewController.m in Sources */,
 				F9E073981CA915BC00468EDC /* BaseViewController.m in Sources */,
 				F9E073AF1CA96B1E00468EDC /* PersonModel.m in Sources */,
 				F9E0739B1CA9160D00468EDC /* ContactsViewController.m in Sources */,
+				F90B416D1CABCE1E00ECF391 /* Constants.m in Sources */,
 				F9E073A11CA9161F00468EDC /* FoundViewController.m in Sources */,
 				F9E072DF1CA90BD800468EDC /* AppDelegate.m in Sources */,
 				F9E073AC1CA96AF000468EDC /* MeTableViewCell.m in Sources */,
 				F91775AB1CAA7EF900557A45 /* ContactsTableViewCell.m in Sources */,
+				F90B416B1CABC45600ECF391 /* GlassView.m in Sources */,
+				F90B41731CAC1DC700ECF391 /* NSString+Pinyin.m in Sources */,
 				F9E073A71CA9167300468EDC /* MainTabBarController.m in Sources */,
 				F9E072DC1CA90BD800468EDC /* main.m in Sources */,
 				F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */,

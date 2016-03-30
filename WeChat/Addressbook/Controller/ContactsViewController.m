@@ -6,13 +6,17 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
+#import "Constants.h"
 #import "ContactsTableViewCell.h"
 #import "ContactsViewController.h"
+#import "GlassView.h"
+#import "SearchResultsController.h"
 #import "UIImage+RandomImage.h"
-#import "YSMChineseSort/Pod/Classes/NSArray+SortContact.h"
+#import "YSMChineseSort/Pod/Classes/NSArray+SortContact.h"
 
 @interface
-ContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
+ContactsViewController ()<UITableViewDelegate, UITableViewDataSource,
+                          UISearchControllerDelegate>
 @property (nonatomic, strong) UITableView* tableView;
 
 @property (nonatomic, copy) NSArray* firstSectionData;
@@ -20,6 +24,11 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, copy) NSArray* contacts;
 @property (nonatomic, copy) NSArray* grouppedContacts;
 @property (nonatomic, copy) NSArray* headers;
+
+@property (nonatomic, strong) UISearchController* searchController;
+@property (strong, nonatomic) GlassView* glassView;
+
+@property (strong, nonatomic) NSMutableArray* fiteredResults;
 @end
 @implementation ContactsViewController
 - (void)viewDidLoad
@@ -74,14 +83,69 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
     tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     tableView.rowHeight = 50;
 
-    tableView.tableFooterView = [self footerView];
+    tableView.tableFooterView = [self tableFooterView];
+    tableView.tableHeaderView = [self tableHeaderView];
+
+    // sectionIndex样式
+    tableView.sectionIndexColor = [UIColor grayColor];
+    tableView.sectionIndexBackgroundColor = [UIColor clearColor];
 
     tableView;
   });
 
   [self.view addSubview:_tableView];
 }
-- (UIView*)footerView
+#pragma mark - search
+- (UISearchBar*)tableHeaderView
+{
+  NSMutableArray* tempImageArray = [NSMutableArray array];
+  for (int i = 0; i < self.contacts.count; i++) {
+    [tempImageArray
+      addObject:[UIImage randromImageInPath:@"Images/cell_icons"]];
+  }
+  SearchResultsController* resultController =
+    [[SearchResultsController alloc] initWithKeywords:self.contacts
+                                            andImages:tempImageArray];
+
+  self.searchController = [[UISearchController alloc]
+    initWithSearchResultsController:resultController];
+  self.searchController.searchResultsUpdater = resultController;
+  self.searchController.dimsBackgroundDuringPresentation = NO;
+  self.searchController.delegate = self;
+
+  UISearchBar* bar = self.searchController.searchBar;
+  [bar sizeToFit];
+  bar.backgroundColor = [UIColor lightGrayColor];
+  bar.placeholder = @"搜索";
+  bar.tintColor = [Constants themeColor];
+  bar.showsBookmarkButton = YES;
+  [bar setImage:[UIImage imageNamed:@"VoiceSearchStartBtn"]
+    forSearchBarIcon:UISearchBarIconBookmark
+               state:UIControlStateNormal];
+
+  return self.searchController.searchBar;
+}
+
+- (GlassView*)glassView
+{
+  if (!_glassView) {
+    _glassView = [[GlassView alloc]
+      initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width,
+                               [UIScreen mainScreen].bounds.size.height - 64)];
+  }
+  return _glassView;
+}
+- (void)willPresentSearchController:(UISearchController*)searchController
+{
+  [self.view addSubview:self.glassView];
+}
+
+- (void)willDismissSearchController:(UISearchController*)searchController
+{
+  [self.glassView removeFromSuperview];
+}
+#pragma mark - footer
+- (UIView*)tableFooterView
 {
   UIView* view = [[UIView alloc]
     initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
@@ -94,10 +158,10 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
 
   return view;
 }
-#pragma mark - tableview datasource
+
+#pragma mark - tableview datasource & delegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
-
   return self.headers.count + 1;
 }
 
@@ -163,5 +227,9 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
   heightForHeaderInSection:(NSInteger)section
 {
   return section == 0 ? 0 : 20;
+}
+- (NSArray<NSString*>*)sectionIndexTitlesForTableView:(UITableView*)tableView
+{
+  return self.headers;
 }
 @end
