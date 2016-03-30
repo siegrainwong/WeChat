@@ -18,6 +18,7 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, copy) NSArray* firstSectionData;
 
 @property (nonatomic, copy) NSArray* contacts;
+@property (nonatomic, copy) NSArray* grouppedContacts;
 @property (nonatomic, copy) NSArray* headers;
 @end
 @implementation ContactsViewController
@@ -55,7 +56,7 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
     if (!isSuccess)
       return;
 
-    self.contacts = rowArray;
+    self.grouppedContacts = rowArray;
     self.headers = titleArray;
   }];
 }
@@ -64,7 +65,7 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
   _tableView = ({
     UITableView* tableView = [[UITableView alloc]
       initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,
-                               self.view.frame.size.height - 44)
+                               self.view.frame.size.height)
               style:UITableViewStylePlain];
 
     tableView.delegate = self;
@@ -73,10 +74,25 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
     tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     tableView.rowHeight = 50;
 
+    tableView.tableFooterView = [self footerView];
+
     tableView;
   });
 
   [self.view addSubview:_tableView];
+}
+- (UIView*)footerView
+{
+  UIView* view = [[UIView alloc]
+    initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 50)];
+  UILabel* label = [[UILabel alloc] initWithFrame:view.bounds];
+  label.text = [NSString
+    stringWithFormat:@"%lu位联系人 ", (unsigned long)self.contacts.count];
+  label.textAlignment = NSTextAlignmentCenter;
+  label.textColor = [UIColor lightGrayColor];
+  [view addSubview:label];
+
+  return view;
 }
 #pragma mark - tableview datasource
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
@@ -91,7 +107,7 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource>
   if (section == 0)
     return self.firstSectionData.count;
 
-  return [self.contacts[section - 1] count];
+  return [self.grouppedContacts[section - 1] count];
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView
@@ -119,7 +135,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     cell.name = self.firstSectionData[indexPath.row][1];
   } else {
     cell.avatar = [UIImage randromImageInPath:@"Images/cell_icons"];
-    cell.name = self.contacts[indexPath.section - 1][indexPath.row];
+    cell.name = self.grouppedContacts[indexPath.section - 1][indexPath.row];
   }
 }
 

@@ -11,17 +11,10 @@
 @implementation UIImage (RandomImage)
 + (UIImage*)randromImageInPath:(NSString*)path
 {
-  NSFileManager* fm = [[NSFileManager alloc] init];
-  if (![fm fileExistsAtPath:path])
-    return nil;
-
-  NSArray* files = [fm subpathsAtPath:path];
-  NSString* randomFileName = files[arc4random() % files.count - 1];
-  NSString* combinedFilePath =
-    [NSString stringWithFormat:@"%@/%@", path, randomFileName];
-
   NSString* imagePath =
-    [[NSBundle mainBundle] pathForResource:combinedFilePath ofType:nil];
+    [NSString stringWithFormat:@"%@/%u.jpg", [[NSBundle mainBundle] bundlePath],
+                               arc4random() % 29];
+
   UIImage* image = [[UIImage alloc] initWithContentsOfFile:imagePath];
 
   return image;
