@@ -137,11 +137,6 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource,
 
   UIButton* btn = [searchBar valueForKey:@"_cancelButton"];
   [btn setTitle:@"取消" forState:UIControlStateNormal];
-
-  searchBar.backgroundImage =
-    [UIImage imageWithColor:[UIColor redColor]
-                       size:CGSizeMake(searchBar.frame.size.width,
-                                       searchBar.frame.size.height)];
 }
 - (GlassView*)glassView
 {
