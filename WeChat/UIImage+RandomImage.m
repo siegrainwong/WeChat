@@ -19,4 +19,5 @@
 
   return image;
 }
+
 @end

@@ -11,6 +11,7 @@
 #import "ContactsViewController.h"
 #import "GlassView.h"
 #import "SearchResultsController.h"
+#import "UIImage+Common.h"
 #import "UIImage+RandomImage.h"
 #import "YSMChineseSort/Pod/Classes/NSArray+SortContact.h"
 
@@ -116,7 +117,10 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource,
   UISearchBar* bar = self.searchController.searchBar;
   [bar sizeToFit];
   bar.delegate = self;
-  bar.backgroundColor = [UIColor lightGrayColor];
+  bar.backgroundColor = [UIColor colorWithWhite:.95 alpha:1];
+  bar.backgroundImage = [UIImage
+    imageWithColor:[UIColor clearColor]
+              size:CGSizeMake(bar.frame.size.width, bar.frame.size.height)];
   bar.placeholder = @"搜索";
   bar.tintColor = [Constants themeColor];
   bar.showsBookmarkButton = YES;
@@ -133,6 +137,11 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource,
 
   UIButton* btn = [searchBar valueForKey:@"_cancelButton"];
   [btn setTitle:@"取消" forState:UIControlStateNormal];
+
+  searchBar.backgroundImage =
+    [UIImage imageWithColor:[UIColor redColor]
+                       size:CGSizeMake(searchBar.frame.size.width,
+                                       searchBar.frame.size.height)];
 }
 - (GlassView*)glassView
 {

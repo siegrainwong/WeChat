@@ -12,6 +12,7 @@
 		F90B416D1CABCE1E00ECF391 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B416C1CABCE1E00ECF391 /* Constants.m */; };
 		F90B41701CABFF5400ECF391 /* SearchResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B416F1CABFF5400ECF391 /* SearchResultsController.m */; };
 		F90B41731CAC1DC700ECF391 /* NSString+Pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B41721CAC1DC700ECF391 /* NSString+Pinyin.m */; };
+		F90B41771CAD0C0E00ECF391 /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B41761CAD0C0E00ECF391 /* UIImage+Common.m */; };
 		F91775A81CAA68D800557A45 /* UIImage+RandomImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F91775A71CAA68D800557A45 /* UIImage+RandomImage.m */; };
 		F91775AB1CAA7EF900557A45 /* ContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F91775AA1CAA7EF900557A45 /* ContactsTableViewCell.m */; };
 		F9E072DC1CA90BD800468EDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DB1CA90BD800468EDC /* main.m */; };
@@ -110,6 +111,8 @@
 		F90B416F1CABFF5400ECF391 /* SearchResultsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsController.m; sourceTree = "<group>"; };
 		F90B41711CAC1DC700ECF391 /* NSString+Pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Pinyin.h"; sourceTree = "<group>"; };
 		F90B41721CAC1DC700ECF391 /* NSString+Pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Pinyin.m"; sourceTree = "<group>"; };
+		F90B41751CAD0C0E00ECF391 /* UIImage+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Common.h"; sourceTree = "<group>"; };
+		F90B41761CAD0C0E00ECF391 /* UIImage+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Common.m"; sourceTree = "<group>"; };
 		F91775A61CAA68D800557A45 /* UIImage+RandomImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RandomImage.h"; sourceTree = "<group>"; };
 		F91775A71CAA68D800557A45 /* UIImage+RandomImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RandomImage.m"; sourceTree = "<group>"; };
 		F91775A91CAA7EF900557A45 /* ContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTableViewCell.h; sourceTree = "<group>"; };
@@ -241,6 +244,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F90B41741CAD0BF400ECF391 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				F90B41751CAD0C0E00ECF391 /* UIImage+Common.h */,
+				F90B41761CAD0C0E00ECF391 /* UIImage+Common.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		F91775A21CAA684700557A45 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +276,7 @@
 		F91775A41CAA687F00557A45 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F90B41741CAD0BF400ECF391 /* Category */,
 				F9E073A81CA925A400468EDC /* Constants */,
 				F90B41691CABC45600ECF391 /* GlassView.h */,
 				F90B416A1CABC45600ECF391 /* GlassView.m */,
@@ -865,6 +878,7 @@
 				F9E073A71CA9167300468EDC /* MainTabBarController.m in Sources */,
 				F9E072DC1CA90BD800468EDC /* main.m in Sources */,
 				F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */,
+				F90B41771CAD0C0E00ECF391 /* UIImage+Common.m in Sources */,
 				F9E072E81CA90BD800468EDC /* WeChat.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
