@@ -12,11 +12,11 @@
 #import "GlassView.h"
 #import "SearchResultsController.h"
 #import "UIImage+RandomImage.h"
-#import "YSMChineseSort/Pod/Classes/NSArray+SortContact.h"
+#import "YSMChineseSort/Pod/Classes/NSArray+SortContact.h"
 
 @interface
 ContactsViewController ()<UITableViewDelegate, UITableViewDataSource,
-                          UISearchControllerDelegate>
+                          UISearchControllerDelegate, UISearchBarDelegate>
 @property (nonatomic, strong) UITableView* tableView;
 
 @property (nonatomic, copy) NSArray* firstSectionData;
@@ -115,6 +115,7 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource,
 
   UISearchBar* bar = self.searchController.searchBar;
   [bar sizeToFit];
+  bar.delegate = self;
   bar.backgroundColor = [UIColor lightGrayColor];
   bar.placeholder = @"搜索";
   bar.tintColor = [Constants themeColor];
@@ -125,7 +126,14 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource,
 
   return self.searchController.searchBar;
 }
+- (void)searchBarTextDidBeginEditing:(UISearchBar*)searchBar
+{
+  //修改searchBar右侧按钮的文字
+  [searchBar setShowsCancelButton:YES animated:YES];
 
+  UIButton* btn = [searchBar valueForKey:@"_cancelButton"];
+  [btn setTitle:@"取消" forState:UIControlStateNormal];
+}
 - (GlassView*)glassView
 {
   if (!_glassView) {

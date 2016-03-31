@@ -29,7 +29,8 @@ SearchResultsController ()
     self.images = images;
     self.filteredResultIndexes = [NSMutableArray array];
 
-    self.tableView.rowHeight = 50;
+    self.tableView.rowHeight = 60;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   }
 
   return self;
@@ -93,5 +94,16 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 
   [self.tableView reloadData];
 }
-
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+  //修正在navigationcontroller +
+  // searchresultscontroller下tableview高度不正确的问题
+  [super viewWillAppear:animated];
+  self.tableView.frame = CGRectMake(0, -40, self.view.bounds.size.width,
+                                    self.view.bounds.size.height);
+}
 @end
