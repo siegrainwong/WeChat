@@ -8,7 +8,7 @@
 
 #import "ChatViewController.h"
 #import "ContactsViewController.h"
-#import "FoundViewController.h"
+#import "DiscoverViewController.h"
 #import "MainTabBarController.h"
 #import "MeViewController.h"
 @implementation MainTabBarController
@@ -22,7 +22,7 @@
   ContactsViewController* addbkVC = [[ContactsViewController alloc] init];
   addbkVC.title = @"通讯录";
 
-  FoundViewController* foundVC = [[FoundViewController alloc] init];
+  DiscoverViewController* foundVC = [[DiscoverViewController alloc] init];
   foundVC.title = @"发现";
 
   MeViewController* meVC = [[MeViewController alloc] init];

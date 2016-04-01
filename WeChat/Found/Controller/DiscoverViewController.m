@@ -7,10 +7,10 @@
 //
 
 #import "Constants.h"
-#import "FoundViewController.h"
+#import "DiscoverViewController.h"
 
 @interface
-FoundViewController ()<UITableViewDelegate, UITableViewDataSource>
+DiscoverViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView* tableView;
 //名字数组
 @property (nonatomic, copy) NSArray* dataArr;
@@ -19,7 +19,7 @@ FoundViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, copy) NSArray* imgArr;
 
 @end
-@implementation FoundViewController
+@implementation DiscoverViewController
 - (void)viewDidLoad
 {
   [self initializeData];
@@ -28,21 +28,19 @@ FoundViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 - (void)initializeData
 {
-	_dataArr = @[
-							 @[ @"朋友圈" ],
-							 @[ @"扫一扫", @"摇一摇" ],
-							 @[ @"附近的人" ],
-							 @[ @"购物", @"游戏" ]
-							 ];
-	
-	_imgArr = @[
-							@[ @"ff_IconShowAlbum" ],
-							@[ @"ff_IconQRCode", @"ff_IconBottle" ],
-							@[ @"ff_IconLocationService" ],
-							@[ @"CreditCard_ShoppingBag", @"MoreGame" ]
-							];
-	
-	
+  _dataArr = @[
+    @[ @"朋友圈" ],
+    @[ @"扫一扫", @"摇一摇" ],
+    @[ @"附近的人" ],
+    @[ @"购物", @"游戏" ]
+  ];
+
+  _imgArr = @[
+    @[ @"ff_IconShowAlbum" ],
+    @[ @"ff_IconQRCode", @"ff_IconBottle" ],
+    @[ @"ff_IconLocationService" ],
+    @[ @"CreditCard_ShoppingBag", @"MoreGame" ]
+  ];
 }
 - (void)buildTableView
 {

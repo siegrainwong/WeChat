@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, ContactsTableViewCellStyle) {
+  ContactsTableViewCellStyleDefault = 0,
+  ContactsTableViewCellStyleSubtitle
+};
+
 @interface ContactsTableViewCell : UITableViewCell
+@property (assign, nonatomic) ContactsTableViewCellStyle style;
+
+/*请按照以下顺序设值*/
 @property (strong, nonatomic) UIImage* avatar;
 @property (copy, nonatomic) NSString* name;
+@property (copy, nonatomic) NSString* descriptionText;
+
 @end

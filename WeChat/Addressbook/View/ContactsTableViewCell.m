@@ -15,6 +15,7 @@ static NSInteger const kContentInsetV = 6;
 ContactsTableViewCell ()
 @property (strong, nonatomic) UIImageView* avatarImageView;
 @property (strong, nonatomic) UILabel* nameLabel;
+@property (strong, nonatomic) UILabel* descriptionLabel;
 @end
 
 @implementation ContactsTableViewCell
@@ -40,6 +41,30 @@ ContactsTableViewCell ()
     initWithFrame:CGRectMake(marginX, 0, self.bounds.size.width - marginX,
                              self.bounds.size.height)];
   label.text = name;
+
+  if (self.style == ContactsTableViewCellStyleSubtitle)
+    [label sizeToFit];
+
+  [self addSubview:label];
+}
+- (void)setDescriptionText:(NSString*)descriptionText
+{
+  if (self.style == ContactsTableViewCellStyleDefault)
+    return;
+
+  _descriptionText = descriptionText;
+
+  CGFloat marginX = self.nameLabel.frame.origin.x;
+  CGFloat marginY = CGRectGetMaxY(self.nameLabel.frame) + 3;
+  UILabel* label = [[UILabel alloc]
+    initWithFrame:CGRectMake(marginX, marginY, self.bounds.size.width - marginX,
+                             20)];
+  label.text = descriptionText;
+  label.font = [UIFont systemFontOfSize:15];
+  label.textColor = [UIColor colorWithWhite:.2 alpha:1];
+
+  [label sizeToFit];
+
   [self addSubview:label];
 }
 @end

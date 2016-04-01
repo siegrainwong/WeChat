@@ -9,6 +9,6 @@
 #import "BaseViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface FoundViewController : BaseViewController
+@interface DiscoverViewController : BaseViewController
 
 @end

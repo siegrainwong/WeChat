@@ -192,11 +192,15 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource,
   static NSString* identifier = @"contactsCellIdentifier";
   ContactsTableViewCell* cell =
     [tableView dequeueReusableCellWithIdentifier:identifier];
-  cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 
   if (cell == nil) {
     cell = [[ContactsTableViewCell alloc] init];
     [cell setRestorationIdentifier:identifier];
+
+    //调整分割线长度
+    cell.preservesSuperviewLayoutMargins = false;
+    cell.layoutMargins = UIEdgeInsetsZero;
+    cell.separatorInset = UIEdgeInsetsMake(0, 10, 0, 0);
   }
 
   return cell;

@@ -76,7 +76,7 @@
 		F9E073981CA915BC00468EDC /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073971CA915BC00468EDC /* BaseViewController.m */; };
 		F9E0739B1CA9160D00468EDC /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E0739A1CA9160D00468EDC /* ContactsViewController.m */; };
 		F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E0739D1CA9161500468EDC /* ChatViewController.m */; };
-		F9E073A11CA9161F00468EDC /* FoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073A01CA9161F00468EDC /* FoundViewController.m */; };
+		F9E073A11CA9161F00468EDC /* DiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073A01CA9161F00468EDC /* DiscoverViewController.m */; };
 		F9E073A41CA9162800468EDC /* MeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073A31CA9162800468EDC /* MeViewController.m */; };
 		F9E073A71CA9167300468EDC /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073A61CA9167300468EDC /* MainTabBarController.m */; };
 		F9E073AC1CA96AF000468EDC /* MeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E073AB1CA96AF000468EDC /* MeTableViewCell.m */; };
@@ -115,8 +115,8 @@
 		F90B41761CAD0C0E00ECF391 /* UIImage+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Common.m"; sourceTree = "<group>"; };
 		F91775A61CAA68D800557A45 /* UIImage+RandomImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RandomImage.h"; sourceTree = "<group>"; };
 		F91775A71CAA68D800557A45 /* UIImage+RandomImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RandomImage.m"; sourceTree = "<group>"; };
-		F91775A91CAA7EF900557A45 /* ContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTableViewCell.h; sourceTree = "<group>"; };
-		F91775AA1CAA7EF900557A45 /* ContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTableViewCell.m; sourceTree = "<group>"; };
+		F91775A91CAA7EF900557A45 /* ContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsTableViewCell.h; path = Addressbook/View/ContactsTableViewCell.h; sourceTree = "<group>"; };
+		F91775AA1CAA7EF900557A45 /* ContactsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsTableViewCell.m; path = Addressbook/View/ContactsTableViewCell.m; sourceTree = "<group>"; };
 		F9E072D71CA90BD700468EDC /* WeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E072DB1CA90BD800468EDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F9E072DD1CA90BD800468EDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -188,8 +188,8 @@
 		F9E0739A1CA9160D00468EDC /* ContactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		F9E0739C1CA9161500468EDC /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
 		F9E0739D1CA9161500468EDC /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
-		F9E0739F1CA9161F00468EDC /* FoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoundViewController.h; sourceTree = "<group>"; };
-		F9E073A01CA9161F00468EDC /* FoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FoundViewController.m; sourceTree = "<group>"; };
+		F9E0739F1CA9161F00468EDC /* DiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverViewController.h; sourceTree = "<group>"; };
+		F9E073A01CA9161F00468EDC /* DiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverViewController.m; sourceTree = "<group>"; };
 		F9E073A21CA9162800468EDC /* MeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeViewController.h; sourceTree = "<group>"; };
 		F9E073A31CA9162800468EDC /* MeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeViewController.m; sourceTree = "<group>"; };
 		F9E073A51CA9167300468EDC /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -253,13 +253,24 @@
 			name = Category;
 			sourceTree = "<group>";
 		};
+		F90B41781CAD665A00ECF391 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F91775A91CAA7EF900557A45 /* ContactsTableViewCell.h */,
+				F91775AA1CAA7EF900557A45 /* ContactsTableViewCell.m */,
+				F90B41691CABC45600ECF391 /* GlassView.h */,
+				F90B416A1CABC45600ECF391 /* GlassView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		F91775A21CAA684700557A45 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				F9E073941CA9156800468EDC /* Main */,
 				F9E073841CA9155900468EDC /* Contacts */,
 				F9E073881CA9155900468EDC /* Chat */,
-				F9E0738C1CA9155900468EDC /* Found */,
+				F9E0738C1CA9155900468EDC /* Discover */,
 				F9E073901CA9155900468EDC /* Me */,
 				F9E073101CA90C8400468EDC /* Model */,
 			);
@@ -278,8 +289,7 @@
 			children = (
 				F90B41741CAD0BF400ECF391 /* Category */,
 				F9E073A81CA925A400468EDC /* Constants */,
-				F90B41691CABC45600ECF391 /* GlassView.h */,
-				F90B416A1CABC45600ECF391 /* GlassView.m */,
+				F90B41781CAD665A00ECF391 /* View */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -489,8 +499,6 @@
 		F9E073871CA9155900468EDC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F91775A91CAA7EF900557A45 /* ContactsTableViewCell.h */,
-				F91775AA1CAA7EF900557A45 /* ContactsTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -528,21 +536,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		F9E0738C1CA9155900468EDC /* Found */ = {
+		F9E0738C1CA9155900468EDC /* Discover */ = {
 			isa = PBXGroup;
 			children = (
 				F9E0738D1CA9155900468EDC /* Controller */,
 				F9E0738E1CA9155900468EDC /* Model */,
 				F9E0738F1CA9155900468EDC /* View */,
 			);
+			name = Discover;
 			path = Found;
 			sourceTree = "<group>";
 		};
 		F9E0738D1CA9155900468EDC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F9E0739F1CA9161F00468EDC /* FoundViewController.h */,
-				F9E073A01CA9161F00468EDC /* FoundViewController.m */,
+				F9E0739F1CA9161F00468EDC /* DiscoverViewController.h */,
+				F9E073A01CA9161F00468EDC /* DiscoverViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -869,7 +878,7 @@
 				F9E073AF1CA96B1E00468EDC /* PersonModel.m in Sources */,
 				F9E0739B1CA9160D00468EDC /* ContactsViewController.m in Sources */,
 				F90B416D1CABCE1E00ECF391 /* Constants.m in Sources */,
-				F9E073A11CA9161F00468EDC /* FoundViewController.m in Sources */,
+				F9E073A11CA9161F00468EDC /* DiscoverViewController.m in Sources */,
 				F9E072DF1CA90BD800468EDC /* AppDelegate.m in Sources */,
 				F9E073AC1CA96AF000468EDC /* MeTableViewCell.m in Sources */,
 				F91775AB1CAA7EF900557A45 /* ContactsTableViewCell.m in Sources */,
