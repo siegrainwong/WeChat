@@ -113,8 +113,8 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 - (void)tableView:(UITableView*)tableView
   didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  [self.navigationController
-    pushViewController:[[ChatroomViewController alloc] init]
-              animated:true];
+  ChatroomViewController* chatVC = [[ChatroomViewController alloc] init];
+  chatVC.hidesBottomBarWhenPushed = true;
+  [self.navigationController pushViewController:chatVC animated:true];
 }
 @end
