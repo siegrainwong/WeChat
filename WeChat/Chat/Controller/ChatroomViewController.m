@@ -27,6 +27,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   [self buildEditorView];
 
   [self bindConstraints];
+  [self bindGestureRecognizer];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +47,39 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
   self.editorView = [EditorView editor];
   [self.view addSubview:self.editorView];
+
+  __weak typeof(self.editorView) weakEditorView = self.editorView;
+  [weakEditorView setKeyboardWasShown:^(NSInteger animCurveKey,
+                                        CGFloat duration, CGSize keyboardSize) {
+
+    //若要在修改约束的同时进行动画的话，需要调用其父视图的layoutIfNeeded方法，并在动画中再调用一次！
+    [weakEditorView.superview layoutIfNeeded];
+    [weakEditorView mas_updateConstraints:^(MASConstraintMaker* make) {
+      make.bottom.offset(-keyboardSize.height);
+    }];
+    [UIView animateWithDuration:duration
+                          delay:0
+                        options:animCurveKey
+                     animations:^{
+                       [weakEditorView.superview layoutIfNeeded];
+                     }
+                     completion:nil];
+  }];
+  [weakEditorView
+    setKeyboardWillBeHidden:^(NSInteger animCurveKey, CGFloat duration,
+                              CGSize keyboardSize) {
+      [weakEditorView.superview layoutIfNeeded];
+      [weakEditorView mas_updateConstraints:^(MASConstraintMaker* make) {
+        make.bottom.offset(0);
+      }];
+      [UIView animateWithDuration:duration
+                            delay:0
+                          options:animCurveKey
+                       animations:^{
+                         [weakEditorView.superview layoutIfNeeded];
+                       }
+                       completion:nil];
+    }];
 }
 - (void)bindConstraints
 {
@@ -58,6 +92,14 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
     make.height.offset(kEditorHeight);
   }];
 }
+- (void)bindGestureRecognizer
+{
+  UITapGestureRecognizer* singleTapGestureRecognizer =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(endTextEditing)];
+  singleTapGestureRecognizer.numberOfTapsRequired = 1;
+  [self.tableView addGestureRecognizer:singleTapGestureRecognizer];
+}
 #pragma mark - tableview
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -68,5 +110,15 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
   return [[UITableViewCell alloc] init];
+}
+#pragma mark - scrollview
+- (void)scrollViewWillBeginDragging:(UIScrollView*)scrollView
+{
+  [self endTextEditing];
+}
+#pragma mark -
+- (void)endTextEditing
+{
+  [self.view endEditing:true];
 }
 @end
