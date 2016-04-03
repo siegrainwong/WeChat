@@ -21,8 +21,8 @@
   self.wechatIdLabel.text =
     [NSString stringWithFormat:@"微信号: %@", model.wechatId];
 
-  self.barcodeImageView.image = [UIImage imageNamed:@""];
-  self.barcodeImageView.backgroundColor = [UIColor lightGrayColor];
+  self.barcodeImageView.image = [UIImage imageNamed:@"ScanQRCode"];
+  self.barcodeImageView.backgroundColor = [UIColor whiteColor];
 }
 
 - (UIImageView*)avatarImageView

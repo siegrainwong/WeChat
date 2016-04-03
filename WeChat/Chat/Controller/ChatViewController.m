@@ -87,6 +87,7 @@ ChatViewController ()<UITableViewDelegate, UITableViewDataSource>
     cell.preservesSuperviewLayoutMargins = false;
     cell.separatorInset = UIEdgeInsetsMake(5, 0, 0, 0);
     cell.layoutMargins = UIEdgeInsetsZero;
+    cell.avatarCornerRadius = 3;
   }
 
   return cell;

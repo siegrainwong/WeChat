@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="auf-RX-wpd" customClass="EditorView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YyD-fX-UK0">
+                    <rect key="frame" x="44" y="7" width="290" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6yg-xz-lHJ">
+                    <rect key="frame" x="8" y="8" width="28" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="Egn-dg-4VM"/>
+                        <constraint firstAttribute="width" constant="28" id="y8V-ro-zNi"/>
+                    </constraints>
+                    <state key="normal" image="chat_setmode_voice_btn_normal"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WGh-b7-ZCD">
+                    <rect key="frame" x="378" y="8" width="28" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="28" id="dHT-MZ-EHg"/>
+                        <constraint firstAttribute="height" constant="28" id="m82-8o-htG"/>
+                    </constraints>
+                    <state key="normal" image="chat_setmode_add_btn_normal"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dea-uk-sI9">
+                    <rect key="frame" x="342" y="8" width="28" height="28"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="28" id="1bh-To-EL4"/>
+                        <constraint firstAttribute="height" constant="28" id="xOe-rY-rDu"/>
+                    </constraints>
+                    <state key="normal" image="Album_ToolViewEmotion"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="WGh-b7-ZCD" firstAttribute="top" secondItem="auf-RX-wpd" secondAttribute="top" constant="8" id="0I2-Uo-eaL"/>
+                <constraint firstItem="6yg-xz-lHJ" firstAttribute="top" secondItem="auf-RX-wpd" secondAttribute="top" constant="8" id="5Vx-RH-Xq5"/>
+                <constraint firstItem="dea-uk-sI9" firstAttribute="top" secondItem="auf-RX-wpd" secondAttribute="top" constant="8" id="FWr-3Z-ATw"/>
+                <constraint firstItem="dea-uk-sI9" firstAttribute="leading" secondItem="YyD-fX-UK0" secondAttribute="trailing" constant="8" id="Nhj-CL-4Oh"/>
+                <constraint firstAttribute="trailing" secondItem="WGh-b7-ZCD" secondAttribute="trailing" constant="8" id="XAL-GN-bhJ"/>
+                <constraint firstItem="YyD-fX-UK0" firstAttribute="leading" secondItem="6yg-xz-lHJ" secondAttribute="trailing" constant="8" id="a1l-hl-oFb"/>
+                <constraint firstItem="YyD-fX-UK0" firstAttribute="top" secondItem="auf-RX-wpd" secondAttribute="top" constant="7" id="aEw-0U-TqM"/>
+                <constraint firstItem="6yg-xz-lHJ" firstAttribute="leading" secondItem="auf-RX-wpd" secondAttribute="leading" constant="8" id="iAu-at-4bz"/>
+                <constraint firstItem="WGh-b7-ZCD" firstAttribute="leading" secondItem="dea-uk-sI9" secondAttribute="trailing" constant="8" id="yHQ-5I-5kf"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="additionalButton" destination="WGh-b7-ZCD" id="pev-zb-GqK"/>
+                <outlet property="emotionButton" destination="dea-uk-sI9" id="0jH-8c-Dlu"/>
+                <outlet property="textField" destination="YyD-fX-UK0" id="yoi-Ei-AEV"/>
+                <outlet property="voiceButton" destination="6yg-xz-lHJ" id="m9m-oI-vF4"/>
+            </connections>
+            <point key="canvasLocation" x="438" y="473"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Album_ToolViewEmotion" width="30" height="30"/>
+        <image name="chat_setmode_add_btn_normal" width="28" height="28"/>
+        <image name="chat_setmode_voice_btn_normal" width="28" height="28"/>
+    </resources>
+</document>

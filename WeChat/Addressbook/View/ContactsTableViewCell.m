@@ -32,6 +32,7 @@ ContactsTableViewCell ()
   self.avatarImageView = [[UIImageView alloc]
     initWithFrame:CGRectMake(kContentInsetH, kContentInsetV, size, size)];
   self.avatarImageView.image = avatar;
+  self.avatarImageView.layer.cornerRadius = self.avatarCornerRadius;
 
   [self addSubview:self.avatarImageView];
 }

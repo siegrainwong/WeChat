@@ -15,6 +15,7 @@ typedef NS_ENUM(NSUInteger, ContactsTableViewCellStyle) {
 
 @interface ContactsTableViewCell : UITableViewCell
 @property (assign, nonatomic) ContactsTableViewCellStyle style;
+@property (assign, nonatomic) CGFloat avatarCornerRadius;
 
 /*请按照以下顺序设值*/
 @property (strong, nonatomic) UIImage* avatar;
