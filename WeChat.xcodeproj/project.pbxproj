@@ -17,6 +17,7 @@
 		F91775AB1CAA7EF900557A45 /* ContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F91775AA1CAA7EF900557A45 /* ContactsTableViewCell.m */; };
 		F918F3FC1CB112B0003855FE /* EditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F918F3FB1CB112B0003855FE /* EditorView.m */; };
 		F918F3FE1CB112C1003855FE /* EditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F918F3FD1CB112C1003855FE /* EditorView.xib */; };
+		F918F4011CB139DA003855FE /* ChatroomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F918F4001CB139DA003855FE /* ChatroomViewController.m */; };
 		F9E072DC1CA90BD800468EDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DB1CA90BD800468EDC /* main.m */; };
 		F9E072DF1CA90BD800468EDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DE1CA90BD800468EDC /* AppDelegate.m */; };
 		F9E072E51CA90BD800468EDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E072E31CA90BD800468EDC /* Main.storyboard */; };
@@ -121,6 +122,8 @@
 		F918F3FA1CB112B0003855FE /* EditorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditorView.h; sourceTree = "<group>"; };
 		F918F3FB1CB112B0003855FE /* EditorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditorView.m; sourceTree = "<group>"; };
 		F918F3FD1CB112C1003855FE /* EditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditorView.xib; sourceTree = "<group>"; };
+		F918F3FF1CB139DA003855FE /* ChatroomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatroomViewController.h; sourceTree = "<group>"; };
+		F918F4001CB139DA003855FE /* ChatroomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatroomViewController.m; sourceTree = "<group>"; };
 		F9E072D71CA90BD700468EDC /* WeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E072DB1CA90BD800468EDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F9E072DD1CA90BD800468EDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -520,6 +523,8 @@
 			children = (
 				F9E0739C1CA9161500468EDC /* ChatViewController.h */,
 				F9E0739D1CA9161500468EDC /* ChatViewController.m */,
+				F918F3FF1CB139DA003855FE /* ChatroomViewController.h */,
+				F918F4001CB139DA003855FE /* ChatroomViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -891,6 +896,7 @@
 				F918F3FC1CB112B0003855FE /* EditorView.m in Sources */,
 				F90B41731CAC1DC700ECF391 /* NSString+Pinyin.m in Sources */,
 				F9E073A71CA9167300468EDC /* MainTabBarController.m in Sources */,
+				F918F4011CB139DA003855FE /* ChatroomViewController.m in Sources */,
 				F9E072DC1CA90BD800468EDC /* main.m in Sources */,
 				F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */,
 				F90B41771CAD0C0E00ECF391 /* UIImage+Common.m in Sources */,

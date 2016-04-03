@@ -7,6 +7,7 @@
 //
 
 #import "ChatViewController.h"
+#import "ChatroomViewController.h"
 #import "ContactsTableViewCell.h"
 #import "UIImage+RandomImage.h"
 
@@ -107,5 +108,13 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
   return 60;
+}
+
+- (void)tableView:(UITableView*)tableView
+  didSelectRowAtIndexPath:(NSIndexPath*)indexPath
+{
+  [self.navigationController
+    pushViewController:[[ChatroomViewController alloc] init]
+              animated:true];
 }
 @end

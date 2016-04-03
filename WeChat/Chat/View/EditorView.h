@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface EditorView : UIView
++ (instancetype)editor;
 
 @end

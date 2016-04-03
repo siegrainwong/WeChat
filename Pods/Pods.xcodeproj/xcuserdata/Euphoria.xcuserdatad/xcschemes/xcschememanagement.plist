@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Masonry.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>PinYin4Objc.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,17 +37,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8D8326168D55874F608125DB1E477811</key>
+		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>942E73519761F7FE16DB24996587C095</key>
+		<key>7961AA422CD39BF71FC1B3E23BDE2E3E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ABD631EC825B19C0E937C0C34C682D60</key>
+		<key>C11827E93D9F2BD879D48A2DE358E942</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CC43CF19CED5EA76509738E7C58BE8E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

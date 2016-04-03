@@ -18,5 +18,10 @@ EditorView ()
 @end
 
 @implementation EditorView
-
++ (instancetype)editor
+{
+  return
+    [[[NSBundle mainBundle] loadNibNamed:@"EditorView" owner:nil options:nil]
+      lastObject];
+}
 @end
