@@ -10,7 +10,7 @@
 #import "EditorView.h"
 #import "Masonry/Masonry/Masonry.h"
 
-static NSInteger const kEditorHeight = 44;
+static NSInteger const kEditorHeight = 50;
 
 @interface
 ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
