@@ -101,8 +101,7 @@ ContactsViewController ()<UITableViewDelegate, UITableViewDataSource,
 {
   NSMutableArray* tempImageArray = [NSMutableArray array];
   for (int i = 0; i < self.contacts.count; i++) {
-    [tempImageArray
-      addObject:[UIImage randromImageInPath:@"Images/cell_icons"]];
+    [tempImageArray addObject:[UIImage randomImageInPath:@"Images/cell_icons"]];
   }
   SearchResultsController* resultController =
     [[SearchResultsController alloc] initWithKeywords:self.contacts
@@ -214,7 +213,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     cell.avatar = [UIImage imageNamed:self.firstSectionData[indexPath.row][0]];
     cell.name = self.firstSectionData[indexPath.row][1];
   } else {
-    cell.avatar = [UIImage randromImageInPath:@"Images/cell_icons"];
+    cell.avatar = [UIImage randomImageInPath:@"Images/cell_icons"];
     cell.name = self.grouppedContacts[indexPath.section - 1][indexPath.row];
   }
 }

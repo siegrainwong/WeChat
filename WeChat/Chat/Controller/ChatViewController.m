@@ -7,6 +7,7 @@
 //
 
 #import "ChatViewController.h"
+#import "ContactsTableViewCell.h"
 #import "UIImage+RandomImage.h"
 
 @interface
@@ -19,10 +20,14 @@ ChatViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 - (void)viewDidLoad
 {
+  [super viewDidLoad];
   [self initializeData];
   [self buildTableView];
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+}
 - (void)initializeData
 {
   self.dataArr = @[
@@ -47,21 +52,18 @@ ChatViewController ()<UITableViewDelegate, UITableViewDataSource>
 }
 - (void)buildTableView
 {
-  _tableView = ({
-    UITableView* tableView = [[UITableView alloc]
-      initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,
-                               self.view.frame.size.height - 44)
-              style:UITableViewStyleGrouped];
+  // tableviewstyle为groupped的话，会有莫名其妙的contentInsets出现
+  self.tableView = [[UITableView alloc]
+    initWithFrame:CGRectMake(0, 0, self.view.frame.size.width,
+                             self.view.frame.size.height)
+            style:UITableViewStylePlain];
 
-    tableView.delegate = self;
-    tableView.dataSource = self;
+  self.tableView.delegate = self;
+  self.tableView.dataSource = self;
 
-    tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+  self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 
-    tableView;
-  });
-
-  [self.view addSubview:_tableView];
+  [self.view addSubview:self.tableView];
 }
 #pragma mark - tableview datasource
 - (NSInteger)tableView:(UITableView*)tableView
@@ -74,42 +76,35 @@ ChatViewController ()<UITableViewDelegate, UITableViewDataSource>
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
   static NSString* identifier = @"chatCellIdentifier";
-  UITableViewCell* cell =
+  ContactsTableViewCell* cell =
     [tableView dequeueReusableCellWithIdentifier:identifier];
 
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
-                                  reuseIdentifier:identifier];
+    cell =
+      [[ContactsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier:identifier];
 
     cell.preservesSuperviewLayoutMargins = false;
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.layoutMargins = UIEdgeInsetsMake(5, 0, 5, 0);
+    cell.separatorInset = UIEdgeInsetsMake(5, 0, 0, 0);
+    cell.layoutMargins = UIEdgeInsetsZero;
   }
 
   return cell;
 }
 
 - (void)tableView:(UITableView*)tableView
-  willDisplayCell:(UITableViewCell*)cell
+  willDisplayCell:(ContactsTableViewCell*)cell
 forRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  UIImage* icon = [UIImage randromImageInPath:@"Images/cell_icons"];
-  CGSize size = CGSizeMake(36, 36);
-  UIGraphicsBeginImageContextWithOptions(size, NO, 0.0);
-  CGRect imageRect = CGRectMake(0.0, 0.0, size.width, size.height);
-  [icon drawInRect:imageRect];
-
-  cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
-
-  UIGraphicsEndImageContext();
-
-  cell.textLabel.text = self.dataArr[indexPath.row][0];
-  cell.detailTextLabel.text = self.dataArr[indexPath.row][1];
+  cell.style = ContactsTableViewCellStyleSubtitle;
+  cell.avatar = [UIImage randomImageInPath:@"Images/cell_icons"];
+  cell.name = self.dataArr[indexPath.row][0];
+  cell.descriptionText = self.dataArr[indexPath.row][1];
 }
 
 - (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  return 44;
+  return 60;
 }
 @end

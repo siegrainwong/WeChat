@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIImage (RandomImage)
-+ (UIImage*)randromImageInPath:(NSString*)path;
++ (UIImage*)randomImageInPath:(NSString*)path;
 @end

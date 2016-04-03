@@ -9,7 +9,7 @@
 #import "UIImage+RandomImage.h"
 
 @implementation UIImage (RandomImage)
-+ (UIImage*)randromImageInPath:(NSString*)path
++ (UIImage*)randomImageInPath:(NSString*)path
 {
   NSString* imagePath =
     [NSString stringWithFormat:@"%@/%u.jpg", [[NSBundle mainBundle] bundlePath],

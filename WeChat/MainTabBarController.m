@@ -69,6 +69,10 @@
     [[UITabBarItem alloc] initWithTitle:VC.title
                                   image:[self removeRendering:imgName]
                           selectedImage:[self removeRendering:selectImgName]];
+
   return nav;
+}
+- (void)viewWillLayoutSubviews
+{
 }
 @end

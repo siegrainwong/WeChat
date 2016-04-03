@@ -22,8 +22,12 @@ ContactsTableViewCell ()
 
 - (void)setAvatar:(UIImage*)avatar
 {
-  _avatar = avatar;
+  if (avatar == _avatar)
+    return;
 
+  [self.avatarImageView removeFromSuperview];
+
+  _avatar = avatar;
   CGFloat size = self.bounds.size.height - kContentInsetV * 2;
   self.avatarImageView = [[UIImageView alloc]
     initWithFrame:CGRectMake(kContentInsetH, kContentInsetV, size, size)];
@@ -33,38 +37,49 @@ ContactsTableViewCell ()
 }
 - (void)setName:(NSString*)name
 {
-  _name = name;
+  if ([name isEqualToString:_name])
+    return;
 
+  [self.nameLabel removeFromSuperview];
+
+  _name = name;
   CGRect imageRect = self.avatarImageView.frame;
   CGFloat marginX = CGRectGetMaxX(imageRect) + kContentInsetH;
-  UILabel* label = [[UILabel alloc]
-    initWithFrame:CGRectMake(marginX, 0, self.bounds.size.width - marginX,
+  CGFloat marginY =
+    self.style == ContactsTableViewCellStyleSubtitle ? kContentInsetV + 5 : 0;
+  self.nameLabel = [[UILabel alloc]
+    initWithFrame:CGRectMake(marginX, marginY, self.bounds.size.width - marginX,
                              self.bounds.size.height)];
-  label.text = name;
+  self.nameLabel.text = name;
+  self.nameLabel.font = [UIFont systemFontOfSize:16];
 
   if (self.style == ContactsTableViewCellStyleSubtitle)
-    [label sizeToFit];
+    [self.nameLabel sizeToFit];
 
-  [self addSubview:label];
+  [self addSubview:self.nameLabel];
 }
 - (void)setDescriptionText:(NSString*)descriptionText
 {
+  if ([descriptionText isEqualToString:_descriptionText])
+    return;
+
   if (self.style == ContactsTableViewCellStyleDefault)
     return;
 
-  _descriptionText = descriptionText;
+  [self.descriptionLabel removeFromSuperview];
 
+  _descriptionText = descriptionText;
   CGFloat marginX = self.nameLabel.frame.origin.x;
-  CGFloat marginY = CGRectGetMaxY(self.nameLabel.frame) + 3;
-  UILabel* label = [[UILabel alloc]
+  CGFloat marginY = CGRectGetMaxY(self.nameLabel.frame) + 5;
+  self.descriptionLabel = [[UILabel alloc]
     initWithFrame:CGRectMake(marginX, marginY, self.bounds.size.width - marginX,
                              20)];
-  label.text = descriptionText;
-  label.font = [UIFont systemFontOfSize:15];
-  label.textColor = [UIColor colorWithWhite:.2 alpha:1];
+  self.descriptionLabel.text = descriptionText;
+  self.descriptionLabel.font = [UIFont systemFontOfSize:14];
+  self.descriptionLabel.textColor = [UIColor colorWithWhite:.5 alpha:1];
 
-  [label sizeToFit];
+  [self.descriptionLabel sizeToFit];
 
-  [self addSubview:label];
+  [self addSubview:self.descriptionLabel];
 }
 @end
