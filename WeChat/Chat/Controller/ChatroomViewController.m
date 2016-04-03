@@ -48,35 +48,52 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   self.editorView = [EditorView editor];
   [self.view addSubview:self.editorView];
 
-  __weak typeof(self.editorView) weakEditorView = self.editorView;
-  [weakEditorView setKeyboardWasShown:^(NSInteger animCurveKey,
-                                        CGFloat duration, CGSize keyboardSize) {
-
-    //若要在修改约束的同时进行动画的话，需要调用其父视图的layoutIfNeeded方法，并在动画中再调用一次！
-    [weakEditorView.superview layoutIfNeeded];
-    [weakEditorView mas_updateConstraints:^(MASConstraintMaker* make) {
-      make.bottom.offset(-keyboardSize.height);
-    }];
-    [UIView animateWithDuration:duration
-                          delay:0
-                        options:animCurveKey
-                     animations:^{
-                       [weakEditorView.superview layoutIfNeeded];
-                     }
-                     completion:nil];
-  }];
-  [weakEditorView
-    setKeyboardWillBeHidden:^(NSInteger animCurveKey, CGFloat duration,
-                              CGSize keyboardSize) {
-      [weakEditorView.superview layoutIfNeeded];
-      [weakEditorView mas_updateConstraints:^(MASConstraintMaker* make) {
-        make.bottom.offset(0);
+  __weak typeof(self) weakSelf = self;
+  __block NSUInteger keyboardHeight = 0;
+  [weakSelf.editorView
+    setKeyboardWasShown:^(NSInteger animCurveKey, CGFloat duration,
+                          CGSize keyboardSize) {
+      keyboardHeight = keyboardSize.height;
+      //若要在修改约束的同时进行动画的话，需要调用其父视图的layoutIfNeeded方法，并在动画中再调用一次！
+      [weakSelf.view layoutIfNeeded];
+      [weakSelf.editorView mas_updateConstraints:^(MASConstraintMaker* make) {
+        make.bottom.offset(-keyboardSize.height);
+      }];
+      [weakSelf.tableView mas_updateConstraints:^(MASConstraintMaker* make) {
+        make.bottom.offset(-keyboardSize.height - kEditorHeight);
       }];
       [UIView animateWithDuration:duration
                             delay:0
                           options:animCurveKey
                        animations:^{
-                         [weakEditorView.superview layoutIfNeeded];
+                         CGPoint contentOffset =
+                           CGPointMake(weakSelf.tableView.contentOffset.x,
+                                       weakSelf.tableView.contentOffset.y +
+                                         keyboardSize.height);
+                         weakSelf.tableView.contentOffset = contentOffset;
+                         [weakSelf.view layoutIfNeeded];
+                       }
+                       completion:nil];
+    }];
+  [weakSelf.editorView
+    setKeyboardWillBeHidden:^(NSInteger animCurveKey, CGFloat duration,
+                              CGSize keyboardSize) {
+      [weakSelf.view layoutIfNeeded];
+      [weakSelf.editorView mas_updateConstraints:^(MASConstraintMaker* make) {
+        make.bottom.offset(0);
+      }];
+      [weakSelf.tableView mas_updateConstraints:^(MASConstraintMaker* make) {
+        make.bottom.offset(-kEditorHeight);
+      }];
+      [UIView animateWithDuration:duration
+                            delay:0
+                          options:animCurveKey
+                       animations:^{
+                         CGPoint contentOffset = CGPointMake(
+                           weakSelf.tableView.contentOffset.x,
+                           weakSelf.tableView.contentOffset.y - keyboardHeight);
+                         weakSelf.tableView.contentOffset = contentOffset;
+                         [weakSelf.view layoutIfNeeded];
                        }
                        completion:nil];
     }];
@@ -101,15 +118,35 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   [self.tableView addGestureRecognizer:singleTapGestureRecognizer];
 }
 #pragma mark - tableview
+- (CGFloat)tableView:(UITableView*)tableView
+  heightForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+  return 50;
+}
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-  return 0;
+  return 15;
 }
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  return [[UITableViewCell alloc] init];
+  static NSString* identifier = @"ChatroomIdentifier";
+  UITableViewCell* cell =
+    [tableView dequeueReusableCellWithIdentifier:identifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:identifier];
+  }
+  return cell;
+}
+- (void)tableView:(UITableView*)tableView
+  willDisplayCell:(UITableViewCell*)cell
+forRowAtIndexPath:(NSIndexPath*)indexPath
+{
+  cell.textLabel.text = [NSString
+    stringWithFormat:@"Cell：%ld - %ld", indexPath.section, indexPath.row];
+  ;
 }
 #pragma mark - scrollview
 - (void)scrollViewWillBeginDragging:(UIScrollView*)scrollView
