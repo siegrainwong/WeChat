@@ -184,10 +184,11 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
   model.identifier = arc4random() % 2 + 1;
   model.name = model.identifier == 1 ? @"Siegrain" : @"Turning robot";
   model.sendTime = [NSDate date];
-  model.message = model.identifier == 1 ? @"床前明月光"
-                                        : @"[作者]\t李白\n[全文]"
-                                          @"\n床前明月光，疑是地上霜。"
-                                          @"\n举头望明月，低头思故乡";
+  model.message = model.identifier == 1
+                    ? @"锄禾日当午，汗滴禾下土。"
+                    : @"[作者]\t李白\n[全文]"
+                      @"\n床前明月光，\n疑是地上霜。"
+                      @"\n举头望明月，\n低头思故乡";
   model.messageType = ChatMessageTypeText;
 
   return model;
