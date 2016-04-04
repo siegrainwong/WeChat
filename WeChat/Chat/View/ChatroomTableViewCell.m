@@ -27,6 +27,7 @@ ChatroomTableViewCell ()
 @property (strong, nonatomic) UIImageView* bubbleView;
 @property (strong, nonatomic) UIImageView* avatarImageView;
 @property (strong, nonatomic) UITextView* messageTextView;
+@property (strong, nonatomic) UILabel* messageLabel;
 @end
 
 @implementation ChatroomTableViewCell
@@ -81,13 +82,16 @@ ChatroomTableViewCell ()
   self.messageTextView.editable = false;
   self.messageTextView.scrollEnabled = false;
   [self.bubbleView addSubview:self.messageTextView];
+
+  //  self.messageLabel = [[UILabel alloc] init];
+  //  self.messageLabel.text = self.model.message;
+  //  self.messageLabel.font = [UIFont systemFontOfSize:15];
+  //  self.messageLabel.numberOfLines = NSIntegerMax;
+  //  [self.bubbleView addSubview:self.messageLabel];
 }
 - (void)bindConstraints
 {
   __weak typeof(self) weakSelf = self;
-  //  [self mas_makeConstraints:^(MASConstraintMaker* make) {
-  //    make.edges.insets(UIEdgeInsetsMake(5, 10, 10, 10));
-  //  }];
   [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
     make.top.offset(5);
     make.width.height.offset(kAvatarSize);
@@ -102,25 +106,30 @@ ChatroomTableViewCell ()
     if (weakSelf.alignement == ChatroomCellAlignementLeft) {
       //指view的左边在avatar的右边，边距为5
       make.left.equalTo(weakSelf.avatarImageView.mas_right).offset(5);
+      make.right.lessThanOrEqualTo(weakSelf.mas_right).offset(-100);
+      //      make.right.lessThanOrEqualTo(weakSelf.mas_width).offset(-50);
     } else {
       make.right.equalTo(weakSelf.avatarImageView.mas_left).offset(-5);
+      make.left.greaterThanOrEqualTo(weakSelf.mas_left).offset(100);
+      //      make.left.greaterThanOrEqualTo(weakSelf.mas_width).offset(50);
     }
 
-    CGRect textRect = [weakSelf.messageTextView.text
-      boundingRectWithSize:CGSizeMake(300, MAXFLOAT)
-                   options:NSStringDrawingUsesLineFragmentOrigin
-                attributes:@{
-                  NSFontAttributeName : weakSelf.messageTextView.font
-                }
-                   context:nil];
+    //    CGRect textRect = [weakSelf.messageTextView.text
+    //      boundingRectWithSize:CGSizeMake(300, MAXFLOAT)
+    //                   options:NSStringDrawingUsesLineFragmentOrigin
+    //                attributes:@{
+    //                  NSFontAttributeName : weakSelf.messageTextView.font
+    //                }
+    //                   context:nil];
 
-    make.width.offset(textRect.size.width + kBubbleCompensateWidth);
-    make.height.offset(textRect.size.height + kBubbleCompensateHeight);
+    //    make.width.offset(textRect.size.width + kBubbleCompensateWidth);
+    //    make.height.offset(textRect.size.height + kBubbleCompensateHeight);
   }];
   [self.messageTextView mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.size.equalTo(weakSelf.bubbleView);
-    make.top.offset(0);
-    make.left.offset(10);
+    make.edges.insets(UIEdgeInsetsMake(0, 15, 15, 15));
   }];
+  //  [self.messageLabel mas_makeConstraints:^(MASConstraintMaker* make) {
+  //    make.edges.insets(UIEdgeInsetsMake(0, 15, 15, 15));
+  //  }];
 }
 @end

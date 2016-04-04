@@ -186,7 +186,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
   model.sendTime = [NSDate date];
   model.message = model.identifier == 1 ? @"床前明月光"
                                         : @"[作者]\t李白\n[全文]"
-                                          @"\t床前明月光，疑是地上霜。"
+                                          @"\n床前明月光，疑是地上霜。"
                                           @"\n举头望明月，低头思故乡";
   model.messageType = ChatMessageTypeText;
 
