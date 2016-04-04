@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ChatroomViewController : UIViewController
-
++ (NSInteger)EditorHeight;
 @end

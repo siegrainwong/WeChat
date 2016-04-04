@@ -35,24 +35,24 @@
                     </constraints>
                     <state key="normal" image="Album_ToolViewEmotion"/>
                 </button>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="D7a-Ld-6iJ">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D7a-Ld-6iJ">
                     <rect key="frame" x="44" y="8" width="290" height="34"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="send"/>
                 </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="WGh-b7-ZCD" firstAttribute="top" secondItem="auf-RX-wpd" secondAttribute="top" constant="11" id="0I2-Uo-eaL"/>
                 <constraint firstItem="dea-uk-sI9" firstAttribute="leading" secondItem="D7a-Ld-6iJ" secondAttribute="trailing" constant="8" id="1q1-Tq-Bwl"/>
-                <constraint firstItem="6yg-xz-lHJ" firstAttribute="top" secondItem="auf-RX-wpd" secondAttribute="top" constant="11" id="5Vx-RH-Xq5"/>
-                <constraint firstItem="dea-uk-sI9" firstAttribute="top" secondItem="auf-RX-wpd" secondAttribute="top" constant="11" id="FWr-3Z-ATw"/>
+                <constraint firstAttribute="bottom" secondItem="D7a-Ld-6iJ" secondAttribute="bottom" constant="8" id="5V6-A8-1SI"/>
+                <constraint firstAttribute="bottom" secondItem="6yg-xz-lHJ" secondAttribute="bottom" constant="11" id="9Tp-eR-fVq"/>
                 <constraint firstItem="D7a-Ld-6iJ" firstAttribute="leading" secondItem="6yg-xz-lHJ" secondAttribute="trailing" constant="8" id="KN5-4b-XbV"/>
+                <constraint firstItem="D7a-Ld-6iJ" firstAttribute="top" secondItem="auf-RX-wpd" secondAttribute="top" constant="8" id="WJG-ci-aWM"/>
                 <constraint firstAttribute="trailing" secondItem="WGh-b7-ZCD" secondAttribute="trailing" constant="8" id="XAL-GN-bhJ"/>
-                <constraint firstItem="D7a-Ld-6iJ" firstAttribute="top" secondItem="auf-RX-wpd" secondAttribute="top" constant="8" id="fPn-Cj-Acr"/>
+                <constraint firstAttribute="bottom" secondItem="WGh-b7-ZCD" secondAttribute="bottom" constant="11" id="e5T-MX-0KB"/>
                 <constraint firstItem="6yg-xz-lHJ" firstAttribute="leading" secondItem="auf-RX-wpd" secondAttribute="leading" constant="8" id="iAu-at-4bz"/>
-                <constraint firstItem="D7a-Ld-6iJ" firstAttribute="centerY" secondItem="auf-RX-wpd" secondAttribute="centerY" id="xJR-ox-5GI"/>
+                <constraint firstAttribute="bottom" secondItem="dea-uk-sI9" secondAttribute="bottom" constant="11" id="nQq-qz-r5l"/>
                 <constraint firstItem="WGh-b7-ZCD" firstAttribute="leading" secondItem="dea-uk-sI9" secondAttribute="trailing" constant="8" id="yHQ-5I-5kf"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

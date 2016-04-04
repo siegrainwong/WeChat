@@ -19,7 +19,12 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 @end
 
 @implementation ChatroomViewController
-
+#pragma mark -
++ (NSInteger)EditorHeight
+{
+  return kEditorHeight;
+}
+#pragma mark - init
 - (void)viewDidLoad
 {
   [super viewDidLoad];

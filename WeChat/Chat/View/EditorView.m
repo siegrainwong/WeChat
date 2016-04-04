@@ -6,7 +6,9 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
+#import "ChatroomViewController.h"
 #import "EditorView.h"
+#import "Masonry/Masonry/Masonry.h"
 
 @interface
 EditorView ()<UITextViewDelegate>
@@ -42,20 +44,40 @@ EditorView ()<UITextViewDelegate>
   self.textView.layer.cornerRadius = 3;
   self.textView.layer.borderColor =
     [UIColor colorWithWhite:0 alpha:0.1].CGColor;
+  self.textView.delegate = self;
 
   [self appendKeyboardNotifications];
 }
 
 #pragma mark - textview delegate
+/*根据textView的行数调整视图高度*/
+- (void)textViewDidChange:(UITextView*)textView
+{
+  NSInteger lineHeight = self.textView.font.lineHeight;
+  NSInteger lineCount = (NSInteger)(textView.contentSize.height / lineHeight);
+  if (lineCount > 5)
+    return;
+
+  NSInteger increase = (lineCount - 1) * lineHeight;
+  [self mas_updateConstraints:^(MASConstraintMaker* make) {
+    make.height.offset([ChatroomViewController EditorHeight] + increase);
+  }];
+  [UIView animateWithDuration:.3
+                   animations:^{
+                     [self.superview layoutIfNeeded];
+                   }];
+}
 - (BOOL)textView:(UITextView*)textView
   shouldChangeTextInRange:(NSRange)range
           replacementText:(NSString*)text
 {
   if ([text isEqualToString:@"\n"])
-    if (self.messageWasSend)
+    if (self.messageWasSend) {
       self.messageWasSend(text, ChatMessageTypeText);
+      return false;
+    }
 
-  return false;
+  return true;
 }
 
 #pragma mark - keyboard notifications
