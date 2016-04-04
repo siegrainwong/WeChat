@@ -13,6 +13,7 @@
 #import "Masonry/Masonry/Masonry.h"
 #import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
 
+static NSString* const kCellIdentifier = @"ChatroomIdentifier";
 static NSInteger const kEditorHeight = 50;
 
 @interface
@@ -49,6 +50,8 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   self.tableView = [[UITableView alloc] init];
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
+  [self.tableView registerClass:[ChatroomTableViewCell class]
+         forCellReuseIdentifier:kCellIdentifier];
   [self.view addSubview:self.tableView];
 }
 - (void)buildEditorView
@@ -129,7 +132,11 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  return 50;
+  return [tableView
+    fd_heightForCellWithIdentifier:kCellIdentifier
+                     configuration:^(ChatroomTableViewCell* cell) {
+                       [self configureCellData:cell atIndexPath:indexPath];
+                     }];
 }
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -139,18 +146,22 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  static NSString* identifier = @"ChatroomIdentifier";
   ChatroomTableViewCell* cell =
-    [tableView dequeueReusableCellWithIdentifier:identifier];
-  if (cell == nil) {
+    [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
+  if (cell == nil)
     cell = [[ChatroomTableViewCell alloc] init];
-    cell.restorationIdentifier = identifier;
-  }
+
   return cell;
 }
 - (void)tableView:(UITableView*)tableView
   willDisplayCell:(ChatroomTableViewCell*)cell
 forRowAtIndexPath:(NSIndexPath*)indexPath
+{
+  [self configureCellData:cell atIndexPath:indexPath];
+}
+/*配置数据*/
+- (void)configureCellData:(ChatroomTableViewCell*)cell
+              atIndexPath:(NSIndexPath*)indexPath
 {
   cell.model = [self testModel];
 }
