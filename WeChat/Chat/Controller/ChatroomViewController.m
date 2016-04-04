@@ -133,14 +133,12 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  return
-    [tableView fd_heightForCellWithIdentifier:kCellIdentifier
-                             cacheByIndexPath:indexPath
-                                configuration:^(ChatroomTableViewCell* cell) {
-                                  // 配置 cell 的数据源，和 "cellForRow"
-                                  // 干的事一致，比如：
-                                  cell.model = [self testModel];
-                                }];
+  return [tableView
+    fd_heightForCellWithIdentifier:kCellIdentifier
+                  cacheByIndexPath:indexPath
+                     configuration:^(ChatroomTableViewCell* cell) {
+                       [self configureCellData:cell atIndexPath:indexPath];
+                     }];
   //  return 120;
 }
 - (NSInteger)tableView:(UITableView*)tableView

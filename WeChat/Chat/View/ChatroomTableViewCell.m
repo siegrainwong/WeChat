@@ -10,7 +10,7 @@
 #import "ChatroomTableViewCell.h"
 #import "Masonry/Masonry/Masonry.h"
 
-static NSInteger const kAvatarSize = 60;
+static NSInteger const kAvatarSize = 36;
 static NSInteger const kAvatarMarginH = 10;
 static NSInteger const kBubbleCompensateWidth = 35;
 static NSInteger const kBubbleCompensateHeight = 25;
@@ -85,22 +85,25 @@ ChatroomTableViewCell ()
 - (void)bindConstraints
 {
   __weak typeof(self) weakSelf = self;
+  //  [self mas_makeConstraints:^(MASConstraintMaker* make) {
+  //    make.edges.insets(UIEdgeInsetsMake(5, 10, 10, 10));
+  //  }];
   [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
     make.top.offset(5);
     make.width.height.offset(kAvatarSize);
     if (weakSelf.alignement == ChatroomCellAlignementLeft) {
       make.leading.offset(kAvatarMarginH);
     } else {
-      make.trailing.offset(kAvatarMarginH);
+      make.trailing.offset(-kAvatarMarginH);
     }
   }];
   [self.bubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
     make.top.offset(4);
     if (weakSelf.alignement == ChatroomCellAlignementLeft) {
       //指view的左边在avatar的右边，边距为5
-      make.leading.equalTo(weakSelf.avatarImageView.mas_right).offset(5);
+      make.left.equalTo(weakSelf.avatarImageView.mas_right).offset(5);
     } else {
-      make.trailing.equalTo(weakSelf.avatarImageView.mas_left).offset(5);
+      make.right.equalTo(weakSelf.avatarImageView.mas_left).offset(-5);
     }
 
     CGRect textRect = [weakSelf.messageTextView.text
