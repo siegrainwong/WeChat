@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UITableView+FDTemplateLayoutCell.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>YSMChineseSort-YSMChineseSort.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,22 +42,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2D5A086484A63CC7B96692751E7CA180</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7961AA422CD39BF71FC1B3E23BDE2E3E</key>
+		<key>7B3F73123A9E27A5A9DF59A75A2395DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C11827E93D9F2BD879D48A2DE358E942</key>
+		<key>A63E459880039C2D68E8ECA1FDD2F151</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CC43CF19CED5EA76509738E7C58BE8E7</key>
+		<key>CF3F5BD18E4E1CAEA6FBD3D55FE850E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

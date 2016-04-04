@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'AE17546F08F29F12D0073D77'
-               BlueprintName = 'YSMChineseSort-YSMChineseSort'
+               BlueprintIdentifier = 'A0A76478DD8F04E80DCC5FC8'
+               BlueprintName = 'UITableView+FDTemplateLayoutCell'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'YSMChineseSort.bundle'>
+               BuildableName = 'libUITableView+FDTemplateLayoutCell.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

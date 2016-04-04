@@ -6,9 +6,12 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
+#import "ChatModel.h"
+#import "ChatroomTableViewCell.h"
 #import "ChatroomViewController.h"
 #import "EditorView.h"
 #import "Masonry/Masonry/Masonry.h"
+#import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
 
 static NSInteger const kEditorHeight = 50;
 
@@ -73,7 +76,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
                        animations:^{
                          CGPoint contentOffset =
                            CGPointMake(weakSelf.tableView.contentOffset.x,
-                                       weakSelf.tableView.contentOffset.y +
+                                       weakSelf.tableView.contentSize.height -
                                          keyboardSize.height);
                          weakSelf.tableView.contentOffset = contentOffset;
                          [weakSelf.view layoutIfNeeded];
@@ -131,27 +134,25 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-  return 15;
+  return 10;
 }
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
   static NSString* identifier = @"ChatroomIdentifier";
-  UITableViewCell* cell =
+  ChatroomTableViewCell* cell =
     [tableView dequeueReusableCellWithIdentifier:identifier];
   if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                  reuseIdentifier:identifier];
+    cell = [[ChatroomTableViewCell alloc] init];
+    cell.restorationIdentifier = identifier;
   }
   return cell;
 }
 - (void)tableView:(UITableView*)tableView
-  willDisplayCell:(UITableViewCell*)cell
+  willDisplayCell:(ChatroomTableViewCell*)cell
 forRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  cell.textLabel.text = [NSString
-    stringWithFormat:@"Cell：%ld - %ld", indexPath.section, indexPath.row];
-  ;
+  cell.model = [self testModel];
 }
 #pragma mark - scrollview
 - (void)scrollViewWillBeginDragging:(UIScrollView*)scrollView
@@ -162,5 +163,19 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 - (void)endTextEditing
 {
   [self.view endEditing:true];
+}
+- (ChatModel*)testModel
+{
+  ChatModel* model = [[ChatModel alloc] init];
+  model.identifier = arc4random() % 2 + 1;
+  model.name = model.identifier == 1 ? @"Siegrain" : @"Turning robot";
+  model.sendTime = [NSDate date];
+  model.message = model.identifier == 1 ? @"床前明月光"
+                                        : @"\n[作者]\t李白\n[全文]"
+                                          @"\t床前明月光，疑是地上霜。"
+                                          @"\n举头望明月，低头思故乡";
+  model.messageType = ChatMessageTypeText;
+
+  return model;
 }
 @end
