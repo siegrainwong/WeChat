@@ -52,6 +52,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   self.tableView.dataSource = self;
   [self.tableView registerClass:[ChatroomTableViewCell class]
          forCellReuseIdentifier:kCellIdentifier];
+  self.tableView.fd_debugLogEnabled = true;
   [self.view addSubview:self.tableView];
 }
 - (void)buildEditorView
@@ -132,11 +133,15 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  return [tableView
-    fd_heightForCellWithIdentifier:kCellIdentifier
-                     configuration:^(ChatroomTableViewCell* cell) {
-                       [self configureCellData:cell atIndexPath:indexPath];
-                     }];
+  return
+    [tableView fd_heightForCellWithIdentifier:kCellIdentifier
+                             cacheByIndexPath:indexPath
+                                configuration:^(ChatroomTableViewCell* cell) {
+                                  // 配置 cell 的数据源，和 "cellForRow"
+                                  // 干的事一致，比如：
+                                  cell.model = [self testModel];
+                                }];
+  //  return 120;
 }
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -182,7 +187,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
   model.name = model.identifier == 1 ? @"Siegrain" : @"Turning robot";
   model.sendTime = [NSDate date];
   model.message = model.identifier == 1 ? @"床前明月光"
-                                        : @"\n[作者]\t李白\n[全文]"
+                                        : @"[作者]\t李白\n[全文]"
                                           @"\t床前明月光，疑是地上霜。"
                                           @"\n举头望明月，低头思故乡";
   model.messageType = ChatMessageTypeText;

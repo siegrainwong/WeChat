@@ -10,9 +10,10 @@
 #import "ChatroomTableViewCell.h"
 #import "Masonry/Masonry/Masonry.h"
 
-static NSInteger const kAvatarSize = 40;
-
+static NSInteger const kAvatarSize = 60;
 static NSInteger const kAvatarMarginH = 10;
+static NSInteger const kBubbleCompensateWidth = 35;
+static NSInteger const kBubbleCompensateHeight = 25;
 
 typedef NS_ENUM(NSUInteger, ChatroomCellAlignement) {
   ChatroomCellAlignementLeft,
@@ -70,11 +71,15 @@ ChatroomTableViewCell ()
   UIEdgeInsets insets = UIEdgeInsetsMake(30, 15, 30, 15);
   bubbleImage = [bubbleImage resizableImageWithCapInsets:insets];
   self.bubbleView.image = bubbleImage;
+  self.bubbleView.userInteractionEnabled = true;
   [self addSubview:self.bubbleView];
 
   self.messageTextView = [[UITextView alloc] init];
+  self.messageTextView.backgroundColor = [UIColor clearColor];
   self.messageTextView.text = self.model.message;
+  self.messageTextView.font = [UIFont systemFontOfSize:15];
   self.messageTextView.editable = false;
+  self.messageTextView.scrollEnabled = false;
   [self.bubbleView addSubview:self.messageTextView];
 }
 - (void)bindConstraints
@@ -84,23 +89,35 @@ ChatroomTableViewCell ()
     make.top.offset(5);
     make.width.height.offset(kAvatarSize);
     if (weakSelf.alignement == ChatroomCellAlignementLeft) {
-      make.left.offset(kAvatarMarginH);
+      make.leading.offset(kAvatarMarginH);
     } else {
-      make.right.offset(-kAvatarMarginH);
+      make.trailing.offset(kAvatarMarginH);
     }
   }];
   [self.bubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.top.bottom.offset(5);
+    make.top.offset(4);
     if (weakSelf.alignement == ChatroomCellAlignementLeft) {
       //指view的左边在avatar的右边，边距为5
-      make.left.equalTo(weakSelf.avatarImageView.mas_right).offset(5);
+      make.leading.equalTo(weakSelf.avatarImageView.mas_right).offset(5);
     } else {
-      make.right.equalTo(weakSelf.avatarImageView.mas_left).offset(-5);
+      make.trailing.equalTo(weakSelf.avatarImageView.mas_left).offset(5);
     }
+
+    CGRect textRect = [weakSelf.messageTextView.text
+      boundingRectWithSize:CGSizeMake(300, MAXFLOAT)
+                   options:NSStringDrawingUsesLineFragmentOrigin
+                attributes:@{
+                  NSFontAttributeName : weakSelf.messageTextView.font
+                }
+                   context:nil];
+
+    make.width.offset(textRect.size.width + kBubbleCompensateWidth);
+    make.height.offset(textRect.size.height + kBubbleCompensateHeight);
   }];
   [self.messageTextView mas_makeConstraints:^(MASConstraintMaker* make) {
-    UIEdgeInsets insets = UIEdgeInsetsMake(5, 15, 15, 15);
-    make.edges.insets(insets);
+    make.size.equalTo(weakSelf.bubbleView);
+    make.top.offset(0);
+    make.left.offset(10);
   }];
 }
 @end
