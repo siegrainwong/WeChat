@@ -11,7 +11,5 @@
 @class ChatModel;
 
 @interface ChatroomTableViewCell : UITableViewCell
-+ (instancetype)chatCellWithModel:(ChatModel*)model;
-
 @property (strong, nonatomic) ChatModel* model;
 @end

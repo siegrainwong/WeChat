@@ -50,9 +50,11 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   self.tableView = [[UITableView alloc] init];
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
+  self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+  self.tableView.backgroundColor = [UIColor colorWithWhite:.2 alpha:1];
   [self.tableView registerClass:[ChatroomTableViewCell class]
          forCellReuseIdentifier:kCellIdentifier];
-  self.tableView.fd_debugLogEnabled = true;
+  self.tableView.fd_debugLogEnabled = false;
   [self.view addSubview:self.tableView];
 }
 - (void)buildEditorView
@@ -131,15 +133,19 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 }
 #pragma mark - tableview
 - (CGFloat)tableView:(UITableView*)tableView
+  estimatedHeightForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+  return [self tableView:tableView heightForRowAtIndexPath:indexPath];
+}
+- (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  return [tableView
+  return [self.tableView
     fd_heightForCellWithIdentifier:kCellIdentifier
                   cacheByIndexPath:indexPath
                      configuration:^(ChatroomTableViewCell* cell) {
-                       [self configureCellData:cell atIndexPath:indexPath];
+                       cell.model = [self testModel:indexPath];
                      }];
-  //  return 120;
 }
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -150,9 +156,13 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
   ChatroomTableViewCell* cell =
-    [tableView dequeueReusableCellWithIdentifier:kCellIdentifier];
-  if (cell == nil)
-    cell = [[ChatroomTableViewCell alloc] init];
+    [tableView dequeueReusableCellWithIdentifier:kCellIdentifier
+                                    forIndexPath:indexPath];
+  if (cell == nil) {
+    cell =
+      [[ChatroomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                   reuseIdentifier:kCellIdentifier];
+  }
 
   return cell;
 }
@@ -160,13 +170,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   willDisplayCell:(ChatroomTableViewCell*)cell
 forRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  [self configureCellData:cell atIndexPath:indexPath];
-}
-/*配置数据*/
-- (void)configureCellData:(ChatroomTableViewCell*)cell
-              atIndexPath:(NSIndexPath*)indexPath
-{
-  cell.model = [self testModel];
+  cell.model = [self testModel:indexPath];
 }
 #pragma mark - scrollview
 - (void)scrollViewWillBeginDragging:(UIScrollView*)scrollView
@@ -178,18 +182,18 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 {
   [self.view endEditing:true];
 }
-- (ChatModel*)testModel
+- (ChatModel*)testModel:(NSIndexPath*)indexPath
 {
   ChatModel* model = [[ChatModel alloc] init];
-  model.identifier = arc4random() % 2 + 1;
-  model.name = model.identifier == 1 ? @"Siegrain" : @"Turning robot";
   model.sendTime = [NSDate date];
-  model.message = model.identifier == 1
+  model.messageType = ChatMessageTypeText;
+  model.identifier = indexPath.row;
+  model.name = model.identifier % 2 == 0 ? @"Siegrain" : @"Turning robot";
+  model.message = model.identifier % 2 == 0
                     ? @"锄禾日当午，汗滴禾下土。"
                     : @"[作者]\t李白\n[全文]"
                       @"\n床前明月光，\n疑是地上霜。"
                       @"\n举头望明月，\n低头思故乡";
-  model.messageType = ChatMessageTypeText;
 
   return model;
 }
