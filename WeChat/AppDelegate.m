@@ -42,6 +42,7 @@ AppDelegate ()
                                                                 green:53 / 255.0
                                                                  blue:58 / 255.0
                                                                 alpha:1]];
+  [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
   [[UINavigationBar appearance] setTitleTextAttributes:@{
     NSForegroundColorAttributeName : [UIColor whiteColor]
   }];

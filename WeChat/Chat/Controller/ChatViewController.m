@@ -115,6 +115,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 {
   ChatroomViewController* chatVC = [[ChatroomViewController alloc] init];
   chatVC.hidesBottomBarWhenPushed = true;
+  chatVC.barTitle = self.dataArr[indexPath.row][0];
   [self.navigationController pushViewController:chatVC animated:true];
 }
 @end

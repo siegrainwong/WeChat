@@ -32,6 +32,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [self buildView];
   [self buildTableView];
   [self buildEditorView];
 
@@ -45,13 +46,18 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 }
 
 #pragma mark - build
+- (void)buildView
+{
+  self.navigationItem.title = self.barTitle;
+}
 - (void)buildTableView
 {
   self.tableView = [[UITableView alloc] init];
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-  self.tableView.backgroundColor = [UIColor colorWithWhite:.2 alpha:1];
+  self.tableView.backgroundColor = [UIColor colorWithWhite:.95 alpha:1];
+
   [self.tableView registerClass:[ChatroomTableViewCell class]
          forCellReuseIdentifier:kCellIdentifier];
   self.tableView.fd_debugLogEnabled = false;
@@ -67,9 +73,11 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   [weakSelf.editorView
     setKeyboardWasShown:^(NSInteger animCurveKey, CGFloat duration,
                           CGSize keyboardSize) {
+      if (keyboardSize.height == 0)
+        return;
+
       keyboardHeight = keyboardSize.height;
       //若要在修改约束的同时进行动画的话，需要调用其父视图的layoutIfNeeded方法，并在动画中再调用一次！
-      [weakSelf.view layoutIfNeeded];
       [weakSelf.editorView mas_updateConstraints:^(MASConstraintMaker* make) {
         make.bottom.offset(-keyboardSize.height);
       }];
@@ -80,10 +88,13 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
                             delay:0
                           options:animCurveKey
                        animations:^{
+                         CGFloat contentOffsetYFarFromBottom =
+                           weakSelf.tableView.contentSize.height -
+                           weakSelf.tableView.contentOffset.y;
                          CGPoint contentOffset =
                            CGPointMake(weakSelf.tableView.contentOffset.x,
-                                       weakSelf.tableView.contentSize.height -
-                                         keyboardSize.height);
+                                       weakSelf.tableView.contentOffset.y +
+                                         contentOffsetYFarFromBottom);
                          weakSelf.tableView.contentOffset = contentOffset;
                          [weakSelf.view layoutIfNeeded];
                        }

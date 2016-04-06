@@ -10,4 +10,6 @@
 
 @interface ChatroomViewController : UIViewController
 + (NSInteger)EditorHeight;
+
+@property (copy, nonatomic) NSString* barTitle;
 @end

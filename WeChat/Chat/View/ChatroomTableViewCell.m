@@ -8,6 +8,8 @@
 
 #import "ChatModel.h"
 #import "ChatroomTableViewCell.h"
+#import "DateUtil.h"
+#import "InsetsTextField.h"
 #import "Masonry/Masonry/Masonry.h"
 
 typedef NS_ENUM(NSUInteger, ChatroomCellAlignement) {
@@ -26,7 +28,7 @@ ChatroomTableViewCell ()
 @property (strong, nonatomic) UIImageView* bubbleView;
 @property (strong, nonatomic) UIImageView* avatarImageView;
 @property (strong, nonatomic) UITextView* messageTextView;
-@property (strong, nonatomic) UILabel* messageLabel;
+@property (strong, nonatomic) InsetsTextField* sendTimeField;
 @end
 
 @implementation ChatroomTableViewCell
@@ -43,6 +45,9 @@ ChatroomTableViewCell ()
               reuseIdentifier:(NSString*)reuseIdentifier
 {
   if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+    self.backgroundColor = [UIColor clearColor];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+
     [self buildCell];
     [self bindConstraints];
   }
@@ -62,7 +67,8 @@ ChatroomTableViewCell ()
    */
   _model = model;
   self.messageTextView.text = (NSString*)model.message;
-  self.messageLabel.text = (NSString*)model.message;
+  self.sendTimeField.text =
+    [DateUtil dateString:model.sendTime withFormat:@"yyyy年MM月dd日 HH:mm"];
 
   self.avatarImageView.image = self.alignement == ChatroomCellAlignementRight
                                  ? [UIImage imageNamed:@"siegrain_avatar"]
@@ -79,6 +85,15 @@ ChatroomTableViewCell ()
 
 - (void)buildCell
 {
+  self.sendTimeField = [[InsetsTextField alloc] init];
+  self.sendTimeField.backgroundColor = [UIColor colorWithWhite:.83 alpha:1];
+  self.sendTimeField.textColor = [UIColor whiteColor];
+  self.sendTimeField.font = [UIFont systemFontOfSize:12];
+  self.sendTimeField.textAlignment = NSTextAlignmentCenter;
+  self.sendTimeField.layer.cornerRadius = 5;
+  self.sendTimeField.textFieldInset = CGPointMake(3, 3);
+  [self.contentView addSubview:self.sendTimeField];
+
   self.avatarImageView = [[UIImageView alloc] init];
   [self.contentView addSubview:self.avatarImageView];
 
@@ -95,8 +110,13 @@ ChatroomTableViewCell ()
 }
 - (void)bindConstraints
 {
-  [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
+  [self.sendTimeField mas_makeConstraints:^(MASConstraintMaker* make) {
     make.top.offset(5);
+    make.centerX.offset(0);
+    make.height.lessThanOrEqualTo(self.contentView);
+  }];
+  [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
+    make.top.equalTo(self.sendTimeField.mas_bottom).offset(10);
     make.width.height.offset(kAvatarSize);
     if (self.alignement == ChatroomCellAlignementLeft) {
       make.left.offset(kAvatarMarginH);
@@ -105,7 +125,7 @@ ChatroomTableViewCell ()
     }
   }];
   [self.bubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.top.offset(3);
+    make.top.equalTo(self.sendTimeField.mas_bottom).offset(8);
     make.bottom.offset(-5);
     if (self.alignement == ChatroomCellAlignementLeft) {
       //指view的左边在avatar的右边，边距为5
