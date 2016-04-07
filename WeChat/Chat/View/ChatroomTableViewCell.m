@@ -80,13 +80,12 @@ ChatroomTableViewCell ()
   bubbleImage = [bubbleImage resizableImageWithCapInsets:insets];
   self.bubbleView.image = bubbleImage;
 
-  //  if (model.sendTime != nil && self.sendTimeField == nil) {
-  //    [self buildSendTimeField];
-  //
-  //    self.sendTimeField.text =
-  //      [DateUtil dateString:model.sendTime withFormat:@"yyyy年MM月dd日
-  //      HH:mm"];
-  //  }
+  /*
+   一定要两个判断都修改约束
+   因为缓存会认为每一行都有时间条
+
+         玛德坑死人了。
+   */
   if (model.sendTime != nil) {
     self.sendTimeField.text = [DateUtil dateString:model.sendTime
                                         withFormat:@"yyyy年MM月dd日 "
@@ -129,19 +128,7 @@ ChatroomTableViewCell ()
   self.messageTextView.scrollEnabled = false;
   [self.bubbleView addSubview:self.messageTextView];
 }
-//- (void)bindConstraintsWithPureLayout
-//{
-//  [self.avatarImageView
-//    autoSetDimensionsToSize:CGSizeMake(kAvatarSize, kAvatarSize)];
-//  [self.avatarImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:10];
-//  if (self.alignement == ChatroomCellAlignementLeft)
-//    [self.avatarImageView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:10];
-//  else
-//    [self.avatarImageView autoPinEdgeToSuperviewEdge:ALEdgeRight
-//    withInset:10];
-//
-//  [self.avatarImageView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:10];
-//}
+
 - (void)bindConstraintsWithMasonry
 {
   [self.sendTimeField mas_makeConstraints:^(MASConstraintMaker* make) {
@@ -173,9 +160,6 @@ ChatroomTableViewCell ()
   [self.messageTextView mas_makeConstraints:^(MASConstraintMaker* make) {
     make.edges.insets(UIEdgeInsetsMake(5, 15, 10, 10));
   }];
-}
-- (void)buildSendTimeField
-{
 }
 #pragma mark -
 @end

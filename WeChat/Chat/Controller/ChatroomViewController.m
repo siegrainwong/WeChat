@@ -209,7 +209,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
                       @"\n床前明月光，疑是地上霜。"
                       @"\n举头望明月，低头思故乡。";
 
-  NSLog(@"喜怒无常的表格：%ld - %@", indexPath.row, model.sendTime);
+  //  NSLog(@"喜怒无常的表格：%ld - %@", indexPath.row, model.sendTime);
   return model;
 }
 @end
