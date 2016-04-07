@@ -98,7 +98,7 @@ ChatroomTableViewCell ()
   } else {
     self.sendTimeField.hidden = true;
     [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
-      make.top.offset(10);
+      make.top.offset(5);
     }];
   }
 }
@@ -112,6 +112,7 @@ ChatroomTableViewCell ()
   self.sendTimeField.textAlignment = NSTextAlignmentCenter;
   self.sendTimeField.layer.cornerRadius = 5;
   self.sendTimeField.textFieldInset = CGPointMake(3, 3);
+  self.sendTimeField.userInteractionEnabled = false;
   [self.contentView addSubview:self.sendTimeField];
 
   self.avatarImageView = [[UIImageView alloc] init];
@@ -132,11 +133,11 @@ ChatroomTableViewCell ()
 - (void)bindConstraintsWithMasonry
 {
   [self.sendTimeField mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.bottom.equalTo(self.avatarImageView.mas_top).offset(-10).priorityLow();
-    make.centerX.offset(0);
+    make.bottom.equalTo(self.avatarImageView.mas_top).offset(-10);
+    make.centerX.offset(5);
   }];
   [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.top.offset(5);
+    make.top.offset(0);
     make.width.height.offset(kAvatarSize);
     if (self.alignement == ChatroomCellAlignementLeft)
       make.leading.offset(kAvatarMarginH);
@@ -145,7 +146,7 @@ ChatroomTableViewCell ()
 
   }];
   [self.bubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.bottom.offset(-5).priorityLow();
+    make.bottom.offset(-5);
     make.top.equalTo(self.avatarImageView).offset(-2);
     make.width.lessThanOrEqualTo(self.contentView);
     if (self.alignement == ChatroomCellAlignementLeft) {

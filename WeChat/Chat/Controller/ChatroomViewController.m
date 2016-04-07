@@ -20,10 +20,20 @@ static NSInteger const kEditorHeight = 50;
 ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView* tableView;
 @property (strong, nonatomic) EditorView* editorView;
+@property (assign, nonatomic) NSUInteger rowCount;
+
+@property (assign, nonatomic) NSInteger contentOffsetYFarFromBottom;
 @end
 
 @implementation ChatroomViewController
-#pragma mark -
+#pragma mark - accessors
+- (NSUInteger)rowCount
+{
+  if (_rowCount == 0) {
+    _rowCount = 10;
+  }
+  return _rowCount;
+}
 + (NSInteger)EditorHeight
 {
   return kEditorHeight;
@@ -44,7 +54,12 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
   [super didReceiveMemoryWarning];
 }
-
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  //这里用scrollToIndexPath方法的话滚不到最下面，不知为何
+  [self.tableView setContentOffset:CGPointMake(0, MAXFLOAT)];
+}
 #pragma mark - build
 - (void)buildView
 {
@@ -69,14 +84,12 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   [self.view addSubview:self.editorView];
 
   __weak typeof(self) weakSelf = self;
-  __block NSUInteger keyboardHeight = 0;
   [weakSelf.editorView
     setKeyboardWasShown:^(NSInteger animCurveKey, CGFloat duration,
                           CGSize keyboardSize) {
       if (keyboardSize.height == 0)
         return;
 
-      keyboardHeight = keyboardSize.height;
       //若要在修改约束的同时进行动画的话，需要调用其父视图的layoutIfNeeded方法，并在动画中再调用一次！
       [weakSelf.editorView mas_updateConstraints:^(MASConstraintMaker* make) {
         make.bottom.offset(-keyboardSize.height);
@@ -88,15 +101,10 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
                             delay:0
                           options:animCurveKey
                        animations:^{
-                         CGFloat contentOffsetYFarFromBottom =
-                           weakSelf.tableView.contentSize.height -
-                           weakSelf.tableView.contentOffset.y;
-                         CGPoint contentOffset =
-                           CGPointMake(weakSelf.tableView.contentOffset.x,
-                                       weakSelf.tableView.contentOffset.y +
-                                         contentOffsetYFarFromBottom);
-                         weakSelf.tableView.contentOffset = contentOffset;
                          [weakSelf.view layoutIfNeeded];
+
+                         //滚动动画必须在约束动画之后执行，不然会被中断
+                         [weakSelf scrollToBottom:true];
                        }
                        completion:nil];
     }];
@@ -114,13 +122,22 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
                             delay:0
                           options:animCurveKey
                        animations:^{
-                         CGPoint contentOffset = CGPointMake(
-                           weakSelf.tableView.contentOffset.x,
-                           weakSelf.tableView.contentOffset.y - keyboardHeight);
-                         weakSelf.tableView.contentOffset = contentOffset;
                          [weakSelf.view layoutIfNeeded];
                        }
                        completion:nil];
+    }];
+  [weakSelf.editorView
+    setMessageWasSend:^(id message, ChatMessageType messageType) {
+      NSIndexPath* insertion =
+        [NSIndexPath indexPathForRow:self.rowCount inSection:0];
+      [self.tableView beginUpdates];
+      [self.tableView insertRowsAtIndexPaths:@[ insertion ]
+                            withRowAnimation:UITableViewRowAnimationTop];
+      self.rowCount++;
+      [self.tableView endUpdates];
+      [self.tableView scrollToRowAtIndexPath:insertion
+                            atScrollPosition:UITableViewScrollPositionBottom
+                                    animated:true];
     }];
 }
 - (void)bindConstraints
@@ -162,7 +179,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-  return 10;
+  return self.rowCount;
 }
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
@@ -193,6 +210,14 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 - (void)endTextEditing
 {
   [self.view endEditing:true];
+}
+- (void)scrollToBottom:(BOOL)animated
+{
+  [self.tableView
+    scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rowCount - 1
+                                              inSection:0]
+          atScrollPosition:UITableViewScrollPositionBottom
+                  animated:animated];
 }
 - (ChatModel*)testModel:(NSIndexPath*)indexPath
 {
