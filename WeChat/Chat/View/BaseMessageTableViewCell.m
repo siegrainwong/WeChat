@@ -40,6 +40,7 @@ BaseMessageTableViewCell ()
 
     [self buildCell];
     [self bindConstraints];
+    [self bindGestureRecognizer];
   }
   return self;
 }
@@ -138,5 +139,29 @@ BaseMessageTableViewCell ()
       make.left.greaterThanOrEqualTo(self.contentView).offset(100);
     }
   }];
+}
+
+#pragma mark - gesture
+- (void)bindGestureRecognizer
+{
+  UILongPressGestureRecognizer* bubblelongPress =
+    [[UILongPressGestureRecognizer alloc]
+      initWithTarget:self
+              action:@selector(longPressOnBubble:)];
+  [self.bubbleView addGestureRecognizer:bubblelongPress];
+}
+
+- (void)longPressOnBubble:(UILongPressGestureRecognizer*)press
+{
+}
+#pragma mark -
+- (BOOL)canBecomeFirstResponder
+{
+  return true;
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+  return false;
 }
 @end

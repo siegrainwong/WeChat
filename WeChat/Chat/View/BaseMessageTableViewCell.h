@@ -24,4 +24,6 @@ typedef NS_ENUM(NSUInteger, MessageAlignement) {
 
 - (void)buildCell;
 - (void)bindConstraints;
+
+- (void)longPressOnBubble:(UILongPressGestureRecognizer*)press;
 @end

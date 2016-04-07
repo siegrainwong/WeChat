@@ -42,14 +42,9 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+
   [self buildView];
-  [self buildTableView];
-  [self buildEditorView];
-
-  [self bindConstraints];
-  [self bindGestureRecognizer];
 }
-
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
@@ -57,16 +52,25 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  //这里用scrollToIndexPath方法的话滚不到最下面，不知为何
+
   [self.tableView setContentOffset:CGPointMake(0, MAXFLOAT)];
 }
 #pragma mark - build
 - (void)buildView
 {
   self.navigationItem.title = self.barTitle;
+
+  [self buildTableView];
+  [self buildEditorView];
+
+  [self bindConstraints];
+  [self bindGestureRecognizer];
 }
 - (void)buildTableView
 {
+  if (self.tableView != nil)
+    return;
+
   self.tableView = [[UITableView alloc] init];
   self.tableView.delegate = self;
   self.tableView.dataSource = self;
@@ -80,6 +84,9 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 }
 - (void)buildEditorView
 {
+  if (self.editorView != nil)
+    return;
+
   self.editorView = [EditorView editor];
   [self.view addSubview:self.editorView];
 

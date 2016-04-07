@@ -23,9 +23,6 @@ TextMessageTableViewCell ()
               reuseIdentifier:(NSString*)reuseIdentifier
 {
   if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-
-    [self buildCell];
-    [self bindConstraints];
   }
   return self;
 }
@@ -45,6 +42,7 @@ TextMessageTableViewCell ()
   self.messageTextView.font = [UIFont systemFontOfSize:16];
   self.messageTextView.editable = false;
   self.messageTextView.scrollEnabled = false;
+  self.messageTextView.selectable = false;
   [super.bubbleView addSubview:self.messageTextView];
 }
 
@@ -56,5 +54,51 @@ TextMessageTableViewCell ()
     make.edges.insets(UIEdgeInsetsMake(5, 15, 10, 10));
   }];
 }
-#pragma mark -
+#pragma mark - longpress menu
+- (void)longPressOnBubble:(UILongPressGestureRecognizer*)press
+{
+  if (press.state == UIGestureRecognizerStateBegan) {
+    [self becomeFirstResponder];
+
+    super.bubbleView.highlighted = YES;
+
+    UIMenuItem* copy =
+      [[UIMenuItem alloc] initWithTitle:@"复制" action:@selector(menuCopy:)];
+    UIMenuItem* remove =
+      [[UIMenuItem alloc] initWithTitle:@"删除"
+                                 action:@selector(menuRemove:)];
+
+    UIMenuController* menu = [UIMenuController sharedMenuController];
+    [menu setMenuItems:@[ copy, remove ]];
+    [menu setTargetRect:super.bubbleView.frame inView:self];
+    [menu setMenuVisible:YES animated:YES];
+
+    [[NSNotificationCenter defaultCenter]
+      addObserver:self
+         selector:@selector(UIMenuControllerWillHideMenu)
+             name:UIMenuControllerWillHideMenuNotification
+           object:nil];
+  }
+}
+
+- (void)UIMenuControllerWillHideMenu
+{
+  super.bubbleView.highlighted = NO;
+
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+  return (action == @selector(menuCopy:) || action == @selector(menuRemove:));
+}
+
+- (void)menuCopy:(id)sender
+{
+  [UIPasteboard generalPasteboard].string = self.messageTextView.text;
+}
+
+- (void)menuRemove:(id)sender
+{
+}
 @end
