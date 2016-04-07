@@ -1,39 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LAg-2R-4Zt">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Table View Controller-->
+        <scene sceneID="3Es-2A-voT">
             <objects>
-                <viewController id="BYZ-38-t0r" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <tableViewController id="LAg-2R-4Zt" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="168" sectionHeaderHeight="28" sectionFooterHeight="28" id="jdC-qo-LpQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cYh-n3-2Vs">
-                                <rect key="frame" x="67" y="270" width="240" height="128"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="11" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Dy-eg-pUD">
-                                <rect key="frame" x="90" y="435" width="184" height="107"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="haha" rowHeight="168" id="GBT-la-bzh">
+                                <rect key="frame" x="0.0" y="28" width="600" height="168"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GBT-la-bzh" id="0VM-7G-QrM">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="167"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2015-5-5 12:22:12" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N2P-42-Yzb">
+                                            <rect key="frame" x="230" y="8" width="141" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2e6-VI-Wk3">
+                                            <rect key="frame" x="141" y="42" width="385" height="112"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        </textView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="siegrain_avatar" translatesAutoresizingMaskIntoConstraints="NO" id="h7a-Ia-dkQ">
+                                            <rect key="frame" x="534" y="42" width="58" height="55"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="55" id="Hje-jD-l7P"/>
+                                                <constraint firstAttribute="width" constant="58" id="ucm-fr-hxh"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="h7a-Ia-dkQ" firstAttribute="top" secondItem="0VM-7G-QrM" secondAttribute="topMargin" constant="34" id="3AP-6w-IJD"/>
+                                        <constraint firstAttribute="topMargin" secondItem="N2P-42-Yzb" secondAttribute="top" id="4mQ-WA-cHS"/>
+                                        <constraint firstItem="2e6-VI-Wk3" firstAttribute="width" relation="lessThanOrEqual" secondItem="0VM-7G-QrM" secondAttribute="width" id="5lK-ER-a7O"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="h7a-Ia-dkQ" secondAttribute="trailing" id="5mM-wz-RjE"/>
+                                        <constraint firstItem="2e6-VI-Wk3" firstAttribute="top" secondItem="0VM-7G-QrM" secondAttribute="topMargin" constant="34" id="HSu-5D-SgN"/>
+                                        <constraint firstItem="N2P-42-Yzb" firstAttribute="centerX" secondItem="0VM-7G-QrM" secondAttribute="centerX" id="IlX-UR-bF0"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="2e6-VI-Wk3" secondAttribute="bottom" constant="5" id="M1K-fU-sSp"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="2e6-VI-Wk3" secondAttribute="trailing" constant="66" id="h5D-FZ-0wS"/>
+                                        <constraint firstItem="2e6-VI-Wk3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="0VM-7G-QrM" secondAttribute="leadingMargin" constant="133" id="xVa-eP-LfK"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="LAg-2R-4Zt" id="QVc-N8-5c8"/>
+                            <outlet property="delegate" destination="LAg-2R-4Zt" id="ogW-xo-4ju"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="698-ST-Jdx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="532.5" y="343.5"/>
+            <point key="canvasLocation" x="228" y="-36"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="siegrain_avatar" width="252" height="252"/>
+    </resources>
 </document>

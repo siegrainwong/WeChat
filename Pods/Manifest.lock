@@ -1,19 +1,19 @@
 PODS:
   - Masonry (1.0.0)
   - PinYin4Objc (1.1.1)
-  - UITableView+FDTemplateLayoutCell (1.5.beta)
+  - UITableView+FDTemplateLayoutCell (1.4)
   - YSMChineseSort (0.1.1):
     - PinYin4Objc (~> 1.1.1)
 
 DEPENDENCIES:
   - Masonry
-  - UITableView+FDTemplateLayoutCell (= 1.5.beta)
+  - UITableView+FDTemplateLayoutCell
   - YSMChineseSort (~> 0.1.0)
 
 SPEC CHECKSUMS:
   Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
   PinYin4Objc: 3fa9673610368330e2dfb688b1d19a35c3930a78
-  UITableView+FDTemplateLayoutCell: 02b508ab1cb4cea16a8c17ac83d2cd1fd72124f9
+  UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
   YSMChineseSort: ef532bfe993ff1b4dc9bcd644ead1a43b2632b88
 
 COCOAPODS: 0.39.0

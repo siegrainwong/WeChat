@@ -262,6 +262,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F907C8EA1CB5692D005C19C5 /* Plugins */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Plugins;
+			sourceTree = "<group>";
+		};
 		F90B41741CAD0BF400ECF391 /* Category */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +316,7 @@
 		F91775A41CAA687F00557A45 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				F907C8EA1CB5692D005C19C5 /* Plugins */,
 				F90B41741CAD0BF400ECF391 /* Category */,
 				F9E073A81CA925A400468EDC /* Constants */,
 				F90B41781CAD665A00ECF391 /* View */,

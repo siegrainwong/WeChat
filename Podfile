@@ -5,4 +5,4 @@ platform :ios, '8.0'
 
 pod 'YSMChineseSort','~>0.1.0'
 pod 'Masonry'
-pod 'UITableView+FDTemplateLayoutCell', '1.5.beta'
+pod 'UITableView+FDTemplateLayoutCell'

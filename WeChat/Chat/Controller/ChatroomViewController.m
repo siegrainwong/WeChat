@@ -57,10 +57,10 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   self.tableView.dataSource = self;
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   self.tableView.backgroundColor = [UIColor colorWithWhite:.95 alpha:1];
+  self.tableView.fd_debugLogEnabled = true;
 
   [self.tableView registerClass:[ChatroomTableViewCell class]
          forCellReuseIdentifier:kCellIdentifier];
-  self.tableView.fd_debugLogEnabled = false;
   [self.view addSubview:self.tableView];
 }
 - (void)buildEditorView
@@ -151,12 +151,13 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  return [self.tableView
+  float height = [self.tableView
     fd_heightForCellWithIdentifier:kCellIdentifier
                   cacheByIndexPath:indexPath
                      configuration:^(ChatroomTableViewCell* cell) {
                        cell.model = [self testModel:indexPath];
                      }];
+  return height <= 10 ? 100 : height;
 }
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section
@@ -196,16 +197,19 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 - (ChatModel*)testModel:(NSIndexPath*)indexPath
 {
   ChatModel* model = [[ChatModel alloc] init];
-  model.sendTime = [NSDate date];
   model.messageType = ChatMessageTypeText;
   model.identifier = indexPath.row;
+  model.sendTime = model.identifier % 2 == 0 ? [NSDate date] : nil;
   model.name = model.identifier % 2 == 0 ? @"Siegrain" : @"Turning robot";
   model.message = model.identifier % 2 == 0
                     ? @"锄禾日当午，汗滴禾下土。"
-                    : @"[作者]\t李白\n[全文]"
-                      @"\n床前明月光，\n疑是地上霜。"
-                      @"\n举头望明月，\n低头思故乡";
+                      @"\n谁知盘中餐，粒粒皆辛苦。"
+                    : @"《静夜思》"
+                      @"\n\t李白"
+                      @"\n床前明月光，疑是地上霜。"
+                      @"\n举头望明月，低头思故乡。";
 
+  NSLog(@"喜怒无常的表格：%ld - %@", indexPath.row, model.sendTime);
   return model;
 }
 @end

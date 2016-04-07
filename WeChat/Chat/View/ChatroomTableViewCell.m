@@ -49,7 +49,7 @@ ChatroomTableViewCell ()
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     [self buildCell];
-    [self bindConstraints];
+    [self bindConstraintsWithMasonry];
   }
   return self;
 }
@@ -67,8 +67,6 @@ ChatroomTableViewCell ()
    */
   _model = model;
   self.messageTextView.text = (NSString*)model.message;
-  self.sendTimeField.text =
-    [DateUtil dateString:model.sendTime withFormat:@"yyyy年MM月dd日 HH:mm"];
 
   self.avatarImageView.image = self.alignement == ChatroomCellAlignementRight
                                  ? [UIImage imageNamed:@"siegrain_avatar"]
@@ -81,6 +79,29 @@ ChatroomTableViewCell ()
   UIEdgeInsets insets = UIEdgeInsetsMake(30, 15, 30, 15);
   bubbleImage = [bubbleImage resizableImageWithCapInsets:insets];
   self.bubbleView.image = bubbleImage;
+
+  //  if (model.sendTime != nil && self.sendTimeField == nil) {
+  //    [self buildSendTimeField];
+  //
+  //    self.sendTimeField.text =
+  //      [DateUtil dateString:model.sendTime withFormat:@"yyyy年MM月dd日
+  //      HH:mm"];
+  //  }
+  if (model.sendTime != nil) {
+    self.sendTimeField.text = [DateUtil dateString:model.sendTime
+                                        withFormat:@"yyyy年MM月dd日 "
+                                                    "HH:mm"];
+    self.sendTimeField.hidden = false;
+
+    [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
+      make.top.offset(40);
+    }];
+  } else {
+    self.sendTimeField.hidden = true;
+    [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
+      make.top.offset(10);
+    }];
+  }
 }
 
 - (void)buildCell
@@ -108,36 +129,53 @@ ChatroomTableViewCell ()
   self.messageTextView.scrollEnabled = false;
   [self.bubbleView addSubview:self.messageTextView];
 }
-- (void)bindConstraints
+//- (void)bindConstraintsWithPureLayout
+//{
+//  [self.avatarImageView
+//    autoSetDimensionsToSize:CGSizeMake(kAvatarSize, kAvatarSize)];
+//  [self.avatarImageView autoPinEdgeToSuperviewEdge:ALEdgeTop withInset:10];
+//  if (self.alignement == ChatroomCellAlignementLeft)
+//    [self.avatarImageView autoPinEdgeToSuperviewEdge:ALEdgeLeft withInset:10];
+//  else
+//    [self.avatarImageView autoPinEdgeToSuperviewEdge:ALEdgeRight
+//    withInset:10];
+//
+//  [self.avatarImageView autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:10];
+//}
+- (void)bindConstraintsWithMasonry
 {
   [self.sendTimeField mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.top.offset(5);
+    make.bottom.equalTo(self.avatarImageView.mas_top).offset(-10).priorityLow();
     make.centerX.offset(0);
-    make.height.lessThanOrEqualTo(self.contentView);
   }];
   [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.top.equalTo(self.sendTimeField.mas_bottom).offset(10);
+    make.top.offset(5);
     make.width.height.offset(kAvatarSize);
-    if (self.alignement == ChatroomCellAlignementLeft) {
-      make.left.offset(kAvatarMarginH);
-    } else {
-      make.right.offset(-kAvatarMarginH);
-    }
+    if (self.alignement == ChatroomCellAlignementLeft)
+      make.leading.offset(kAvatarMarginH);
+    else
+      make.trailing.offset(-kAvatarMarginH);
+
   }];
   [self.bubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.top.equalTo(self.sendTimeField.mas_bottom).offset(8);
-    make.bottom.offset(-5);
+    make.bottom.offset(-5).priorityLow();
+    make.top.equalTo(self.avatarImageView).offset(-2);
+    make.width.lessThanOrEqualTo(self.contentView);
     if (self.alignement == ChatroomCellAlignementLeft) {
       //指view的左边在avatar的右边，边距为5
       make.left.equalTo(self.avatarImageView.mas_right).offset(5);
-      make.right.lessThanOrEqualTo(self.contentView.mas_right).offset(-100);
+      make.right.lessThanOrEqualTo(self.contentView).offset(-100);
     } else {
       make.right.equalTo(self.avatarImageView.mas_left).offset(-5);
-      make.left.greaterThanOrEqualTo(self.contentView.mas_left).offset(100);
+      make.left.greaterThanOrEqualTo(self.contentView).offset(100);
     }
   }];
   [self.messageTextView mas_makeConstraints:^(MASConstraintMaker* make) {
     make.edges.insets(UIEdgeInsetsMake(5, 15, 10, 10));
   }];
 }
+- (void)buildSendTimeField
+{
+}
+#pragma mark -
 @end
