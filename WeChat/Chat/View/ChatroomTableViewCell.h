@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class BaseMessageTableViewCell;
+
 @class ChatModel;
 
-@interface ChatroomTableViewCell : UITableViewCell
+@interface ChatroomTableViewCell : BaseMessageTableViewCell
 
-@property (strong, nonatomic) ChatModel* model;
 @end

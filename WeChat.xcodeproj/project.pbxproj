@@ -19,6 +19,7 @@
 		F918F3FE1CB112C1003855FE /* EditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F918F3FD1CB112C1003855FE /* EditorView.xib */; };
 		F918F4011CB139DA003855FE /* ChatroomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F918F4001CB139DA003855FE /* ChatroomViewController.m */; };
 		F962F64C1CB53218005D73EA /* InsetsTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F962F64B1CB53218005D73EA /* InsetsTextField.m */; };
+		F9A2AD1E1CB65981002CE5F8 /* BaseMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2AD1D1CB65981002CE5F8 /* BaseMessageTableViewCell.m */; };
 		F9C9CBD81CB254A900ABF0E0 /* ChatroomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C9CBD71CB254A900ABF0E0 /* ChatroomTableViewCell.m */; };
 		F9C9CBDB1CB25AF600ABF0E0 /* ChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C9CBDA1CB25AF600ABF0E0 /* ChatModel.m */; };
 		F9DA96021CB513E2008033A6 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DA96011CB513E2008033A6 /* DateUtil.m */; };
@@ -130,6 +131,8 @@
 		F918F4001CB139DA003855FE /* ChatroomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatroomViewController.m; sourceTree = "<group>"; };
 		F962F64A1CB53218005D73EA /* InsetsTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsetsTextField.h; sourceTree = "<group>"; };
 		F962F64B1CB53218005D73EA /* InsetsTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsetsTextField.m; sourceTree = "<group>"; };
+		F9A2AD1C1CB65981002CE5F8 /* BaseMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMessageTableViewCell.h; sourceTree = "<group>"; };
+		F9A2AD1D1CB65981002CE5F8 /* BaseMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMessageTableViewCell.m; sourceTree = "<group>"; };
 		F9C9CBD61CB254A900ABF0E0 /* ChatroomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatroomTableViewCell.h; sourceTree = "<group>"; };
 		F9C9CBD71CB254A900ABF0E0 /* ChatroomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatroomTableViewCell.m; sourceTree = "<group>"; };
 		F9C9CBD91CB25AF600ABF0E0 /* ChatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatModel.h; sourceTree = "<group>"; };
@@ -570,6 +573,8 @@
 				F918F3FD1CB112C1003855FE /* EditorView.xib */,
 				F9C9CBD61CB254A900ABF0E0 /* ChatroomTableViewCell.h */,
 				F9C9CBD71CB254A900ABF0E0 /* ChatroomTableViewCell.m */,
+				F9A2AD1C1CB65981002CE5F8 /* BaseMessageTableViewCell.h */,
+				F9A2AD1D1CB65981002CE5F8 /* BaseMessageTableViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -917,6 +922,7 @@
 				F9E073AF1CA96B1E00468EDC /* PersonModel.m in Sources */,
 				F9E0739B1CA9160D00468EDC /* ContactsViewController.m in Sources */,
 				F9C9CBDB1CB25AF600ABF0E0 /* ChatModel.m in Sources */,
+				F9A2AD1E1CB65981002CE5F8 /* BaseMessageTableViewCell.m in Sources */,
 				F9DA96021CB513E2008033A6 /* DateUtil.m in Sources */,
 				F90B416D1CABCE1E00ECF391 /* Constants.m in Sources */,
 				F9E073A11CA9161F00468EDC /* DiscoverViewController.m in Sources */,
