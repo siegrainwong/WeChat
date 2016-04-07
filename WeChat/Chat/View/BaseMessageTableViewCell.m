@@ -8,13 +8,18 @@
 
 #import "BaseMessageTableViewCell.h"
 #import "ChatModel.h"
-#import "ChatroomTableViewCell.h"
 #import "DateUtil.h"
 #import "InsetsTextField.h"
 #import "Masonry/Masonry/Masonry.h"
 
 static NSInteger const kAvatarSize = 40;
 static NSInteger const kAvatarMarginH = 10;
+
+@interface
+BaseMessageTableViewCell ()
+@property (strong, nonatomic) InsetsTextField* sendTimeField;
+@property (strong, nonatomic) UIImageView* avatarImageView;
+@end
 
 @implementation BaseMessageTableViewCell
 #pragma mark - init
@@ -51,9 +56,9 @@ static NSInteger const kAvatarMarginH = 10;
    卧槽尼玛。
    */
   _model = model;
-  avatarImageView.image = self.alignement == MessageAlignementRight
-                            ? [UIImage imageNamed:@"siegrain_avatar"]
-                            : [UIImage imageNamed:@"robot"];
+  self.avatarImageView.image = self.alignement == MessageAlignementRight
+                                 ? [UIImage imageNamed:@"siegrain_avatar"]
+                                 : [UIImage imageNamed:@"robot"];
 
   UIImage* bubbleImage = self.alignement == MessageAlignementRight
                            ? [UIImage imageNamed:@"SenderTextNodeBkg"]
@@ -61,7 +66,7 @@ static NSInteger const kAvatarMarginH = 10;
   //设置图片有哪些地方是不能被拉伸的，以像素为单位
   UIEdgeInsets insets = UIEdgeInsetsMake(30, 15, 30, 15);
   bubbleImage = [bubbleImage resizableImageWithCapInsets:insets];
-  bubbleView.image = bubbleImage;
+  self.bubbleView.image = bubbleImage;
 
   /*
    一定要两个判断都修改约束
@@ -70,17 +75,16 @@ static NSInteger const kAvatarMarginH = 10;
    玛德坑死人了。
    */
   if (model.sendTime != nil) {
-    sendTimeField.text = [DateUtil dateString:model.sendTime
-                                   withFormat:@"yyyy年MM月dd日 "
-                                               "HH:mm"];
-    sendTimeField.hidden = false;
-
-    [avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
+    self.sendTimeField.text = [DateUtil dateString:model.sendTime
+                                        withFormat:@"yyyy年MM月dd日 "
+                                                    "HH:mm"];
+    self.sendTimeField.hidden = false;
+    [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
       make.top.offset(40);
     }];
   } else {
-    sendTimeField.hidden = true;
-    [avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
+    self.sendTimeField.hidden = true;
+    [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
       make.top.offset(5);
     }];
   }
@@ -88,31 +92,31 @@ static NSInteger const kAvatarMarginH = 10;
 
 - (void)buildCell
 {
-  sendTimeField = [[InsetsTextField alloc] init];
-  sendTimeField.backgroundColor = [UIColor colorWithWhite:.83 alpha:1];
-  sendTimeField.textColor = [UIColor whiteColor];
-  sendTimeField.font = [UIFont systemFontOfSize:12];
-  sendTimeField.textAlignment = NSTextAlignmentCenter;
-  sendTimeField.layer.cornerRadius = 5;
-  sendTimeField.textFieldInset = CGPointMake(3, 3);
-  sendTimeField.userInteractionEnabled = false;
-  [self.contentView addSubview:sendTimeField];
+  self.sendTimeField = [[InsetsTextField alloc] init];
+  self.sendTimeField.backgroundColor = [UIColor colorWithWhite:.83 alpha:1];
+  self.sendTimeField.textColor = [UIColor whiteColor];
+  self.sendTimeField.font = [UIFont systemFontOfSize:12];
+  self.sendTimeField.textAlignment = NSTextAlignmentCenter;
+  self.sendTimeField.layer.cornerRadius = 5;
+  self.sendTimeField.textFieldInset = CGPointMake(3, 3);
+  self.sendTimeField.userInteractionEnabled = false;
+  [self.contentView addSubview:self.sendTimeField];
 
-  avatarImageView = [[UIImageView alloc] init];
-  [self.contentView addSubview:avatarImageView];
+  self.avatarImageView = [[UIImageView alloc] init];
+  [self.contentView addSubview:self.avatarImageView];
 
-  bubbleView = [[UIImageView alloc] init];
-  bubbleView.userInteractionEnabled = true;
-  [self.contentView addSubview:bubbleView];
+  self.bubbleView = [[UIImageView alloc] init];
+  self.bubbleView.userInteractionEnabled = true;
+  [self.contentView addSubview:self.bubbleView];
 }
 
 - (void)bindConstraints
 {
-  [sendTimeField mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.bottom.equalTo(avatarImageView.mas_top).offset(-10);
-    make.centerX.offset(5);
+  [self.sendTimeField mas_makeConstraints:^(MASConstraintMaker* make) {
+    make.bottom.equalTo(self.avatarImageView.mas_top).offset(-10);
+    make.centerX.offset(0);
   }];
-  [avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
+  [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
     make.top.offset(0);
     make.width.height.offset(kAvatarSize);
     if (self.alignement == MessageAlignementLeft)
@@ -121,16 +125,16 @@ static NSInteger const kAvatarMarginH = 10;
       make.trailing.offset(-kAvatarMarginH);
 
   }];
-  [bubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
+  [self.bubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
     make.bottom.offset(-5);
-    make.top.equalTo(avatarImageView).offset(-2);
+    make.top.equalTo(self.avatarImageView).offset(-2);
     make.width.lessThanOrEqualTo(self.contentView);
     if (self.alignement == MessageAlignementLeft) {
       //指view的左边在avatar的右边，边距为5
-      make.left.equalTo(avatarImageView.mas_right).offset(5);
+      make.left.equalTo(self.avatarImageView.mas_right).offset(5);
       make.right.lessThanOrEqualTo(self.contentView).offset(-100);
     } else {
-      make.right.equalTo(avatarImageView.mas_left).offset(-5);
+      make.right.equalTo(self.avatarImageView.mas_left).offset(-5);
       make.left.greaterThanOrEqualTo(self.contentView).offset(100);
     }
   }];

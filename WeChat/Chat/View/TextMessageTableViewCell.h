@@ -6,12 +6,10 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@class BaseMessageTableViewCell;
+#import "BaseMessageTableViewCell.h"
 
 @class ChatModel;
 
-@interface ChatroomTableViewCell : BaseMessageTableViewCell
+@interface TextMessageTableViewCell : BaseMessageTableViewCell
 
 @end

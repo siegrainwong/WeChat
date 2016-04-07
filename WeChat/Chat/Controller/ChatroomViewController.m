@@ -7,10 +7,10 @@
 //
 
 #import "ChatModel.h"
-#import "ChatroomTableViewCell.h"
 #import "ChatroomViewController.h"
 #import "EditorView.h"
 #import "Masonry/Masonry/Masonry.h"
+#import "TextMessageTableViewCell.h"
 #import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
 
 static NSString* const kCellIdentifier = @"ChatroomIdentifier";
@@ -74,7 +74,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   self.tableView.backgroundColor = [UIColor colorWithWhite:.95 alpha:1];
   self.tableView.fd_debugLogEnabled = true;
 
-  [self.tableView registerClass:[ChatroomTableViewCell class]
+  [self.tableView registerClass:[TextMessageTableViewCell class]
          forCellReuseIdentifier:kCellIdentifier];
   [self.view addSubview:self.tableView];
 }
@@ -171,7 +171,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   float height = [self.tableView
     fd_heightForCellWithIdentifier:kCellIdentifier
                   cacheByIndexPath:indexPath
-                     configuration:^(ChatroomTableViewCell* cell) {
+                     configuration:^(TextMessageTableViewCell* cell) {
                        cell.model = [self testModel:indexPath];
                      }];
   return height <= 10 ? 100 : height;
@@ -184,19 +184,19 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  ChatroomTableViewCell* cell =
+  TextMessageTableViewCell* cell =
     [tableView dequeueReusableCellWithIdentifier:kCellIdentifier
                                     forIndexPath:indexPath];
   if (cell == nil) {
-    cell =
-      [[ChatroomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                   reuseIdentifier:kCellIdentifier];
+    cell = [[TextMessageTableViewCell alloc]
+        initWithStyle:UITableViewCellStyleDefault
+      reuseIdentifier:kCellIdentifier];
   }
 
   return cell;
 }
 - (void)tableView:(UITableView*)tableView
-  willDisplayCell:(ChatroomTableViewCell*)cell
+  willDisplayCell:(TextMessageTableViewCell*)cell
 forRowAtIndexPath:(NSIndexPath*)indexPath
 {
   cell.model = [self testModel:indexPath];

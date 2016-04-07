@@ -15,14 +15,13 @@ typedef NS_ENUM(NSUInteger, MessageAlignement) {
 };
 
 @class ChatModel;
-@class InsetsTextField;
 
-@interface BaseMessageTableViewCell : UITableViewCell {
-@protected
-  UIImageView* bubbleView;
-  UIImageView* avatarImageView;
-  InsetsTextField* sendTimeField;
-}
+@interface BaseMessageTableViewCell : UITableViewCell
 @property (assign, nonatomic) MessageAlignement alignement;
 @property (strong, nonatomic) ChatModel* model;
+
+@property (strong, nonatomic) UIImageView* bubbleView;
+
+- (void)buildCell;
+- (void)bindConstraints;
 @end
