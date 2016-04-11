@@ -53,7 +53,8 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
   [super viewWillAppear:animated];
 
-  [self.tableView setContentOffset:CGPointMake(0, MAXFLOAT)];
+  //滚不到最下面。。将就一下了只有。。。
+  [self scrollToBottom:false];
 }
 #pragma mark - build
 - (void)buildView
@@ -135,6 +136,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
     }];
   [weakSelf.editorView
     setMessageWasSend:^(id message, ChatMessageType messageType) {
+			
       NSIndexPath* insertion =
         [NSIndexPath indexPathForRow:self.rowCount inSection:0];
       [self.tableView beginUpdates];
