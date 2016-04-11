@@ -76,7 +76,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   self.tableView.dataSource = self;
   self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
   self.tableView.backgroundColor = [UIColor colorWithWhite:.95 alpha:1];
-  self.tableView.fd_debugLogEnabled = true;
+  self.tableView.fd_debugLogEnabled = false;
 
   [self.tableView registerClass:[TextMessageTableViewCell class]
          forCellReuseIdentifier:kCellIdentifier];
@@ -97,7 +97,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
       if (keyboardSize.height == 0)
         return;
 
-      //若要在修改约束的同时进行动画的话，需要调用其父视图的layoutIfNeeded方法，并在动画中再调用一次！
+      //若要在修改约束的同时进行动画的话，需要调用其父视图的layoutIfNeeded方法，并在动画中再调用一次
       [weakSelf.editorView mas_updateConstraints:^(MASConstraintMaker* make) {
         make.bottom.offset(-keyboardSize.height);
       }];
