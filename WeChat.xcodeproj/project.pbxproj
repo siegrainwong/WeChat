@@ -23,6 +23,21 @@
 		F9C9CBD81CB254A900ABF0E0 /* TextMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C9CBD71CB254A900ABF0E0 /* TextMessageTableViewCell.m */; };
 		F9C9CBDB1CB25AF600ABF0E0 /* ChatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C9CBDA1CB25AF600ABF0E0 /* ChatModel.m */; };
 		F9DA96021CB513E2008033A6 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DA96011CB513E2008033A6 /* DateUtil.m */; };
+		F9E02DD91CBE246600B14B7E /* libTuringSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DD81CBE246600B14B7E /* libTuringSDK.a */; };
+		F9E02DEC1CBE24FC00B14B7E /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9E02DDC1CBE24FC00B14B7E /* CADebugMacros.cpp */; };
+		F9E02DED1CBE24FC00B14B7E /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9E02DDF1CBE24FC00B14B7E /* CAStreamBasicDescription.cpp */; };
+		F9E02DEE1CBE24FC00B14B7E /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9E02DE11CBE24FC00B14B7E /* CAXException.cpp */; };
+		F9E02DEF1CBE24FC00B14B7E /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E02DE51CBE24FC00B14B7E /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F9E02DF01CBE24FC00B14B7E /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E02DE81CBE24FC00B14B7E /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F9E02DF11CBE24FC00B14B7E /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E02DEB1CBE24FC00B14B7E /* TTTAttributedLabel.m */; };
+		F9E02DF31CBE27F100B14B7E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DF21CBE27F100B14B7E /* SystemConfiguration.framework */; };
+		F9E02DF51CBE280F00B14B7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DF41CBE280F00B14B7E /* Foundation.framework */; };
+		F9E02DF71CBE281800B14B7E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DF61CBE281800B14B7E /* AVFoundation.framework */; };
+		F9E02DF91CBE282000B14B7E /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DF81CBE282000B14B7E /* GLKit.framework */; };
+		F9E02DFB1CBE282A00B14B7E /* libz.1.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DFA1CBE282A00B14B7E /* libz.1.tbd */; };
+		F9E02DFD1CBE283600B14B7E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DFC1CBE283600B14B7E /* Security.framework */; };
+		F9E02DFF1CBE284F00B14B7E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DFE1CBE284F00B14B7E /* CFNetwork.framework */; };
+		F9E02E011CBE285A00B14B7E /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02E001CBE285A00B14B7E /* CoreLocation.framework */; };
 		F9E072DC1CA90BD800468EDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DB1CA90BD800468EDC /* main.m */; };
 		F9E072DF1CA90BD800468EDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E072DE1CA90BD800468EDC /* AppDelegate.m */; };
 		F9E072E51CA90BD800468EDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9E072E31CA90BD800468EDC /* Main.storyboard */; };
@@ -139,6 +154,34 @@
 		F9C9CBDA1CB25AF600ABF0E0 /* ChatModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatModel.m; sourceTree = "<group>"; };
 		F9DA96001CB513E2008033A6 /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
 		F9DA96011CB513E2008033A6 /* DateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
+		F9E02DD81CBE246600B14B7E /* libTuringSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTuringSDK.a; path = WeChat/libTuringSDK.a; sourceTree = "<group>"; };
+		F9E02DDC1CBE24FC00B14B7E /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
+		F9E02DDD1CBE24FC00B14B7E /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
+		F9E02DDE1CBE24FC00B14B7E /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
+		F9E02DDF1CBE24FC00B14B7E /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
+		F9E02DE01CBE24FC00B14B7E /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
+		F9E02DE11CBE24FC00B14B7E /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
+		F9E02DE21CBE24FC00B14B7E /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
+		F9E02DE41CBE24FC00B14B7E /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		F9E02DE51CBE24FC00B14B7E /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		F9E02DE71CBE24FC00B14B7E /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
+		F9E02DE81CBE24FC00B14B7E /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
+		F9E02DEA1CBE24FC00B14B7E /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		F9E02DEB1CBE24FC00B14B7E /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
+		F9E02DF21CBE27F100B14B7E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F9E02DF41CBE280F00B14B7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		F9E02DF61CBE281800B14B7E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		F9E02DF81CBE282000B14B7E /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		F9E02DFA1CBE282A00B14B7E /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
+		F9E02DFC1CBE283600B14B7E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F9E02DFE1CBE284F00B14B7E /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		F9E02E001CBE285A00B14B7E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		F9E02E031CBE2AF500B14B7E /* BDVoiceRecognitionClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDVoiceRecognitionClient.h; sourceTree = "<group>"; };
+		F9E02E041CBE2AF500B14B7E /* TRRSpeechSythesizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRRSpeechSythesizer.h; sourceTree = "<group>"; };
+		F9E02E051CBE2AF500B14B7E /* TRRTuringAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRRTuringAPI.h; sourceTree = "<group>"; };
+		F9E02E061CBE2AF500B14B7E /* TRRTuringAPIConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRRTuringAPIConfig.h; sourceTree = "<group>"; };
+		F9E02E071CBE2AF500B14B7E /* TRRTuringRequestManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRRTuringRequestManager.h; sourceTree = "<group>"; };
+		F9E02E081CBE2AF500B14B7E /* TRRVoiceRecognitionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TRRVoiceRecognitionManager.h; sourceTree = "<group>"; };
 		F9E072D71CA90BD700468EDC /* WeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9E072DB1CA90BD800468EDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F9E072DD1CA90BD800468EDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -227,7 +270,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9E02E011CBE285A00B14B7E /* CoreLocation.framework in Frameworks */,
+				F9E02DFF1CBE284F00B14B7E /* CFNetwork.framework in Frameworks */,
+				F9E02DFD1CBE283600B14B7E /* Security.framework in Frameworks */,
+				F9E02DFB1CBE282A00B14B7E /* libz.1.tbd in Frameworks */,
+				F9E02DF91CBE282000B14B7E /* GLKit.framework in Frameworks */,
+				F9E02DF71CBE281800B14B7E /* AVFoundation.framework in Frameworks */,
+				F9E02DF51CBE280F00B14B7E /* Foundation.framework in Frameworks */,
+				F9E02DF31CBE27F100B14B7E /* SystemConfiguration.framework in Frameworks */,
 				86CBF868FAB45515D068AC17 /* libPods.a in Frameworks */,
+				F9E02DD91CBE246600B14B7E /* libTuringSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +303,15 @@
 		27AA5EEE73E2D030EC30623E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F9E02E001CBE285A00B14B7E /* CoreLocation.framework */,
+				F9E02DFE1CBE284F00B14B7E /* CFNetwork.framework */,
+				F9E02DFC1CBE283600B14B7E /* Security.framework */,
+				F9E02DFA1CBE282A00B14B7E /* libz.1.tbd */,
+				F9E02DF81CBE282000B14B7E /* GLKit.framework */,
+				F9E02DF61CBE281800B14B7E /* AVFoundation.framework */,
+				F9E02DF41CBE280F00B14B7E /* Foundation.framework */,
+				F9E02DF21CBE27F100B14B7E /* SystemConfiguration.framework */,
+				F9E02DD81CBE246600B14B7E /* libTuringSDK.a */,
 				29031F3F901A2B3953BCC850 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -310,6 +371,7 @@
 		F91775A31CAA685800557A45 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				F9E02DD71CBE245800B14B7E /* TuringTest */,
 				F9DA96001CB513E2008033A6 /* DateUtil.h */,
 				F9DA96011CB513E2008033A6 /* DateUtil.m */,
 			);
@@ -338,6 +400,79 @@
 			name = Category;
 			sourceTree = "<group>";
 		};
+		F9E02DD71CBE245800B14B7E /* TuringTest */ = {
+			isa = PBXGroup;
+			children = (
+				F9E02E021CBE2AF500B14B7E /* header */,
+			);
+			name = TuringTest;
+			sourceTree = "<group>";
+		};
+		F9E02DDA1CBE24E600B14B7E /* ThridParty */ = {
+			isa = PBXGroup;
+			children = (
+				F9E02DDB1CBE24FC00B14B7E /* CoreAudioUtility */,
+				F9E02DE31CBE24FC00B14B7E /* JSONKit-master */,
+				F9E02DE61CBE24FC00B14B7E /* OpenUDID */,
+				F9E02DE91CBE24FC00B14B7E /* TTTAttributedLabel */,
+			);
+			name = ThridParty;
+			sourceTree = "<group>";
+		};
+		F9E02DDB1CBE24FC00B14B7E /* CoreAudioUtility */ = {
+			isa = PBXGroup;
+			children = (
+				F9E02DDC1CBE24FC00B14B7E /* CADebugMacros.cpp */,
+				F9E02DDD1CBE24FC00B14B7E /* CADebugMacros.h */,
+				F9E02DDE1CBE24FC00B14B7E /* CAMath.h */,
+				F9E02DDF1CBE24FC00B14B7E /* CAStreamBasicDescription.cpp */,
+				F9E02DE01CBE24FC00B14B7E /* CAStreamBasicDescription.h */,
+				F9E02DE11CBE24FC00B14B7E /* CAXException.cpp */,
+				F9E02DE21CBE24FC00B14B7E /* CAXException.h */,
+			);
+			path = CoreAudioUtility;
+			sourceTree = "<group>";
+		};
+		F9E02DE31CBE24FC00B14B7E /* JSONKit-master */ = {
+			isa = PBXGroup;
+			children = (
+				F9E02DE41CBE24FC00B14B7E /* JSONKit.h */,
+				F9E02DE51CBE24FC00B14B7E /* JSONKit.m */,
+			);
+			path = "JSONKit-master";
+			sourceTree = "<group>";
+		};
+		F9E02DE61CBE24FC00B14B7E /* OpenUDID */ = {
+			isa = PBXGroup;
+			children = (
+				F9E02DE71CBE24FC00B14B7E /* OpenUDID.h */,
+				F9E02DE81CBE24FC00B14B7E /* OpenUDID.m */,
+			);
+			path = OpenUDID;
+			sourceTree = "<group>";
+		};
+		F9E02DE91CBE24FC00B14B7E /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				F9E02DEA1CBE24FC00B14B7E /* TTTAttributedLabel.h */,
+				F9E02DEB1CBE24FC00B14B7E /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
+			sourceTree = "<group>";
+		};
+		F9E02E021CBE2AF500B14B7E /* header */ = {
+			isa = PBXGroup;
+			children = (
+				F9E02E031CBE2AF500B14B7E /* BDVoiceRecognitionClient.h */,
+				F9E02E041CBE2AF500B14B7E /* TRRSpeechSythesizer.h */,
+				F9E02E051CBE2AF500B14B7E /* TRRTuringAPI.h */,
+				F9E02E061CBE2AF500B14B7E /* TRRTuringAPIConfig.h */,
+				F9E02E071CBE2AF500B14B7E /* TRRTuringRequestManager.h */,
+				F9E02E081CBE2AF500B14B7E /* TRRVoiceRecognitionManager.h */,
+			);
+			path = header;
+			sourceTree = "<group>";
+		};
 		F9E072CE1CA90BD700468EDC = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +498,7 @@
 		F9E072D91CA90BD800468EDC /* WeChat */ = {
 			isa = PBXGroup;
 			children = (
+				F9E02DDA1CBE24E600B14B7E /* ThridParty */,
 				F91775A51CAA68A500557A45 /* Category */,
 				F91775A41CAA687F00557A45 /* Common */,
 				F91775A31CAA685800557A45 /* Utility */,
@@ -914,6 +1050,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9E02DEF1CBE24FC00B14B7E /* JSONKit.m in Sources */,
 				F90B41701CABFF5400ECF391 /* SearchResultsController.m in Sources */,
 				F91775A81CAA68D800557A45 /* UIImage+RandomImage.m in Sources */,
 				F9E073A41CA9162800468EDC /* MeViewController.m in Sources */,
@@ -922,9 +1059,13 @@
 				F9E073AF1CA96B1E00468EDC /* PersonModel.m in Sources */,
 				F9E0739B1CA9160D00468EDC /* ContactsViewController.m in Sources */,
 				F9C9CBDB1CB25AF600ABF0E0 /* ChatModel.m in Sources */,
+				F9E02DF01CBE24FC00B14B7E /* OpenUDID.m in Sources */,
 				F9A2AD1E1CB65981002CE5F8 /* BaseMessageTableViewCell.m in Sources */,
 				F9DA96021CB513E2008033A6 /* DateUtil.m in Sources */,
 				F90B416D1CABCE1E00ECF391 /* Constants.m in Sources */,
+				F9E02DED1CBE24FC00B14B7E /* CAStreamBasicDescription.cpp in Sources */,
+				F9E02DF11CBE24FC00B14B7E /* TTTAttributedLabel.m in Sources */,
+				F9E02DEE1CBE24FC00B14B7E /* CAXException.cpp in Sources */,
 				F9E073A11CA9161F00468EDC /* DiscoverViewController.m in Sources */,
 				F962F64C1CB53218005D73EA /* InsetsTextField.m in Sources */,
 				F9E072DF1CA90BD800468EDC /* AppDelegate.m in Sources */,
@@ -934,6 +1075,7 @@
 				F918F3FC1CB112B0003855FE /* EditorView.m in Sources */,
 				F90B41731CAC1DC700ECF391 /* NSString+Pinyin.m in Sources */,
 				F9E073A71CA9167300468EDC /* MainTabBarController.m in Sources */,
+				F9E02DEC1CBE24FC00B14B7E /* CADebugMacros.cpp in Sources */,
 				F918F4011CB139DA003855FE /* ChatroomViewController.m in Sources */,
 				F9E072DC1CA90BD800468EDC /* main.m in Sources */,
 				F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */,
@@ -1078,8 +1220,13 @@
 			baseConfigurationReference = 9EA824567924F7CE92751CEC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WeChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WeChat",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Siegrain.WeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)";
@@ -1091,8 +1238,13 @@
 			baseConfigurationReference = D173503D2BF6FCA5B3A2572B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WeChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/WeChat",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Siegrain.WeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)";

@@ -9,31 +9,19 @@
 #import "ChatModel.h"
 
 @implementation ChatModel
-- (instancetype)initWithDic:(NSDictionary*)dic
++ (instancetype)chatModelWithId:(NSUInteger)identifier
+                           name:(NSString*)name
+                       sendTime:(NSDate*)sendTime
+                        message:(NSString*)message
+                    messageType:(ChatMessageType)messageType
 {
-  self = [super init];
-  if (self) {
-    [self setValuesForKeysWithDictionary:dic];
-  }
-  return self;
-}
+  ChatModel* model = [[ChatModel alloc] init];
+  model.identifier = identifier;
+  model.name = name;
+  model.sendTime = sendTime;
+  model.message = message;
+  model.messageType = messageType;
 
-+ (instancetype)chatWithDic:(NSDictionary*)dic
-{
-  return [[self alloc] initWithDic:dic];
-}
-
-+ (NSArray*)chat
-{
-  NSArray* array = [NSArray
-    arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"chat"
-                                                            ofType:@"plist"]];
-
-  NSMutableArray* arrayM = [NSMutableArray array];
-  for (NSDictionary* dic in array) {
-    [arrayM addObject:[self chatWithDic:dic]];
-  }
-
-  return arrayM;
+  return model;
 }
 @end

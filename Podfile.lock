@@ -1,4 +1,5 @@
 PODS:
+  - JSONModel (1.2.0)
   - Masonry (1.0.0)
   - PinYin4Objc (1.1.1)
   - UITableView+FDTemplateLayoutCell (1.4)
@@ -6,11 +7,13 @@ PODS:
     - PinYin4Objc (~> 1.1.1)
 
 DEPENDENCIES:
+  - JSONModel
   - Masonry
   - UITableView+FDTemplateLayoutCell
   - YSMChineseSort (~> 0.1.0)
 
 SPEC CHECKSUMS:
+  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
   PinYin4Objc: 3fa9673610368330e2dfb688b1d19a35c3930a78
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030

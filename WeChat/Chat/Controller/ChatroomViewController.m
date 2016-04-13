@@ -10,9 +10,11 @@
 #import "ChatroomViewController.h"
 #import "EditorView.h"
 #import "Masonry/Masonry/Masonry.h"
+#import "TRRTuringRequestManager.h"
 #import "TextMessageTableViewCell.h"
 #import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
 
+static NSString* const kTuringAPIKey = @"7b698d636ca822b96f78a2fcef16a47f";
 static NSString* const kCellIdentifier = @"ChatroomIdentifier";
 static NSInteger const kEditorHeight = 50;
 
@@ -20,19 +22,23 @@ static NSInteger const kEditorHeight = 50;
 ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) UITableView* tableView;
 @property (strong, nonatomic) EditorView* editorView;
-@property (assign, nonatomic) NSUInteger rowCount;
 
 @property (assign, nonatomic) NSInteger contentOffsetYFarFromBottom;
+
+@property (strong, nonatomic) TRRTuringAPIConfig* apiConfig;
+@property (strong, nonatomic) TRRTuringRequestManager* apiRequest;
+
+@property (strong, nonatomic) NSMutableArray<ChatModel*>* chatModelArray;
 @end
 
 @implementation ChatroomViewController
 #pragma mark - accessors
-- (NSUInteger)rowCount
+- (NSMutableArray<ChatModel*>*)chatModelArray
 {
-  if (_rowCount == 0) {
-    _rowCount = 10;
+  if (_chatModelArray == nil) {
+    _chatModelArray = [NSMutableArray array];
   }
-  return _rowCount;
+  return _chatModelArray;
 }
 + (NSInteger)EditorHeight
 {
@@ -66,6 +72,13 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 
   [self bindConstraints];
   [self bindGestureRecognizer];
+  [self setupTuringRobot];
+}
+- (void)setupTuringRobot
+{
+  self.apiConfig = [[TRRTuringAPIConfig alloc] initWithAPIKey:kTuringAPIKey];
+  self.apiRequest =
+    [[TRRTuringRequestManager alloc] initWithConfig:self.apiConfig];
 }
 - (void)buildTableView
 {
@@ -136,17 +149,52 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
     }];
   [weakSelf.editorView
     setMessageWasSend:^(id message, ChatMessageType messageType) {
-			
-      NSIndexPath* insertion =
-        [NSIndexPath indexPathForRow:self.rowCount inSection:0];
-      [self.tableView beginUpdates];
-      [self.tableView insertRowsAtIndexPaths:@[ insertion ]
-                            withRowAnimation:UITableViewRowAnimationTop];
-      self.rowCount++;
-      [self.tableView endUpdates];
-      [self.tableView scrollToRowAtIndexPath:insertion
-                            atScrollPosition:UITableViewScrollPositionBottom
-                                    animated:true];
+      __block ChatModel* robotModel =
+        [ChatModel chatModelWithId:2
+                              name:@"图灵机器人"
+                          sendTime:nil
+                           message:nil
+                       messageType:ChatMessageTypeText];
+      [weakSelf.apiConfig request_UserIDwithSuccessBlock:^(NSString* str) {
+
+        NSLog(@"result = %@", str);
+        [weakSelf.apiRequest request_OpenAPIWithInfo:message
+          successBlock:^(NSDictionary* dict) {
+            NSLog(@"apiResult =%@", dict);
+
+            robotModel.message = dict[@"text"];
+            robotModel.sendTime = [NSDate date];
+            [weakSelf.chatModelArray addObject:robotModel];
+
+            [self updateNewOneRowInTableview];
+          }
+          failBlock:^(TRRAPIErrorType errorType, NSString* infoStr) {
+            NSLog(@"errorinfo = %@", infoStr);
+
+            robotModel.message = infoStr;
+            robotModel.sendTime = [NSDate date];
+
+            [weakSelf.chatModelArray addObject:robotModel];
+            [self updateNewOneRowInTableview];
+          }];
+      }
+        failBlock:^(TRRAPIErrorType errorType, NSString* infoStr) {
+          NSLog(@"erroresult = %@", infoStr);
+          robotModel.message = infoStr;
+          robotModel.sendTime = [NSDate date];
+
+          [weakSelf.chatModelArray addObject:robotModel];
+
+          [self updateNewOneRowInTableview];
+        }];
+
+      ChatModel* meModel = [ChatModel chatModelWithId:1
+                                                 name:@"Siegrain"
+                                             sendTime:[NSDate date]
+                                              message:message
+                                          messageType:ChatMessageTypeText];
+      [weakSelf.chatModelArray addObject:meModel];
+      [self updateNewOneRowInTableview];
     }];
 }
 - (void)bindConstraints
@@ -181,14 +229,14 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
     fd_heightForCellWithIdentifier:kCellIdentifier
                   cacheByIndexPath:indexPath
                      configuration:^(TextMessageTableViewCell* cell) {
-                       cell.model = [self testModel:indexPath];
+                       cell.model = self.chatModelArray[indexPath.row];
                      }];
-  return height <= 10 ? 100 : height;
+  return height;
 }
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-  return self.rowCount;
+  return self.chatModelArray.count;
 }
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
@@ -208,7 +256,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   willDisplayCell:(TextMessageTableViewCell*)cell
 forRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  cell.model = [self testModel:indexPath];
+  cell.model = self.chatModelArray[indexPath.row];
 }
 #pragma mark - scrollview
 - (void)scrollViewWillBeginDragging:(UIScrollView*)scrollView
@@ -222,28 +270,26 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 }
 - (void)scrollToBottom:(BOOL)animated
 {
+  if (self.chatModelArray.count == 0)
+    return;
+
   [self.tableView
-    scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.rowCount - 1
-                                              inSection:0]
+    scrollToRowAtIndexPath:[NSIndexPath
+                             indexPathForRow:self.chatModelArray.count - 1
+                                   inSection:0]
           atScrollPosition:UITableViewScrollPositionBottom
                   animated:animated];
 }
-- (ChatModel*)testModel:(NSIndexPath*)indexPath
+- (void)updateNewOneRowInTableview
 {
-  ChatModel* model = [[ChatModel alloc] init];
-  model.messageType = ChatMessageTypeText;
-  model.identifier = indexPath.row;
-  model.sendTime = model.identifier % 2 == 0 ? [NSDate date] : nil;
-  model.name = model.identifier % 2 == 0 ? @"Siegrain" : @"Turning robot";
-  model.message = model.identifier % 2 == 0
-                    ? @"锄禾日当午，汗滴禾下土。"
-                      @"\n谁知盘中餐，粒粒皆辛苦。"
-                    : @"《静夜思》"
-                      @"\n\t李白"
-                      @"\n床前明月光，疑是地上霜。"
-                      @"\n举头望明月，低头思故乡。";
-
-  //  NSLog(@"喜怒无常的表格：%ld - %@", indexPath.row, model.sendTime);
-  return model;
+  NSIndexPath* insertion =
+    [NSIndexPath indexPathForRow:self.chatModelArray.count inSection:0];
+  [self.tableView beginUpdates];
+  [self.tableView insertRowsAtIndexPaths:@[ insertion ]
+                        withRowAnimation:UITableViewRowAnimationTop];
+  [self.tableView endUpdates];
+  [self.tableView scrollToRowAtIndexPath:insertion
+                        atScrollPosition:UITableViewScrollPositionBottom
+                                animated:true];
 }
 @end

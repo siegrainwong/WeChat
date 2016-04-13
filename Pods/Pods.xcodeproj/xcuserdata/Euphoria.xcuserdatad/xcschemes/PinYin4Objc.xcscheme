@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '7E2DDE0BB51723B4BDB1002F'
+               BlueprintIdentifier = '2F17966CB202ED9DB0A9D44B'
                BlueprintName = 'PinYin4Objc'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libPinYin4Objc.a'>

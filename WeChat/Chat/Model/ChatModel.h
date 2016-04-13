@@ -7,17 +7,19 @@
 //
 
 #import "EditorView.h"
+#import "JSONModel/JSONModel/JSONModel/JSONModel.h"
 #import <UIKit/UIKit.h>
 
-@interface ChatModel : NSObject
+@interface ChatModel : JSONModel
 @property (assign, nonatomic) NSUInteger identifier;
 @property (strong, nonatomic) NSString* name;
 @property (strong, nonatomic) NSDate* sendTime;
-@property (strong, nonatomic) id message;
+@property (strong, nonatomic) NSString* message;
 @property (assign, nonatomic) ChatMessageType messageType;
 
-- (instancetype)initWithDic:(NSDictionary*)dic;
-+ (instancetype)chatWithDic:(NSDictionary*)dic;
-
-+ (NSArray*)chat;
++ (instancetype)chatModelWithId:(NSUInteger)identifier
+                           name:(NSString*)name
+                       sendTime:(NSDate*)sendTime
+                        message:(NSString*)message
+                    messageType:(ChatMessageType)messageType;
 @end
