@@ -21,6 +21,7 @@ TextMessageTableViewCell ()
 #pragma mark - init
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
               reuseIdentifier:(NSString*)reuseIdentifier
+//                   alignement:(MessageAlignement)alignement
 {
   if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
   }
@@ -51,7 +52,7 @@ TextMessageTableViewCell ()
   [super bindConstraints];
 
   [self.messageTextView mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.edges.insets(UIEdgeInsetsMake(5, 15, 10, 10));
+    make.edges.insets(UIEdgeInsetsMake(5, 13, 10, 15));
   }];
 }
 #pragma mark - longpress menu

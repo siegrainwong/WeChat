@@ -26,8 +26,8 @@ BaseMessageTableViewCell ()
 - (MessageAlignement)alignement
 {
   if (_alignement == MessageAlignementUndefined) {
-    _alignement =
-      arc4random() % 2 == 0 ? MessageAlignementLeft : MessageAlignementRight;
+    _alignement = self.model.identifier == 1 ? MessageAlignementRight
+                                             : MessageAlignementLeft;
   }
   return _alignement;
 }
@@ -89,6 +89,25 @@ BaseMessageTableViewCell ()
       make.top.offset(5);
     }];
   }
+
+  if (self.alignement == MessageAlignementLeft) {
+    [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
+      make.leading.offset(kAvatarMarginH);
+    }];
+    [self.bubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
+      //指view的左边在avatar的右边，边距为5
+      make.left.equalTo(self.avatarImageView.mas_right).offset(5);
+      make.right.lessThanOrEqualTo(self.contentView).offset(-100);
+    }];
+  } else if (self.alignement == MessageAlignementRight) {
+    [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
+      make.trailing.offset(-kAvatarMarginH);
+    }];
+    [self.bubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
+      make.right.equalTo(self.avatarImageView.mas_left).offset(-5);
+      make.left.greaterThanOrEqualTo(self.contentView).offset(100);
+    }];
+  }
 }
 
 - (void)buildCell
@@ -120,24 +139,23 @@ BaseMessageTableViewCell ()
   [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
     make.top.offset(0);
     make.width.height.offset(kAvatarSize);
-    if (self.alignement == MessageAlignementLeft)
-      make.leading.offset(kAvatarMarginH);
-    else
-      make.trailing.offset(-kAvatarMarginH);
-
+    //    if (self.alignement == MessageAlignementLeft)
+    //      make.leading.offset(kAvatarMarginH);
+    //    else
+    //      make.trailing.offset(-kAvatarMarginH);
   }];
   [self.bubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
     make.bottom.offset(-5);
     make.top.equalTo(self.avatarImageView).offset(-2);
     make.width.lessThanOrEqualTo(self.contentView);
-    if (self.alignement == MessageAlignementLeft) {
-      //指view的左边在avatar的右边，边距为5
-      make.left.equalTo(self.avatarImageView.mas_right).offset(5);
-      make.right.lessThanOrEqualTo(self.contentView).offset(-100);
-    } else {
-      make.right.equalTo(self.avatarImageView.mas_left).offset(-5);
-      make.left.greaterThanOrEqualTo(self.contentView).offset(100);
-    }
+    //    if (self.alignement == MessageAlignementLeft) {
+    //      //指view的左边在avatar的右边，边距为5
+    //      make.left.equalTo(self.avatarImageView.mas_right).offset(5);
+    //      make.right.lessThanOrEqualTo(self.contentView).offset(-100);
+    //    } else {
+    //      make.right.equalTo(self.avatarImageView.mas_left).offset(-5);
+    //      make.left.greaterThanOrEqualTo(self.contentView).offset(100);
+    //    }
   }];
 }
 

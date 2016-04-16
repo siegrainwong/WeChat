@@ -14,8 +14,13 @@
 #import "TextMessageTableViewCell.h"
 #import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
 
+/*
+ 在从重用池出列时，修改的数据会作用到其他具有相同标识的待重用列上，所以需要用到两个标识避免数据错误
+ */
+static NSString* const kCellIdentifierLeft = @"ChatroomIdentifierLeft";
+static NSString* const kCellIdentifierRight = @"ChatroomIdentifierRight";
+
 static NSString* const kTuringAPIKey = @"7b698d636ca822b96f78a2fcef16a47f";
-static NSString* const kCellIdentifier = @"ChatroomIdentifier";
 static NSInteger const kEditorHeight = 50;
 
 @interface
@@ -33,6 +38,12 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 
 @implementation ChatroomViewController
 #pragma mark - accessors
+- (NSString*)chatroomIdentifier:(NSIndexPath*)indexPath
+{
+  return self.chatModelArray[indexPath.row].identifier == 1
+           ? kCellIdentifierRight
+           : kCellIdentifierLeft;
+}
 - (NSMutableArray<ChatModel*>*)chatModelArray
 {
   if (_chatModelArray == nil) {
@@ -93,7 +104,10 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   self.tableView.fd_debugLogEnabled = false;
 
   [self.tableView registerClass:[TextMessageTableViewCell class]
-         forCellReuseIdentifier:kCellIdentifier];
+         forCellReuseIdentifier:kCellIdentifierLeft];
+  [self.tableView registerClass:[TextMessageTableViewCell class]
+         forCellReuseIdentifier:kCellIdentifierRight];
+
   [self.view addSubview:self.tableView];
 }
 - (void)buildEditorView
@@ -149,6 +163,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
     }];
   [weakSelf.editorView
     setMessageWasSend:^(id message, ChatMessageType messageType) {
+
       __block ChatModel* robotModel =
         [ChatModel chatModelWithId:2
                               name:@"图灵机器人"
@@ -156,12 +171,8 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
                            message:nil
                        messageType:ChatMessageTypeText];
       [weakSelf.apiConfig request_UserIDwithSuccessBlock:^(NSString* str) {
-
-        NSLog(@"result = %@", str);
         [weakSelf.apiRequest request_OpenAPIWithInfo:message
           successBlock:^(NSDictionary* dict) {
-            NSLog(@"apiResult =%@", dict);
-
             robotModel.message = dict[@"text"];
             robotModel.sendTime = [NSDate date];
             [weakSelf.chatModelArray addObject:robotModel];
@@ -169,8 +180,6 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
             [self updateNewOneRowInTableview];
           }
           failBlock:^(TRRAPIErrorType errorType, NSString* infoStr) {
-            NSLog(@"errorinfo = %@", infoStr);
-
             robotModel.message = infoStr;
             robotModel.sendTime = [NSDate date];
 
@@ -179,7 +188,6 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
           }];
       }
         failBlock:^(TRRAPIErrorType errorType, NSString* infoStr) {
-          NSLog(@"erroresult = %@", infoStr);
           robotModel.message = infoStr;
           robotModel.sendTime = [NSDate date];
 
@@ -225,12 +233,19 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  float height = [self.tableView
-    fd_heightForCellWithIdentifier:kCellIdentifier
-                  cacheByIndexPath:indexPath
-                     configuration:^(TextMessageTableViewCell* cell) {
-                       cell.model = self.chatModelArray[indexPath.row];
-                     }];
+  ChatModel* model = self.chatModelArray[indexPath.row];
+  CGFloat height = model.height.floatValue;
+
+  if (!height) {
+    height = [self.tableView
+      fd_heightForCellWithIdentifier:[self chatroomIdentifier:indexPath]
+                       configuration:^(TextMessageTableViewCell* cell) {
+                         cell.model = model;
+                       }];
+
+    model.height = @(height);
+  }
+
   return height;
 }
 - (NSInteger)tableView:(UITableView*)tableView
@@ -241,13 +256,14 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  TextMessageTableViewCell* cell =
-    [tableView dequeueReusableCellWithIdentifier:kCellIdentifier
-                                    forIndexPath:indexPath];
+  TextMessageTableViewCell* cell = [tableView
+    dequeueReusableCellWithIdentifier:[self chatroomIdentifier:indexPath]
+                         forIndexPath:indexPath];
   if (cell == nil) {
+
     cell = [[TextMessageTableViewCell alloc]
         initWithStyle:UITableViewCellStyleDefault
-      reuseIdentifier:kCellIdentifier];
+      reuseIdentifier:[self chatroomIdentifier:indexPath]];
   }
 
   return cell;
@@ -256,7 +272,8 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   willDisplayCell:(TextMessageTableViewCell*)cell
 forRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  cell.model = self.chatModelArray[indexPath.row];
+  ChatModel* model = self.chatModelArray[indexPath.row];
+  cell.model = model;
 }
 #pragma mark - scrollview
 - (void)scrollViewWillBeginDragging:(UIScrollView*)scrollView
@@ -283,10 +300,10 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 - (void)updateNewOneRowInTableview
 {
   NSIndexPath* insertion =
-    [NSIndexPath indexPathForRow:self.chatModelArray.count inSection:0];
+    [NSIndexPath indexPathForRow:self.chatModelArray.count - 1 inSection:0];
   [self.tableView beginUpdates];
   [self.tableView insertRowsAtIndexPaths:@[ insertion ]
-                        withRowAnimation:UITableViewRowAnimationTop];
+                        withRowAnimation:UITableViewRowAnimationBottom];
   [self.tableView endUpdates];
   [self.tableView scrollToRowAtIndexPath:insertion
                         atScrollPosition:UITableViewScrollPositionBottom

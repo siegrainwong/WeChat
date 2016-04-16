@@ -74,8 +74,8 @@ EditorView ()<UITextViewDelegate>
   //点击发送
   if ([text isEqualToString:@"\n"])
     if (self.messageWasSend) {
-      self.messageWasSend(text, ChatMessageTypeText);
-			self.textView.text = @"";
+      self.messageWasSend(self.textView.text, ChatMessageTypeText);
+      self.textView.text = @"";
       return false;
     }
 

@@ -17,6 +17,8 @@
 @property (strong, nonatomic) NSString* message;
 @property (assign, nonatomic) ChatMessageType messageType;
 
+@property (strong, nonatomic) NSNumber* height;
+
 + (instancetype)chatModelWithId:(NSUInteger)identifier
                            name:(NSString*)name
                        sendTime:(NSDate*)sendTime
