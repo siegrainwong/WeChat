@@ -21,7 +21,6 @@ TextMessageTableViewCell ()
 #pragma mark - init
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
               reuseIdentifier:(NSString*)reuseIdentifier
-//                   alignement:(MessageAlignement)alignement
 {
   if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
   }
@@ -29,9 +28,9 @@ TextMessageTableViewCell ()
 }
 - (void)setModel:(ChatModel*)model
 {
-  [super setModel:model];
-
   self.messageTextView.text = (NSString*)model.message;
+
+  [super setModel:model];
 }
 
 - (void)buildCell

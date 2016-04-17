@@ -14,12 +14,6 @@
 #import "TextMessageTableViewCell.h"
 #import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
 
-/*
- 在从重用池出列时，修改的数据会作用到其他具有相同标识的待重用列上，所以需要用到两个标识避免数据错误
- */
-static NSString* const kCellIdentifierLeft = @"ChatroomIdentifierLeft";
-static NSString* const kCellIdentifierRight = @"ChatroomIdentifierRight";
-
 static NSString* const kTuringAPIKey = @"7b698d636ca822b96f78a2fcef16a47f";
 static NSInteger const kEditorHeight = 50;
 
@@ -239,6 +233,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   if (!height) {
     height = [self.tableView
       fd_heightForCellWithIdentifier:[self chatroomIdentifier:indexPath]
+                    cacheByIndexPath:indexPath
                        configuration:^(TextMessageTableViewCell* cell) {
                          cell.model = model;
                        }];
@@ -256,21 +251,24 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  TextMessageTableViewCell* cell = [tableView
-    dequeueReusableCellWithIdentifier:[self chatroomIdentifier:indexPath]
-                         forIndexPath:indexPath];
-  if (cell == nil) {
+  //  TextMessageTableViewCell* cell = nil;
+  //  ChatModel* model = self.chatModelArray[indexPath.row];
+  //  if (model.identifier == 1)
+  //    cell = [tableView
+  //    dequeueReusableCellWithIdentifier:kCellIdentifierRight];
+  //  else
+  //    cell = [tableView
+  //    dequeueReusableCellWithIdentifier:kCellIdentifierLeft];
 
-    cell = [[TextMessageTableViewCell alloc]
-        initWithStyle:UITableViewCellStyleDefault
-      reuseIdentifier:[self chatroomIdentifier:indexPath]];
-  }
+  TextMessageTableViewCell* cell = [tableView
+    dequeueReusableCellWithIdentifier:[self chatroomIdentifier:indexPath]];
+
+  [self configureCell:cell atIndexPath:indexPath];
 
   return cell;
 }
-- (void)tableView:(UITableView*)tableView
-  willDisplayCell:(TextMessageTableViewCell*)cell
-forRowAtIndexPath:(NSIndexPath*)indexPath
+- (void)configureCell:(BaseMessageTableViewCell*)cell
+          atIndexPath:(NSIndexPath*)indexPath
 {
   ChatModel* model = self.chatModelArray[indexPath.row];
   cell.model = model;
@@ -303,7 +301,7 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     [NSIndexPath indexPathForRow:self.chatModelArray.count - 1 inSection:0];
   [self.tableView beginUpdates];
   [self.tableView insertRowsAtIndexPaths:@[ insertion ]
-                        withRowAnimation:UITableViewRowAnimationBottom];
+                        withRowAnimation:UITableViewRowAnimationNone];
   [self.tableView endUpdates];
   [self.tableView scrollToRowAtIndexPath:insertion
                         atScrollPosition:UITableViewScrollPositionBottom

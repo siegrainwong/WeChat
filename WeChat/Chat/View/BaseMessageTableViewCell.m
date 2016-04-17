@@ -23,20 +23,15 @@ BaseMessageTableViewCell ()
 
 @implementation BaseMessageTableViewCell
 #pragma mark - init
-- (MessageAlignement)alignement
-{
-  if (_alignement == MessageAlignementUndefined) {
-    _alignement = self.model.identifier == 1 ? MessageAlignementRight
-                                             : MessageAlignementLeft;
-  }
-  return _alignement;
-}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
               reuseIdentifier:(NSString*)reuseIdentifier
 {
   if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
     self.backgroundColor = [UIColor clearColor];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.alignement = [reuseIdentifier isEqualToString:kCellIdentifierLeft]
+                        ? MessageAlignementLeft
+                        : MessageAlignementRight;
 
     [self buildCell];
     [self bindConstraints];
@@ -57,17 +52,6 @@ BaseMessageTableViewCell ()
    卧槽尼玛。
    */
   _model = model;
-  self.avatarImageView.image = self.alignement == MessageAlignementRight
-                                 ? [UIImage imageNamed:@"siegrain_avatar"]
-                                 : [UIImage imageNamed:@"robot"];
-
-  UIImage* bubbleImage = self.alignement == MessageAlignementRight
-                           ? [UIImage imageNamed:@"SenderTextNodeBkg"]
-                           : [UIImage imageNamed:@"ReceiverTextNodeBkgHL"];
-  //设置图片有哪些地方是不能被拉伸的，以像素为单位
-  UIEdgeInsets insets = UIEdgeInsetsMake(30, 15, 30, 15);
-  bubbleImage = [bubbleImage resizableImageWithCapInsets:insets];
-  self.bubbleView.image = bubbleImage;
 
   /*
    一定要两个判断都修改约束
@@ -89,31 +73,13 @@ BaseMessageTableViewCell ()
       make.top.offset(5);
     }];
   }
-
-  if (self.alignement == MessageAlignementLeft) {
-    [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
-      make.leading.offset(kAvatarMarginH);
-    }];
-    [self.bubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
-      //指view的左边在avatar的右边，边距为5
-      make.left.equalTo(self.avatarImageView.mas_right).offset(5);
-      make.right.lessThanOrEqualTo(self.contentView).offset(-100);
-    }];
-  } else if (self.alignement == MessageAlignementRight) {
-    [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
-      make.trailing.offset(-kAvatarMarginH);
-    }];
-    [self.bubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
-      make.right.equalTo(self.avatarImageView.mas_left).offset(-5);
-      make.left.greaterThanOrEqualTo(self.contentView).offset(100);
-    }];
-  }
 }
 
 - (void)buildCell
 {
   self.sendTimeField = [[InsetsTextField alloc] init];
   self.sendTimeField.backgroundColor = [UIColor colorWithWhite:.83 alpha:1];
+  self.sendTimeField.opaque = true;
   self.sendTimeField.textColor = [UIColor whiteColor];
   self.sendTimeField.font = [UIFont systemFontOfSize:12];
   self.sendTimeField.textAlignment = NSTextAlignmentCenter;
@@ -123,10 +89,20 @@ BaseMessageTableViewCell ()
   [self.contentView addSubview:self.sendTimeField];
 
   self.avatarImageView = [[UIImageView alloc] init];
+  self.avatarImageView.image = self.alignement == MessageAlignementRight
+                                 ? [UIImage imageNamed:@"siegrain_avatar"]
+                                 : [UIImage imageNamed:@"robot"];
   [self.contentView addSubview:self.avatarImageView];
 
   self.bubbleView = [[UIImageView alloc] init];
   self.bubbleView.userInteractionEnabled = true;
+  UIImage* bubbleImage = self.alignement == MessageAlignementRight
+                           ? [UIImage imageNamed:@"SenderTextNodeBkg"]
+                           : [UIImage imageNamed:@"ReceiverTextNodeBkgHL"];
+
+  //设置图片哪里是不能被拉伸的
+  self.bubbleView.image =
+    [bubbleImage stretchableImageWithLeftCapWidth:30 topCapHeight:30];
   [self.contentView addSubview:self.bubbleView];
 }
 
@@ -139,23 +115,24 @@ BaseMessageTableViewCell ()
   [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
     make.top.offset(0);
     make.width.height.offset(kAvatarSize);
-    //    if (self.alignement == MessageAlignementLeft)
-    //      make.leading.offset(kAvatarMarginH);
-    //    else
-    //      make.trailing.offset(-kAvatarMarginH);
+    if (self.alignement == MessageAlignementLeft)
+      make.leading.offset(kAvatarMarginH);
+    else
+      make.trailing.offset(-kAvatarMarginH);
   }];
   [self.bubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
     make.bottom.offset(-5);
     make.top.equalTo(self.avatarImageView).offset(-2);
     make.width.lessThanOrEqualTo(self.contentView);
-    //    if (self.alignement == MessageAlignementLeft) {
-    //      //指view的左边在avatar的右边，边距为5
-    //      make.left.equalTo(self.avatarImageView.mas_right).offset(5);
-    //      make.right.lessThanOrEqualTo(self.contentView).offset(-100);
-    //    } else {
-    //      make.right.equalTo(self.avatarImageView.mas_left).offset(-5);
-    //      make.left.greaterThanOrEqualTo(self.contentView).offset(100);
-    //    }
+
+    if (self.alignement == MessageAlignementLeft) {
+      //指view的左边在avatar的右边，边距为5
+      make.left.equalTo(self.avatarImageView.mas_right).offset(5);
+      make.right.lessThanOrEqualTo(self.contentView).offset(-50);
+    } else {
+      make.right.equalTo(self.avatarImageView.mas_left).offset(-5);
+      make.left.greaterThanOrEqualTo(self.contentView).offset(50);
+    }
   }];
 }
 
@@ -177,7 +154,6 @@ BaseMessageTableViewCell ()
 {
   return true;
 }
-
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
   return false;
