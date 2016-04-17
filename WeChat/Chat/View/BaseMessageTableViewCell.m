@@ -50,7 +50,7 @@ BaseMessageTableViewCell ()
   /*
    一定要两个判断都修改约束，不然就要多弄几个标识符...
    */
-  if (model.sendTime != nil) {
+  if (model.showSendTime) {
     self.sendTimeField.text =
       [DateUtil localizedShortDateString:model.sendTime];
     self.sendTimeField.hidden = false;

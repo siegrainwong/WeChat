@@ -34,9 +34,8 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 #pragma mark - accessors
 - (NSString*)chatroomIdentifier:(NSIndexPath*)indexPath
 {
-  return self.chatModelArray[indexPath.row].identifier == 1
-           ? kCellIdentifierRight
-           : kCellIdentifierLeft;
+  return self.chatModelArray[indexPath.row].sender == 1 ? kCellIdentifierRight
+                                                        : kCellIdentifierLeft;
 }
 - (NSMutableArray<ChatModel*>*)chatModelArray
 {
@@ -160,7 +159,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 
       __block ChatModel* robotModel =
         [ChatModel chatModelWithId:2
-                              name:@"图灵机器人"
+                            sender:2
                           sendTime:nil
                            message:nil
                        messageType:ChatMessageTypeText];
@@ -191,7 +190,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
         }];
 
       ChatModel* meModel = [ChatModel chatModelWithId:1
-                                                 name:@"Siegrain"
+                                               sender:1
                                              sendTime:[NSDate date]
                                               message:message
                                           messageType:ChatMessageTypeText];
@@ -251,15 +250,6 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  //  TextMessageTableViewCell* cell = nil;
-  //  ChatModel* model = self.chatModelArray[indexPath.row];
-  //  if (model.identifier == 1)
-  //    cell = [tableView
-  //    dequeueReusableCellWithIdentifier:kCellIdentifierRight];
-  //  else
-  //    cell = [tableView
-  //    dequeueReusableCellWithIdentifier:kCellIdentifierLeft];
-
   TextMessageTableViewCell* cell = [tableView
     dequeueReusableCellWithIdentifier:[self chatroomIdentifier:indexPath]];
 

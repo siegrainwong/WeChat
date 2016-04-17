@@ -12,15 +12,16 @@
 
 @interface ChatModel : JSONModel
 @property (assign, nonatomic) NSUInteger identifier;
-@property (strong, nonatomic) NSString* name;
+@property (assign, nonatomic) NSUInteger sender;
 @property (strong, nonatomic) NSDate* sendTime;
 @property (strong, nonatomic) NSString* message;
 @property (assign, nonatomic) ChatMessageType messageType;
+@property (assign, nonatomic) BOOL showSendTime;
 
 @property (strong, nonatomic) NSNumber* height;
 
 + (instancetype)chatModelWithId:(NSUInteger)identifier
-                           name:(NSString*)name
+                         sender:(NSUInteger)sender
                        sendTime:(NSDate*)sendTime
                         message:(NSString*)message
                     messageType:(ChatMessageType)messageType;

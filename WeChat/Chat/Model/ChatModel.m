@@ -10,14 +10,14 @@
 
 @implementation ChatModel
 + (instancetype)chatModelWithId:(NSUInteger)identifier
-                           name:(NSString*)name
+                         sender:(NSUInteger)sender
                        sendTime:(NSDate*)sendTime
                         message:(NSString*)message
                     messageType:(ChatMessageType)messageType
 {
   ChatModel* model = [[ChatModel alloc] init];
   model.identifier = identifier;
-  model.name = name;
+  model.sender = sender;
   model.sendTime = sendTime;
   model.message = message;
   model.messageType = messageType;
