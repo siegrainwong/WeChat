@@ -44,25 +44,15 @@ BaseMessageTableViewCell ()
   /*
    NMB啊，在setModel的时候才调用buildCell或bindConstraints的话
    尼玛systemFittingSize是算不出大小的
-   尼玛啊。
-   你麻痹吧。。。
-
-   还有啊，尼玛不能在这里判断model !=
-   nil就return，那样只能算出第一行的高度
-   卧槽尼玛。
    */
   _model = model;
 
   /*
-   一定要两个判断都修改约束
-   因为缓存会认为每一行都有时间条
-
-   玛德坑死人了。
+   一定要两个判断都修改约束，不然就要多弄几个标识符...
    */
   if (model.sendTime != nil) {
-    self.sendTimeField.text = [DateUtil dateString:model.sendTime
-                                        withFormat:@"yyyy年MM月dd日 "
-                                                    "HH:mm"];
+    self.sendTimeField.text =
+      [DateUtil localizedShortDateString:model.sendTime];
     self.sendTimeField.hidden = false;
     [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
       make.top.offset(40);
