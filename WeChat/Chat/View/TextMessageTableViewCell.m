@@ -10,15 +10,27 @@
 #import "DateUtil.h"
 #import "InsetsTextField.h"
 #import "Masonry/Masonry/Masonry.h"
+#import "TTTAttributedLabel/TTTAttributedLabel/TTTAttributedLabel.h"
 #import "TextMessageTableViewCell.h"
+
+static UIFont* textFont;
 
 @interface
 TextMessageTableViewCell ()
-@property (strong, nonatomic) UITextView* messageTextView;
+/*
+ 不能用textView，就算关了用户交互和编辑滚动也还是比UILabel卡。
+ 当初不用Label就是因为它没有垂直对齐的方式才放弃的，现在只有用第三方了。
+ */
+//@property (strong, nonatomic) UITextView* messageTextView;
+@property (strong, nonatomic) TTTAttributedLabel* messageLabel;
 @end
 
 @implementation TextMessageTableViewCell
 #pragma mark - init
++ (void)initialize
+{
+  textFont = [UIFont systemFontOfSize:16];
+}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
               reuseIdentifier:(NSString*)reuseIdentifier
 {
@@ -28,7 +40,7 @@ TextMessageTableViewCell ()
 }
 - (void)setModel:(ChatModel*)model
 {
-  self.messageTextView.text = (NSString*)model.message;
+  self.messageLabel.text = (NSString*)model.message;
 
   [super setModel:model];
 }
@@ -37,24 +49,23 @@ TextMessageTableViewCell ()
 {
   [super buildCell];
 
-  self.messageTextView = [[UITextView alloc] init];
-  self.messageTextView.backgroundColor = [UIColor clearColor];
-  self.messageTextView.font = [UIFont systemFontOfSize:16];
-  self.messageTextView.editable = false;
-  self.messageTextView.scrollEnabled = false;
-  self.messageTextView.selectable = false;
-  [super.bubbleView addSubview:self.messageTextView];
+  self.messageLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+  self.messageLabel.backgroundColor = [UIColor clearColor];
+  self.messageLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
+  self.messageLabel.font = textFont;
+  self.messageLabel.numberOfLines = 0;
+  [super.bubbleView addSubview:self.messageLabel];
 }
 
 - (void)bindConstraints
 {
   [super bindConstraints];
 
-  [self.messageTextView mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.edges.insets(UIEdgeInsetsMake(5, 13, 10, 15));
+  [self.messageLabel mas_makeConstraints:^(MASConstraintMaker* make) {
+    make.edges.insets(UIEdgeInsetsMake(13, 20, 20, 20));
   }];
 }
-#pragma mark - longpress menu
+#pragma mark - longpress on bubble
 - (void)longPressOnBubble:(UILongPressGestureRecognizer*)press
 {
   if (press.state == UIGestureRecognizerStateBegan) {
@@ -95,7 +106,7 @@ TextMessageTableViewCell ()
 
 - (void)menuCopy:(id)sender
 {
-  [UIPasteboard generalPasteboard].string = self.messageTextView.text;
+  [UIPasteboard generalPasteboard].string = self.messageLabel.text;
 }
 
 - (void)menuRemove:(id)sender

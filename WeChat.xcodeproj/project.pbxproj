@@ -29,7 +29,6 @@
 		F9E02DEE1CBE24FC00B14B7E /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9E02DE11CBE24FC00B14B7E /* CAXException.cpp */; };
 		F9E02DEF1CBE24FC00B14B7E /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E02DE51CBE24FC00B14B7E /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F9E02DF01CBE24FC00B14B7E /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E02DE81CBE24FC00B14B7E /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		F9E02DF11CBE24FC00B14B7E /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F9E02DEB1CBE24FC00B14B7E /* TTTAttributedLabel.m */; };
 		F9E02DF31CBE27F100B14B7E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DF21CBE27F100B14B7E /* SystemConfiguration.framework */; };
 		F9E02DF51CBE280F00B14B7E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DF41CBE280F00B14B7E /* Foundation.framework */; };
 		F9E02DF71CBE281800B14B7E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DF61CBE281800B14B7E /* AVFoundation.framework */; };
@@ -166,8 +165,6 @@
 		F9E02DE51CBE24FC00B14B7E /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		F9E02DE71CBE24FC00B14B7E /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		F9E02DE81CBE24FC00B14B7E /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
-		F9E02DEA1CBE24FC00B14B7E /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
-		F9E02DEB1CBE24FC00B14B7E /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		F9E02DF21CBE27F100B14B7E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F9E02DF41CBE280F00B14B7E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F9E02DF61CBE281800B14B7E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -403,6 +400,7 @@
 		F9E02DD71CBE245800B14B7E /* TuringTest */ = {
 			isa = PBXGroup;
 			children = (
+				F9E02DDA1CBE24E600B14B7E /* ThridParty */,
 				F9E02E021CBE2AF500B14B7E /* header */,
 			);
 			name = TuringTest;
@@ -414,7 +412,6 @@
 				F9E02DDB1CBE24FC00B14B7E /* CoreAudioUtility */,
 				F9E02DE31CBE24FC00B14B7E /* JSONKit-master */,
 				F9E02DE61CBE24FC00B14B7E /* OpenUDID */,
-				F9E02DE91CBE24FC00B14B7E /* TTTAttributedLabel */,
 			);
 			name = ThridParty;
 			sourceTree = "<group>";
@@ -449,15 +446,6 @@
 				F9E02DE81CBE24FC00B14B7E /* OpenUDID.m */,
 			);
 			path = OpenUDID;
-			sourceTree = "<group>";
-		};
-		F9E02DE91CBE24FC00B14B7E /* TTTAttributedLabel */ = {
-			isa = PBXGroup;
-			children = (
-				F9E02DEA1CBE24FC00B14B7E /* TTTAttributedLabel.h */,
-				F9E02DEB1CBE24FC00B14B7E /* TTTAttributedLabel.m */,
-			);
-			path = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
 		F9E02E021CBE2AF500B14B7E /* header */ = {
@@ -498,7 +486,6 @@
 		F9E072D91CA90BD800468EDC /* WeChat */ = {
 			isa = PBXGroup;
 			children = (
-				F9E02DDA1CBE24E600B14B7E /* ThridParty */,
 				F91775A51CAA68A500557A45 /* Category */,
 				F91775A41CAA687F00557A45 /* Common */,
 				F91775A31CAA685800557A45 /* Utility */,
@@ -1064,7 +1051,6 @@
 				F9DA96021CB513E2008033A6 /* DateUtil.m in Sources */,
 				F90B416D1CABCE1E00ECF391 /* Constants.m in Sources */,
 				F9E02DED1CBE24FC00B14B7E /* CAStreamBasicDescription.cpp in Sources */,
-				F9E02DF11CBE24FC00B14B7E /* TTTAttributedLabel.m in Sources */,
 				F9E02DEE1CBE24FC00B14B7E /* CAXException.cpp in Sources */,
 				F9E073A11CA9161F00468EDC /* DiscoverViewController.m in Sources */,
 				F962F64C1CB53218005D73EA /* InsetsTextField.m in Sources */,
