@@ -119,8 +119,10 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 }
 - (void)loadDataBeforeTimeInterval:(NSTimeInterval)interval
 {
-  NSPredicate* predicate = [NSPredicate
-    predicateWithFormat:@"%@ <= %ul", kdb_Messages_sendTime, interval];
+  //在比较的时候coredata会将sendTime转换为NSNumber类型，这里就要在predicate中使用floatValue
+  NSPredicate* predicate =
+    [NSPredicate predicateWithFormat:@"%@.floatValue <= %ul",
+                                     kdb_Messages_sendTime, interval];
   //取出最后的n条数据
   NSArray* result =
     [[WeChat sharedManager] allRecordsSortByAttribute:kdb_Messages_sendTime
