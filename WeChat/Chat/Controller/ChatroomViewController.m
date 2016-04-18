@@ -6,13 +6,15 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
-#import "Message.h"
+#import "AppDelegate.h"
 #import "ChatroomViewController.h"
 #import "EditorView.h"
 #import "Masonry/Masonry/Masonry.h"
+#import "Messages.h"
 #import "TRRTuringRequestManager.h"
 #import "TextMessageTableViewCell.h"
 #import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
+#import "WeChat.h"
 
 static NSString* const kTuringAPIKey = @"7b698d636ca822b96f78a2fcef16a47f";
 static NSInteger const kEditorHeight = 50;
@@ -27,17 +29,18 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) TRRTuringAPIConfig* apiConfig;
 @property (strong, nonatomic) TRRTuringRequestManager* apiRequest;
 
-@property (strong, nonatomic) NSMutableArray<ChatModel*>* chatModelArray;
+@property (strong, nonatomic) NSMutableArray<Messages*>* chatModelArray;
 @end
 
 @implementation ChatroomViewController
 #pragma mark - accessors
 - (NSString*)chatroomIdentifier:(NSIndexPath*)indexPath
 {
-  return self.chatModelArray[indexPath.row].sender == 1 ? kCellIdentifierRight
-                                                        : kCellIdentifierLeft;
+  return [self.chatModelArray[indexPath.row].sender intValue] == 1
+           ? kCellIdentifierRight
+           : kCellIdentifierLeft;
 }
-- (NSMutableArray<ChatModel*>*)chatModelArray
+- (NSMutableArray<Messages*>*)chatModelArray
 {
   if (_chatModelArray == nil) {
     _chatModelArray = [NSMutableArray array];
@@ -157,19 +160,21 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   [weakSelf.editorView
     setMessageWasSend:^(id message, ChatMessageType messageType) {
 
-      __block ChatModel* robotModel =
-        [ChatModel chatModelWithId:2
-                            sender:2
-                          sendTime:nil
-                           message:nil
-                       messageType:ChatMessageTypeText];
+      __block Messages* robotModel =
+        [[WeChat sharedManager] insertRecordInRecordTable:@{
+          kdb_Messages_message : @"",
+          kdb_Messages_sender : @2,
+          kdb_Messages_sendTime : [NSDate date],
+          kdb_Messages_showSendTime : @true,
+          kdb_Messages_messageType : @(ChatMessageTypeText)
+        }];
       [weakSelf.apiConfig request_UserIDwithSuccessBlock:^(NSString* str) {
         [weakSelf.apiRequest request_OpenAPIWithInfo:message
           successBlock:^(NSDictionary* dict) {
             robotModel.message = dict[@"text"];
             robotModel.sendTime = [NSDate date];
-            [weakSelf.chatModelArray addObject:robotModel];
 
+            [weakSelf.chatModelArray addObject:robotModel];
             [self updateNewOneRowInTableview];
           }
           failBlock:^(TRRAPIErrorType errorType, NSString* infoStr) {
@@ -185,15 +190,17 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
           robotModel.sendTime = [NSDate date];
 
           [weakSelf.chatModelArray addObject:robotModel];
-
           [self updateNewOneRowInTableview];
         }];
 
-      ChatModel* meModel = [ChatModel chatModelWithId:1
-                                               sender:1
-                                             sendTime:[NSDate date]
-                                              message:message
-                                          messageType:ChatMessageTypeText];
+      Messages* meModel = [[WeChat sharedManager] insertRecordInRecordTable:@{
+        kdb_Messages_message : message,
+        kdb_Messages_sender : @1,
+        kdb_Messages_sendTime : [NSDate date],
+        kdb_Messages_showSendTime : @true,
+        kdb_Messages_messageType : @(ChatMessageTypeText)
+      }];
+
       [weakSelf.chatModelArray addObject:meModel];
       [self updateNewOneRowInTableview];
     }];
@@ -226,7 +233,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  Message* model = self.chatModelArray[indexPath.row];
+  Messages* model = self.chatModelArray[indexPath.row];
   CGFloat height = model.height.floatValue;
 
   if (!height) {
@@ -260,7 +267,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (void)configureCell:(BaseMessageTableViewCell*)cell
           atIndexPath:(NSIndexPath*)indexPath
 {
-  Message* model = self.chatModelArray[indexPath.row];
+  Messages* model = self.chatModelArray[indexPath.row];
   cell.model = model;
 }
 #pragma mark - scrollview

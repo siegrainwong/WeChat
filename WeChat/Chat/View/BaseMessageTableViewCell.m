@@ -7,7 +7,7 @@
 //
 
 #import "BaseMessageTableViewCell.h"
-#import "Message.h"
+#import "Messages.h"
 #import "DateUtil.h"
 #import "InsetsTextField.h"
 #import "Masonry/Masonry/Masonry.h"
@@ -39,7 +39,7 @@ BaseMessageTableViewCell ()
   }
   return self;
 }
-- (void)setModel:(Message*)model
+- (void)setModel:(Messages*)model
 {
   /*
    NMB啊，在setModel的时候才调用buildCell或bindConstraints的话
