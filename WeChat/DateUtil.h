@@ -21,4 +21,5 @@
                toFormat:(NSString*)toFormat;
 /*获取尽量短的本地化时间字符串*/
 + (NSString*)localizedShortDateString:(NSDate*)date;
++ (NSString*)localizedShortDateStringFromInterval:(NSTimeInterval)interval;
 @end

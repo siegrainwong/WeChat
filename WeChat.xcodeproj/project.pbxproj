@@ -13,7 +13,6 @@
 		F90B41701CABFF5400ECF391 /* SearchResultsController.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B416F1CABFF5400ECF391 /* SearchResultsController.m */; };
 		F90B41731CAC1DC700ECF391 /* NSString+Pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B41721CAC1DC700ECF391 /* NSString+Pinyin.m */; };
 		F90B41771CAD0C0E00ECF391 /* UIImage+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = F90B41761CAD0C0E00ECF391 /* UIImage+Common.m */; };
-		F91632761CC491FF00EA07DD /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = F91632751CC491FF00EA07DD /* Messages.m */; };
 		F91775A81CAA68D800557A45 /* UIImage+RandomImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F91775A71CAA68D800557A45 /* UIImage+RandomImage.m */; };
 		F91775AB1CAA7EF900557A45 /* ContactsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F91775AA1CAA7EF900557A45 /* ContactsTableViewCell.m */; };
 		F918F3FC1CB112B0003855FE /* EditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = F918F3FB1CB112B0003855FE /* EditorView.m */; };
@@ -21,6 +20,8 @@
 		F918F4011CB139DA003855FE /* ChatroomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F918F4001CB139DA003855FE /* ChatroomViewController.m */; };
 		F941930C1CC3A108000EC067 /* WeChat.m in Sources */ = {isa = PBXBuildFile; fileRef = F941930B1CC3A108000EC067 /* WeChat.m */; };
 		F962F64C1CB53218005D73EA /* InsetsTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F962F64B1CB53218005D73EA /* InsetsTextField.m */; };
+		F97BF8A01CC4E45C00403E47 /* Messages+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F97BF89D1CC4E45C00403E47 /* Messages+CoreDataProperties.m */; };
+		F97BF8A11CC4E45C00403E47 /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = F97BF89F1CC4E45C00403E47 /* Messages.m */; };
 		F9A2AD1E1CB65981002CE5F8 /* BaseMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2AD1D1CB65981002CE5F8 /* BaseMessageTableViewCell.m */; };
 		F9B263311CC3A0E20013EEF2 /* IQDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B2632F1CC3A0E20013EEF2 /* IQDatabaseManager.m */; };
 		F9C9CBD81CB254A900ABF0E0 /* TextMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C9CBD71CB254A900ABF0E0 /* TextMessageTableViewCell.m */; };
@@ -136,7 +137,6 @@
 		F90B41721CAC1DC700ECF391 /* NSString+Pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Pinyin.m"; sourceTree = "<group>"; };
 		F90B41751CAD0C0E00ECF391 /* UIImage+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Common.h"; sourceTree = "<group>"; };
 		F90B41761CAD0C0E00ECF391 /* UIImage+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Common.m"; sourceTree = "<group>"; };
-		F91632751CC491FF00EA07DD /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
 		F91775A61CAA68D800557A45 /* UIImage+RandomImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+RandomImage.h"; sourceTree = "<group>"; };
 		F91775A71CAA68D800557A45 /* UIImage+RandomImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+RandomImage.m"; sourceTree = "<group>"; };
 		F91775A91CAA7EF900557A45 /* ContactsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsTableViewCell.h; path = Addressbook/View/ContactsTableViewCell.h; sourceTree = "<group>"; };
@@ -149,9 +149,12 @@
 		F94193091CC3A108000EC067 /* WechatConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatConstants.h; sourceTree = "<group>"; };
 		F941930A1CC3A108000EC067 /* WeChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChat.h; sourceTree = "<group>"; };
 		F941930B1CC3A108000EC067 /* WeChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChat.m; sourceTree = "<group>"; };
-		F952E6621CC4BB2500331543 /* Messages.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
 		F962F64A1CB53218005D73EA /* InsetsTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InsetsTextField.h; sourceTree = "<group>"; };
 		F962F64B1CB53218005D73EA /* InsetsTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsetsTextField.m; sourceTree = "<group>"; };
+		F97BF89C1CC4E45C00403E47 /* Messages+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Messages+CoreDataProperties.h"; sourceTree = "<group>"; };
+		F97BF89D1CC4E45C00403E47 /* Messages+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Messages+CoreDataProperties.m"; sourceTree = "<group>"; };
+		F97BF89E1CC4E45C00403E47 /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
+		F97BF89F1CC4E45C00403E47 /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
 		F9A2AD1C1CB65981002CE5F8 /* BaseMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMessageTableViewCell.h; sourceTree = "<group>"; };
 		F9A2AD1D1CB65981002CE5F8 /* BaseMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMessageTableViewCell.m; sourceTree = "<group>"; };
 		F9B2632E1CC3A0E20013EEF2 /* IQDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQDatabaseManager.h; sourceTree = "<group>"; };
@@ -712,8 +715,10 @@
 		F9E0738A1CA9155900468EDC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				F952E6621CC4BB2500331543 /* Messages.h */,
-				F91632751CC491FF00EA07DD /* Messages.m */,
+				F97BF89C1CC4E45C00403E47 /* Messages+CoreDataProperties.h */,
+				F97BF89D1CC4E45C00403E47 /* Messages+CoreDataProperties.m */,
+				F97BF89E1CC4E45C00403E47 /* Messages.h */,
+				F97BF89F1CC4E45C00403E47 /* Messages.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1078,10 +1083,12 @@
 				F9E0739B1CA9160D00468EDC /* ContactsViewController.m in Sources */,
 				F9E02DF01CBE24FC00B14B7E /* OpenUDID.m in Sources */,
 				F9A2AD1E1CB65981002CE5F8 /* BaseMessageTableViewCell.m in Sources */,
+				F97BF8A01CC4E45C00403E47 /* Messages+CoreDataProperties.m in Sources */,
 				F9DA96021CB513E2008033A6 /* DateUtil.m in Sources */,
 				F90B416D1CABCE1E00ECF391 /* Constants.m in Sources */,
 				F9E02DED1CBE24FC00B14B7E /* CAStreamBasicDescription.cpp in Sources */,
 				F9E02DEE1CBE24FC00B14B7E /* CAXException.cpp in Sources */,
+				F97BF8A11CC4E45C00403E47 /* Messages.m in Sources */,
 				F9E073A11CA9161F00468EDC /* DiscoverViewController.m in Sources */,
 				F962F64C1CB53218005D73EA /* InsetsTextField.m in Sources */,
 				F9E072DF1CA90BD800468EDC /* AppDelegate.m in Sources */,
@@ -1097,7 +1104,6 @@
 				F9B263311CC3A0E20013EEF2 /* IQDatabaseManager.m in Sources */,
 				F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */,
 				F90B41771CAD0C0E00ECF391 /* UIImage+Common.m in Sources */,
-				F91632761CC491FF00EA07DD /* Messages.m in Sources */,
 				F9E072E81CA90BD800468EDC /* WeChat.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

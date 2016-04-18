@@ -18,6 +18,8 @@
 
 static NSString* const kTuringAPIKey = @"7b698d636ca822b96f78a2fcef16a47f";
 static NSInteger const kEditorHeight = 50;
+static NSUInteger const kShowSendTimeInterval = 60;
+static NSUInteger const kFetchLimit = 20;
 
 @interface
 ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -30,15 +32,23 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) TRRTuringRequestManager* apiRequest;
 
 @property (strong, nonatomic) NSMutableArray<Messages*>* chatModelArray;
+
+@property (strong, nonatomic) NSManagedObjectContext* context;
 @end
 
 @implementation ChatroomViewController
 #pragma mark - accessors
+- (NSManagedObjectContext*)context
+{
+  if (_context == nil) {
+    _context = [[WeChat sharedManager] managedObjectContext];
+  }
+  return _context;
+}
 - (NSString*)chatroomIdentifier:(NSIndexPath*)indexPath
 {
-  return [self.chatModelArray[indexPath.row].sender intValue] == 1
-           ? kCellIdentifierRight
-           : kCellIdentifierLeft;
+  return self.chatModelArray[indexPath.row].sender == 1 ? kCellIdentifierRight
+                                                        : kCellIdentifierLeft;
 }
 - (NSMutableArray<Messages*>*)chatModelArray
 {
@@ -104,7 +114,34 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   [self.tableView registerClass:[TextMessageTableViewCell class]
          forCellReuseIdentifier:kCellIdentifierRight];
 
+  [self loadDataBeforeTimeInterval:[NSDate timeIntervalSinceReferenceDate]];
   [self.view addSubview:self.tableView];
+}
+- (void)loadDataBeforeTimeInterval:(NSTimeInterval)interval
+{
+  NSPredicate* predicate = [NSPredicate
+    predicateWithFormat:@"%@ <= %ul", kdb_Messages_sendTime, interval];
+  //取出最后的n条数据
+  NSArray* result =
+    [[WeChat sharedManager] allRecordsSortByAttribute:kdb_Messages_sendTime
+                                       wherePredicate:predicate
+                                            ascending:false
+                                           fetchLimit:kFetchLimit];
+
+  //取出来的数据是倒序的，需要再排成顺序
+  result = [result sortedArrayUsingComparator:^NSComparisonResult(
+                     Messages* obj1, Messages* obj2) {
+    if (obj1.sendTime < obj2.sendTime)
+      return (NSComparisonResult)
+        NSOrderedAscending; // left obj should bigger than right obj
+    else if (obj1.sendTime > obj2.sendTime)
+      return (NSComparisonResult)
+        NSOrderedDescending; // left obj should smaller than right obj
+
+    return (NSComparisonResult)NSOrderedSame;
+  }];
+
+  [self.chatModelArray addObjectsFromArray:result];
 }
 - (void)buildEditorView
 {
@@ -160,44 +197,43 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   [weakSelf.editorView
     setMessageWasSend:^(id message, ChatMessageType messageType) {
 
-      __block Messages* robotModel =
-        [[WeChat sharedManager] insertRecordInRecordTable:@{
-          kdb_Messages_message : @"",
-          kdb_Messages_sender : @2,
-          kdb_Messages_sendTime : [NSDate date],
-          kdb_Messages_showSendTime : @true,
-          kdb_Messages_messageType : @(ChatMessageTypeText)
-        }];
-      [weakSelf.apiConfig request_UserIDwithSuccessBlock:^(NSString* str) {
-        [weakSelf.apiRequest request_OpenAPIWithInfo:message
-          successBlock:^(NSDictionary* dict) {
-            robotModel.message = dict[@"text"];
-            robotModel.sendTime = [NSDate date];
+      __block Messages* robotModel = (Messages*)[NSEntityDescription
+        insertNewObjectForEntityForName:kdb_Messages
+                 inManagedObjectContext:self.context];
+      robotModel.sender = 2;
+      robotModel.messageType = ChatMessageTypeText;
 
-            [weakSelf.chatModelArray addObject:robotModel];
-            [self updateNewOneRowInTableview];
-          }
-          failBlock:^(TRRAPIErrorType errorType, NSString* infoStr) {
-            robotModel.message = infoStr;
-            robotModel.sendTime = [NSDate date];
-
-            [weakSelf.chatModelArray addObject:robotModel];
-            [self updateNewOneRowInTableview];
-          }];
-      }
-        failBlock:^(TRRAPIErrorType errorType, NSString* infoStr) {
-          robotModel.message = infoStr;
-          robotModel.sendTime = [NSDate date];
+      void (^justBlock)(NSDictionary*, TRRAPIErrorType, NSString*) =
+        ^(NSDictionary* dict, TRRAPIErrorType errorType, NSString* infoStr) {
+          robotModel.message = dict == nil ? infoStr : dict[@"text"];
+          NSDate* date = [NSDate date];
+          robotModel.sendTime = date.timeIntervalSinceReferenceDate;
+          robotModel.showSendTime = [self needsShowSendTime:date];
+          [[WeChat sharedManager] save];
 
           [weakSelf.chatModelArray addObject:robotModel];
           [self updateNewOneRowInTableview];
+        };
+
+      [weakSelf.apiConfig request_UserIDwithSuccessBlock:^(NSString* str) {
+        [weakSelf.apiRequest request_OpenAPIWithInfo:message
+          successBlock:^(NSDictionary* dict) {
+            justBlock(dict, 0, nil);
+          }
+          failBlock:^(TRRAPIErrorType errorType, NSString* infoStr) {
+            justBlock(nil, errorType, infoStr);
+          }];
+      }
+        failBlock:^(TRRAPIErrorType errorType, NSString* infoStr) {
+          justBlock(nil, errorType, infoStr);
         }];
 
+      NSDate* date = [NSDate date];
       Messages* meModel = [[WeChat sharedManager] insertRecordInRecordTable:@{
         kdb_Messages_message : message,
         kdb_Messages_sender : @1,
-        kdb_Messages_sendTime : [NSDate date],
-        kdb_Messages_showSendTime : @true,
+        kdb_Messages_sendTime : date,
+        kdb_Messages_showSendTime : @([self needsShowSendTime:date]),
         kdb_Messages_messageType : @(ChatMessageTypeText)
       }];
 
@@ -234,7 +270,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
   Messages* model = self.chatModelArray[indexPath.row];
-  CGFloat height = model.height.floatValue;
+  CGFloat height = model.height;
 
   if (!height) {
     height = [self.tableView
@@ -244,7 +280,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
                          cell.model = model;
                        }];
 
-    model.height = @(height);
+    model.height = height;
   }
 
   return height;
@@ -291,6 +327,14 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
                                    inSection:0]
           atScrollPosition:UITableViewScrollPositionBottom
                   animated:animated];
+}
+- (BOOL)needsShowSendTime:(NSDate*)date
+{
+  NSTimeInterval lastRecordDatetimeInterval =
+    self.chatModelArray.lastObject.sendTime;
+
+  return date.timeIntervalSinceReferenceDate - lastRecordDatetimeInterval >=
+         kShowSendTimeInterval;
 }
 - (void)updateNewOneRowInTableview
 {

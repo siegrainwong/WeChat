@@ -11,11 +11,17 @@
 - (NSArray*)allRecordsSortByAttribute:(NSString*)attribute
                                 where:(NSString*)key
                              contains:(id)value;
+- (NSArray*)allRecordsSortByAttribute:(NSString*)attribute
+                       wherePredicate:(NSPredicate*)predicate
+                            ascending:(BOOL)ascending
+                           fetchLimit:(NSUInteger)limit;
 
 - (Messages*)insertRecordInRecordTable:(NSDictionary*)recordAttributes;
 - (Messages*)insertUpdateRecordInRecordTable:(NSDictionary*)recordAttributes;
+
 - (Messages*)updateRecord:(Messages*)record
             inRecordTable:(NSDictionary*)recordAttributes;
+
 - (BOOL)deleteTableRecord:(Messages*)record;
 
 - (BOOL)deleteAllTableRecord;

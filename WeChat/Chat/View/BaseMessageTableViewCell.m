@@ -7,10 +7,10 @@
 //
 
 #import "BaseMessageTableViewCell.h"
-#import "Messages.h"
 #import "DateUtil.h"
 #import "InsetsTextField.h"
 #import "Masonry/Masonry/Masonry.h"
+#import "Messages.h"
 
 static NSInteger const kAvatarSize = 40;
 static NSInteger const kAvatarMarginH = 10;
@@ -52,7 +52,7 @@ BaseMessageTableViewCell ()
    */
   if (model.showSendTime) {
     self.sendTimeField.text =
-      [DateUtil localizedShortDateString:model.sendTime];
+      [DateUtil localizedShortDateStringFromInterval:model.sendTime];
     self.sendTimeField.hidden = false;
     [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
       make.top.offset(40);

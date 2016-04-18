@@ -1,27 +1,22 @@
 //
-//  ChatModel.h
-//  WeChat
+//  Messages.h
+//  
 //
-//  Created by Siegrain on 16/4/4.
-//  Copyright © 2016年 siegrain. weChat. All rights reserved.
+//  Created by Siegrain on 16/4/18.
+//
 //
 
-#import "EditorView.h"
-#import "WechatConstants.h"
+#import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface Messages : NSManagedObject
 
-@property (assign, nonatomic) NSNumber* sender;
-@property (strong, nonatomic) NSDate* sendTime;
-@property (strong, nonatomic) NSString* message;
-@property (assign, nonatomic) NSNumber* messageType;
-@property (assign, nonatomic) NSNumber* showSendTime;
-@property (strong, nonatomic) NSNumber* height;
+// Insert code here to declare functionality of your managed object subclass
 
-+ (instancetype)messageWithSender:(NSUInteger)sender
-                         sendTime:(NSDate*)sendTime
-                          message:(NSString*)message
-                      messageType:(ChatMessageType)messageType;
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "Messages+CoreDataProperties.h"

@@ -16,7 +16,7 @@
   return modelURL;
 }
 
-#pragma mark - RecordTable
+#pragma mark - select
 - (NSArray*)allRecordsSortByAttribute:(NSString*)attribute
 {
   NSSortDescriptor* sortDescriptor = nil;
@@ -47,17 +47,31 @@
 - (NSArray*)allRecordsSortByAttribute:(NSString*)attribute
                        wherePredicate:(NSPredicate*)predicate
                             ascending:(BOOL)ascending
+                           fetchLimit:(NSUInteger)limit
 {
-  NSSortDescriptor* sortDescriptor = nil;
+  NSFetchRequest* request = [[NSFetchRequest alloc] init];
+  request.entity =
+    [NSEntityDescription entityForName:NSStringFromClass([Messages class])
+                inManagedObjectContext:self.managedObjectContext];
 
   if ([attribute length])
-    sortDescriptor =
-      [[NSSortDescriptor alloc] initWithKey:attribute ascending:ascending];
+    request.sortDescriptors =
+      @[ [[NSSortDescriptor alloc] initWithKey:attribute ascending:false] ];
 
-  return [self allObjectsFromTable:NSStringFromClass([Messages class])
-                    wherePredicate:predicate
-                    sortDescriptor:sortDescriptor];
+  if (predicate)
+    request.predicate = predicate;
+
+  if (limit > 0)
+    request.fetchLimit = limit;
+
+  __block NSArray* objects = nil;
+  [self.managedObjectContext performBlockAndWait:^{
+    objects = [self.managedObjectContext executeFetchRequest:request error:nil];
+  }];
+
+  return objects;
 }
+#pragma mark - insert&update
 - (Messages*)insertRecordInRecordTable:(NSDictionary*)recordAttribute
 {
   return (Messages*)[self
@@ -79,12 +93,13 @@
 {
   return (Messages*)[self updateRecord:record withAttribute:recordAttribute];
 }
-
+#pragma mark - delete
 - (BOOL)deleteTableRecord:(Messages*)record
 {
   return [self deleteRecord:record];
 }
 
+#pragma mark -
 - (BOOL)deleteAllTableRecord
 {
   return [self flushTable:NSStringFromClass([Messages class])];

@@ -50,4 +50,9 @@
   else
     return [self dateString:date withFormat:@"yyyy年MM月dd日 HH:mm"];
 }
++ (NSString*)localizedShortDateStringFromInterval:(NSTimeInterval)interval
+{
+  return [self localizedShortDateString:
+                 [NSDate dateWithTimeIntervalSinceReferenceDate:interval]];
+}
 @end
