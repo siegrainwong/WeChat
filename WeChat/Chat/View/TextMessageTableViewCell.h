@@ -8,7 +8,7 @@
 
 #import "BaseMessageTableViewCell.h"
 
-@class ChatModel;
+@class Message;
 
 @interface TextMessageTableViewCell : BaseMessageTableViewCell
 

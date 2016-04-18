@@ -6,7 +6,7 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
-#import "ChatModel.h"
+#import "Message.h"
 #import "DateUtil.h"
 #import "InsetsTextField.h"
 #import "Masonry/Masonry/Masonry.h"
@@ -38,7 +38,7 @@ TextMessageTableViewCell ()
   }
   return self;
 }
-- (void)setModel:(ChatModel*)model
+- (void)setModel:(Message*)model
 {
   self.messageLabel.text = (NSString*)model.message;
 

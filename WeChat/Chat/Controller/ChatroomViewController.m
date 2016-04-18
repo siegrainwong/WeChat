@@ -6,7 +6,7 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
-#import "ChatModel.h"
+#import "Message.h"
 #import "ChatroomViewController.h"
 #import "EditorView.h"
 #import "Masonry/Masonry/Masonry.h"
@@ -226,7 +226,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  ChatModel* model = self.chatModelArray[indexPath.row];
+  Message* model = self.chatModelArray[indexPath.row];
   CGFloat height = model.height.floatValue;
 
   if (!height) {
@@ -260,7 +260,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (void)configureCell:(BaseMessageTableViewCell*)cell
           atIndexPath:(NSIndexPath*)indexPath
 {
-  ChatModel* model = self.chatModelArray[indexPath.row];
+  Message* model = self.chatModelArray[indexPath.row];
   cell.model = model;
 }
 #pragma mark - scrollview

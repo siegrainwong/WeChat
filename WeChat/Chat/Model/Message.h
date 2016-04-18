@@ -10,7 +10,7 @@
 #import "JSONModel/JSONModel/JSONModel/JSONModel.h"
 #import <UIKit/UIKit.h>
 
-@interface ChatModel : JSONModel
+@interface Message : JSONModel
 @property (assign, nonatomic) NSUInteger identifier;
 @property (assign, nonatomic) NSUInteger sender;
 @property (strong, nonatomic) NSDate* sendTime;

@@ -5,7 +5,7 @@
 #ifndef DatabaseManager_MyDatabaseConstants_h
 #define DatabaseManager_MyDatabaseConstants_h
 
-#import "ChatModel.h"
+#import "Message.h"
 #import <Foundation/Foundation.h>
 
 static NSString* const kdb_Messages = @"Messages";

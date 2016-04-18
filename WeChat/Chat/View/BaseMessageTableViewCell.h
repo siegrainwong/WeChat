@@ -20,11 +20,11 @@ typedef NS_ENUM(NSUInteger, MessageAlignement) {
   MessageAlignementRight
 };
 
-@class ChatModel;
+@class Message;
 
 @interface BaseMessageTableViewCell : UITableViewCell
 @property (assign, nonatomic) MessageAlignement alignement;
-@property (strong, nonatomic) ChatModel* model;
+@property (strong, nonatomic) Message* model;
 
 @property (strong, nonatomic) UIImageView* bubbleView;
 

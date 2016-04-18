@@ -29,7 +29,7 @@
     sortDescriptor =
       [[NSSortDescriptor alloc] initWithKey:attribute ascending:YES];
 
-  return [self allObjectsFromTable:NSStringFromClass([ChatModel class])
+  return [self allObjectsFromTable:NSStringFromClass([Message class])
                     sortDescriptor:sortDescriptor];
 }
 
@@ -43,7 +43,7 @@
     sortDescriptor =
       [[NSSortDescriptor alloc] initWithKey:attribute ascending:YES];
 
-  return [self allObjectsFromTable:NSStringFromClass([ChatModel class])
+  return [self allObjectsFromTable:NSStringFromClass([Message class])
                              where:key
                           contains:value
                     sortDescriptor:sortDescriptor];
@@ -71,14 +71,14 @@
   return (RecordTable*)[self updateRecord:record withAttribute:recordAttribute];
 }
 
-- (BOOL)deleteTableRecord:(RecordTable*)record
+- (BOOL)deleteTableRecord:(Message*)record
 {
   return [self deleteRecord:record];
 }
 
 - (BOOL)deleteAllTableRecord
 {
-  return [self flushTable:NSStringFromClass([RecordTable class])];
+  return [self flushTable:NSStringFromClass([Message class])];
 }
 
 #pragma mark - Settings

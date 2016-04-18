@@ -6,16 +6,16 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
-#import "ChatModel.h"
+#import "Message.h"
 
-@implementation ChatModel
+@implementation Message
 + (instancetype)chatModelWithId:(NSUInteger)identifier
                          sender:(NSUInteger)sender
                        sendTime:(NSDate*)sendTime
                         message:(NSString*)message
                     messageType:(ChatMessageType)messageType
 {
-  ChatModel* model = [[ChatModel alloc] init];
+  Message* model = [[Message alloc] init];
   model.identifier = identifier;
   model.sender = sender;
   model.sendTime = sendTime;
