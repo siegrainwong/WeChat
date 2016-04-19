@@ -22,4 +22,7 @@
 /*获取尽量短的本地化时间字符串*/
 + (NSString*)localizedShortDateString:(NSDate*)date;
 + (NSString*)localizedShortDateStringFromInterval:(NSTimeInterval)interval;
+
+/*将格林尼治时间转换为当地时间*/
++ (NSDate*)localizedDateFromDate:(NSDate*)date;
 @end

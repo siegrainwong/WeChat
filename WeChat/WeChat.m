@@ -2,6 +2,7 @@
 //  MyDatabaseManager.m
 //  DatabaseManager
 
+#import "DateUtil.h"
 #import "IQDatabaseManagerSubclass.h"
 #import "WeChat.h"
 
@@ -70,6 +71,39 @@
   }];
 
   return objects;
+}
+- (NSArray*)messagesBeforeTimeInterval:(NSTimeInterval)interval
+                            fetchLimit:(NSUInteger)fetchLimit
+{
+  NSDate* date = [NSDate dateWithTimeIntervalSinceReferenceDate:interval];
+  /*
+   Mark:
+   这里的字段类型本来就是Date，所以直接传个NSDate进去就行了
+   还有就是开了SQLite调试之后控制台输出的参数值本来就是个问号，要看参数值得把
+   -com.apple.CoreData.SQLDebug 1 调成 3
+   */
+  NSPredicate* predicate =
+    [NSPredicate predicateWithFormat:@"(sendTime < %@)", date];
+  //取出最后的n条数据
+  NSArray* result = [self allRecordsSortByAttribute:kdb_Messages_sendTime
+                                     wherePredicate:predicate
+                                          ascending:false
+                                         fetchLimit:fetchLimit];
+
+  //取出来的数据是倒序的，需要再排成顺序
+  result = [result sortedArrayUsingComparator:^NSComparisonResult(
+                     Messages* obj1, Messages* obj2) {
+    if (obj1.sendTime < obj2.sendTime)
+      return (NSComparisonResult)
+        NSOrderedAscending; // left obj should bigger than right obj
+    else if (obj1.sendTime > obj2.sendTime)
+      return (NSComparisonResult)
+        NSOrderedDescending; // left obj should smaller than right obj
+
+    return (NSComparisonResult)NSOrderedSame;
+  }];
+
+  return result;
 }
 #pragma mark - insert&update
 - (Messages*)insertRecordInRecordTable:(NSDictionary*)recordAttribute

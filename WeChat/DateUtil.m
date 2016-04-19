@@ -36,6 +36,14 @@
 {
   return [self dateString:[NSDate date] withFormat:@"yyyyMMddHHmmssfff"];
 }
++ (NSDate*)localizedDateFromDate:(NSDate*)date
+{
+  NSTimeZone* zone = [NSTimeZone systemTimeZone];
+  NSInteger interval = [zone secondsFromGMTForDate:date];
+  NSDate* localeDate = [date dateByAddingTimeInterval:interval];
+
+  return localeDate;
+}
 + (NSString*)localizedShortDateString:(NSDate*)date
 {
   NSUInteger intervalOfDay = 24 * 60 * 60;

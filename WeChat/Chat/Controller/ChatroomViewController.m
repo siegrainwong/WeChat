@@ -19,7 +19,7 @@
 static NSString* const kTuringAPIKey = @"7b698d636ca822b96f78a2fcef16a47f";
 static NSInteger const kEditorHeight = 50;
 static NSUInteger const kShowSendTimeInterval = 60;
-static NSUInteger const kFetchLimit = 20;
+static NSUInteger const kFetchLimit = 15;
 
 @interface
 ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -34,6 +34,8 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray<Messages*>* chatModelArray;
 
 @property (strong, nonatomic) NSManagedObjectContext* context;
+
+@property (assign, nonatomic) BOOL isLoading;
 @end
 
 @implementation ChatroomViewController
@@ -114,37 +116,14 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   [self.tableView registerClass:[TextMessageTableViewCell class]
          forCellReuseIdentifier:kCellIdentifierRight];
 
-  [self loadDataBeforeTimeInterval:[NSDate timeIntervalSinceReferenceDate]];
+  [self.chatModelArray
+    addObjectsFromArray:
+      [[WeChat sharedManager]
+        messagesBeforeTimeInterval:[NSDate timeIntervalSinceReferenceDate]
+                        fetchLimit:kFetchLimit]];
   [self.view addSubview:self.tableView];
 }
-- (void)loadDataBeforeTimeInterval:(NSTimeInterval)interval
-{
-  //在比较的时候coredata会将sendTime转换为NSNumber类型，这里就要在predicate中使用floatValue
-  NSPredicate* predicate =
-    [NSPredicate predicateWithFormat:@"%@.floatValue <= %ul",
-                                     kdb_Messages_sendTime, interval];
-  //取出最后的n条数据
-  NSArray* result =
-    [[WeChat sharedManager] allRecordsSortByAttribute:kdb_Messages_sendTime
-                                       wherePredicate:predicate
-                                            ascending:false
-                                           fetchLimit:kFetchLimit];
 
-  //取出来的数据是倒序的，需要再排成顺序
-  result = [result sortedArrayUsingComparator:^NSComparisonResult(
-                     Messages* obj1, Messages* obj2) {
-    if (obj1.sendTime < obj2.sendTime)
-      return (NSComparisonResult)
-        NSOrderedAscending; // left obj should bigger than right obj
-    else if (obj1.sendTime > obj2.sendTime)
-      return (NSComparisonResult)
-        NSOrderedDescending; // left obj should smaller than right obj
-
-    return (NSComparisonResult)NSOrderedSame;
-  }];
-
-  [self.chatModelArray addObjectsFromArray:result];
-}
 - (void)buildEditorView
 {
   if (self.editorView != nil)
@@ -313,6 +292,12 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
   [self endTextEditing];
 }
+- (void)scrollViewDidScroll:(UIScrollView*)scrollView
+{
+  //这个tableview的contentOffsetY是从-64开始的
+  if (scrollView.contentOffset.y < -150)
+    [self updateHistoryDataInTableview];
+}
 #pragma mark -
 - (void)endTextEditing
 {
@@ -349,5 +334,39 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   [self.tableView scrollToRowAtIndexPath:insertion
                         atScrollPosition:UITableViewScrollPositionBottom
                                 animated:true];
+}
+- (void)updateHistoryDataInTableview
+{
+  if (self.isLoading)
+    return;
+
+  self.isLoading = true;
+
+  //  for (Messages* msg in self.chatModelArray) {
+  //    NSLog(@"%@", [NSDate
+  //    dateWithTimeIntervalSinceReferenceDate:msg.sendTime]);
+  //  }
+  dispatch_after(
+    dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)),
+    dispatch_get_main_queue(), ^{
+      NSArray* datas = [[WeChat sharedManager]
+        messagesBeforeTimeInterval:self.chatModelArray.firstObject.sendTime
+                        fetchLimit:kFetchLimit];
+      [self.chatModelArray
+        insertObjects:datas
+            atIndexes:[NSIndexSet
+                        indexSetWithIndexesInRange:NSMakeRange(0,
+                                                               datas.count)]];
+      NSMutableArray* indexPaths = [NSMutableArray array];
+      for (NSUInteger i = 0; i < datas.count; i++) {
+        [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
+      }
+
+      [self.tableView beginUpdates];
+      [self.tableView insertRowsAtIndexPaths:indexPaths
+                            withRowAnimation:UITableViewRowAnimationNone];
+      [self.tableView endUpdates];
+      self.isLoading = false;
+    });
 }
 @end

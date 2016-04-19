@@ -15,6 +15,8 @@
                        wherePredicate:(NSPredicate*)predicate
                             ascending:(BOOL)ascending
                            fetchLimit:(NSUInteger)limit;
+- (NSArray*)messagesBeforeTimeInterval:(NSTimeInterval)interval
+                            fetchLimit:(NSUInteger)fetchLimit;
 
 - (Messages*)insertRecordInRecordTable:(NSDictionary*)recordAttributes;
 - (Messages*)insertUpdateRecordInRecordTable:(NSDictionary*)recordAttributes;
