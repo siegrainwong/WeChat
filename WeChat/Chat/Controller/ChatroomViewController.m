@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ChatroomViewController.h"
 #import "EditorView.h"
+#import "MJRefresh/MJRefresh/MJRefresh.h"
 #import "Masonry/Masonry/Masonry.h"
 #import "Messages.h"
 #import "TRRTuringRequestManager.h"
@@ -121,6 +122,16 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
       [[WeChat sharedManager]
         messagesBeforeTimeInterval:[NSDate timeIntervalSinceReferenceDate]
                         fetchLimit:kFetchLimit]];
+
+  //下拉刷新控件
+  MJRefreshNormalHeader* header =
+    [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+      [self updateHistoryDataInTableview];
+    }];
+  header.lastUpdatedTimeLabel.hidden = true;
+  header.stateLabel.hidden = true;
+  self.tableView.mj_header = header;
+
   [self.view addSubview:self.tableView];
 }
 
@@ -292,12 +303,6 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
   [self endTextEditing];
 }
-- (void)scrollViewDidScroll:(UIScrollView*)scrollView
-{
-  //这个tableview的contentOffsetY是从-64开始的
-  if (scrollView.contentOffset.y < -150)
-    [self updateHistoryDataInTableview];
-}
 #pragma mark -
 - (void)endTextEditing
 {
@@ -322,6 +327,10 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 
   return date.timeIntervalSinceReferenceDate - lastRecordDatetimeInterval >=
          kShowSendTimeInterval;
+}
+- (void)scrollViewDidScroll:(UIScrollView*)scrollView
+{
+  NSLog(@"%f", scrollView.contentOffset.y);
 }
 - (void)updateNewOneRowInTableview
 {
@@ -362,10 +371,34 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
         [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
       }
 
+      /*
+       Mark:
+       使用beginUpdates更新的row就算指定了AnimationNone，也会有一个莫名其妙的SlideDown的动画
+       必须全局禁止动画，更新后再恢复...蛇精病
+       */
+      //      CGFloat oldHeight = self.tableView.contentSize.height;
+      CGFloat offsetY = self.tableView.contentOffset.y;
+      //      NSLog(@"%f %f", oldHeight, offsetY);
+
+      NSLog(@"%f %f", self.tableView.contentSize.height,
+            self.tableView.contentOffset.y);
+      [UIView setAnimationsEnabled:false];
       [self.tableView beginUpdates];
       [self.tableView insertRowsAtIndexPaths:indexPaths
                             withRowAnimation:UITableViewRowAnimationNone];
       [self.tableView endUpdates];
+      [UIView setAnimationsEnabled:true];
+      NSLog(@"%f %f", self.tableView.contentSize.height,
+            self.tableView.contentOffset.y);
+
+      //      CGFloat increasedHeight = self.tableView.contentSize.height -
+      //      oldHeight;
+      //      self.tableView.contentOffset = CGPointMake(0, offsetY +
+      //      increasedHeight);
+      //      NSLog(@"%f", offsetY + increasedHeight);
+
+      //刷新结束后通知菊花停止转动
+      [self.tableView.mj_header endRefreshing];
       self.isLoading = false;
     });
 }

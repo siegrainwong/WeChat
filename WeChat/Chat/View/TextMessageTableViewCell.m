@@ -6,10 +6,10 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
-#import "Messages.h"
 #import "DateUtil.h"
 #import "InsetsTextField.h"
 #import "Masonry/Masonry/Masonry.h"
+#import "Messages.h"
 #import "TTTAttributedLabel/TTTAttributedLabel/TTTAttributedLabel.h"
 #import "TextMessageTableViewCell.h"
 
@@ -62,7 +62,12 @@ TextMessageTableViewCell ()
   [super bindConstraints];
 
   [self.messageLabel mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.edges.insets(UIEdgeInsetsMake(13, 20, 20, 20));
+    make.top.offset(13);
+    make.left.offset(20);
+    make.right.offset(-20);
+    make.bottom.greaterThanOrEqualTo(super.bubbleView).offset(20);
+    /*下边距不能定死，定死要报错*/
+    // make.edges.insets(UIEdgeInsetsMake(13, 20, 20, 20));
   }];
 }
 #pragma mark - longpress on bubble
