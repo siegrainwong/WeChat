@@ -62,12 +62,15 @@ TextMessageTableViewCell ()
   [super bindConstraints];
 
   [self.messageLabel mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.top.offset(13);
-    make.left.offset(20);
-    make.right.offset(-20);
-    make.bottom.greaterThanOrEqualTo(super.bubbleView).offset(20);
-    /*下边距不能定死，定死要报错*/
-    // make.edges.insets(UIEdgeInsetsMake(13, 20, 20, 20));
+    //    make.top.offset(13);
+    //    make.left.offset(20);
+    //    make.right.offset(-20);
+    //        make.bottom.equalTo(super.bubbleView).offset(-20);
+    /*
+                 下边距不能定死，定死要报错
+                 好吧我认了..定不定死都要报错，不过报错之后约束也不会崩，就无视它好了。
+                 */
+    make.edges.insets(UIEdgeInsetsMake(13, 20, 20, 20));
   }];
 }
 #pragma mark - longpress on bubble

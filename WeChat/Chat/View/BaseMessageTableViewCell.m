@@ -111,7 +111,7 @@ BaseMessageTableViewCell ()
       make.trailing.offset(-kAvatarMarginH);
   }];
   [self.bubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
-    make.bottom.offset(-5);
+    make.bottom.lessThanOrEqualTo(self.contentView).offset(-5);
     make.top.equalTo(self.avatarImageView).offset(-2);
     make.width.lessThanOrEqualTo(self.contentView);
 

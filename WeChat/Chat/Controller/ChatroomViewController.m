@@ -322,6 +322,9 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 }
 - (BOOL)needsShowSendTime:(NSDate*)date
 {
+  if (!self.chatModelArray.lastObject)
+    return true;
+
   NSTimeInterval lastRecordDatetimeInterval =
     self.chatModelArray.lastObject.sendTime;
 
@@ -330,7 +333,7 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 }
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView
 {
-  NSLog(@"%f", scrollView.contentOffset.y);
+  //  NSLog(@"%f", scrollView.contentOffset.y);
 }
 - (void)updateNewOneRowInTableview
 {
@@ -355,9 +358,12 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
   //    NSLog(@"%@", [NSDate
   //    dateWithTimeIntervalSinceReferenceDate:msg.sendTime]);
   //  }
+  __weak typeof(self) weakSelf = self;
   dispatch_after(
-    dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)),
+    dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
     dispatch_get_main_queue(), ^{
+      NSInteger oldCount = self.chatModelArray.count;
+
       NSArray* datas = [[WeChat sharedManager]
         messagesBeforeTimeInterval:self.chatModelArray.firstObject.sendTime
                         fetchLimit:kFetchLimit];
@@ -376,26 +382,19 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
        使用beginUpdates更新的row就算指定了AnimationNone，也会有一个莫名其妙的SlideDown的动画
        必须全局禁止动画，更新后再恢复...蛇精病
        */
-      //      CGFloat oldHeight = self.tableView.contentSize.height;
-      CGFloat offsetY = self.tableView.contentOffset.y;
-      //      NSLog(@"%f %f", oldHeight, offsetY);
-
-      NSLog(@"%f %f", self.tableView.contentSize.height,
-            self.tableView.contentOffset.y);
       [UIView setAnimationsEnabled:false];
       [self.tableView beginUpdates];
       [self.tableView insertRowsAtIndexPaths:indexPaths
                             withRowAnimation:UITableViewRowAnimationNone];
       [self.tableView endUpdates];
-      [UIView setAnimationsEnabled:true];
-      NSLog(@"%f %f", self.tableView.contentSize.height,
-            self.tableView.contentOffset.y);
 
-      //      CGFloat increasedHeight = self.tableView.contentSize.height -
-      //      oldHeight;
-      //      self.tableView.contentOffset = CGPointMake(0, offsetY +
-      //      increasedHeight);
-      //      NSLog(@"%f", offsetY + increasedHeight);
+      NSInteger newCount = weakSelf.chatModelArray.count;
+      NSIndexPath* indexPath =
+        [NSIndexPath indexPathForRow:newCount - oldCount inSection:0];
+      [weakSelf.tableView scrollToRowAtIndexPath:indexPath
+                                atScrollPosition:UITableViewScrollPositionTop
+                                        animated:NO];
+      [UIView setAnimationsEnabled:true];
 
       //刷新结束后通知菊花停止转动
       [self.tableView.mj_header endRefreshing];
