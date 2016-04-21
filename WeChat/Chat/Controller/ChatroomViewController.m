@@ -150,7 +150,10 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
       if (keyboardSize.height == 0)
         return;
 
-      //若要在修改约束的同时进行动画的话，需要调用其父视图的layoutIfNeeded方法，并在动画中再调用一次
+      /*
+       若要在修改约束的同时进行动画的话，需要调用其父视图的layoutIfNeeded方法，并在动画中再调用一次
+       */
+
       [weakSelf.editorView mas_updateConstraints:^(MASConstraintMaker* make) {
         make.bottom.offset(-keyboardSize.height);
       }];
@@ -353,11 +356,6 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
     return;
 
   self.isLoading = true;
-
-  //  for (Messages* msg in self.chatModelArray) {
-  //    NSLog(@"%@", [NSDate
-  //    dateWithTimeIntervalSinceReferenceDate:msg.sendTime]);
-  //  }
   __weak typeof(self) weakSelf = self;
   dispatch_after(
     dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),

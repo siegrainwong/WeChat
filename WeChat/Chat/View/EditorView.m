@@ -75,13 +75,20 @@ EditorView ()<UITextViewDelegate>
   if ([text isEqualToString:@"\n"])
     if (self.messageWasSend) {
       self.messageWasSend(self.textView.text, ChatMessageTypeText);
+
+      //手动修改值不会触发textview的通知和事件，只有手动触发textViewDidChange
       self.textView.text = @"";
+      [self textViewDidChange:self.textView];
       return false;
     }
 
   return true;
 }
-
+/*在复制文字进文本框时触发该通知*/
+- (void)textChangedExt:(NSNotification*)notification
+{
+  [self textViewDidChange:self.textView];
+}
 #pragma mark - keyboard notifications
 - (void)appendKeyboardNotifications
 {
@@ -98,6 +105,12 @@ EditorView ()<UITextViewDelegate>
        selector:@selector(keyboardWillBeHidden:)
 
            name:UIKeyboardWillHideNotification
+         object:nil];
+
+  [[NSNotificationCenter defaultCenter]
+    addObserver:self
+       selector:@selector(textChangedExt:)
+           name:UITextViewTextDidChangeNotification
          object:nil];
 }
 

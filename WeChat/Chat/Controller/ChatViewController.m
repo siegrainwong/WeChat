@@ -32,10 +32,10 @@ ChatViewController ()<UITableViewDelegate, UITableViewDataSource>
 - (void)initializeData
 {
   self.dataArr = @[
-    @[ @"吴正祥", @"Github: https://github.com/Seanwong933" ],
-    @[ @"陈维", @"博客地址: http://siegrain.wang" ],
-    @[ @"赖杰", @"[语音]" ],
-    @[ @"范熙丹", @"[链接]红包话语飘落的季节。饿了么送你外卖红包~" ],
+    @[ @"吴正祥", @"*Github: https://github.com/Seanwong933" ],
+    @[ @"陈维", @"*博客地址: http://siegrain.wang" ],
+    @[ @"赖杰", @"*本应用集成了图灵机器人的自动聊天功能" ],
+    @[ @"范熙丹", @"*麻麻再也不怕进来之后没有事干了..." ],
     @[
       @"丁亮",
       @"皇室战争50元红包来洗！登录就送！不信你不来！..."
