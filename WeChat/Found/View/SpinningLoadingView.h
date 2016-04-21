@@ -6,7 +6,7 @@
 //  Copyright © 2015年 小码哥. All rights reserved.
 //
 
-#import "MJRefresh.h"
+#import "MJRefresh/MJRefresh/MJRefresh.h"
 
 @interface SpinningLoadingView : MJRefreshHeader
 

@@ -6,13 +6,23 @@
 //  Copyright © 2015年 小码哥. All rights reserved.
 //
 
+#import "CoverHeaderView.h"
 #import "SpinningLoadingView.h"
+
+static NSString* const kRotateAnimationKey = @"RotateAnimation";
+static NSUInteger const kSpinningPosition = 30;
+static NSInteger const kViewHeight = 60;
+static NSUInteger const kSpinningSize = 30;
+
 /*
  朋友圈的转圈下拉加载
  */
 @interface
 SpinningLoadingView ()
-@property (weak, nonatomic) UIImageView* logo;
+@property (weak, nonatomic) UIImageView* spinningView;
+@property (strong, nonatomic) CoverHeaderView* coverView;
+
+@property (strong, nonatomic) CABasicAnimation* rotateAnimation;
 @end
 
 @implementation SpinningLoadingView
@@ -22,15 +32,24 @@ SpinningLoadingView ()
 {
   [super prepare];
 
-  // 设置控件的高度
-  self.mj_h = 50;
+  self.backgroundColor = [UIColor redColor];
+  self.dontSetYWhenPlaceSubviews = true;
+  self.mj_h = kViewHeight;
 
-  // logo
-  UIImageView* logo = [[UIImageView alloc]
-    initWithImage:[UIImage imageNamed:@"ff_IconShowAlbum"]];
-  logo.contentMode = UIViewContentModeScaleAspectFit;
-  [self addSubview:logo];
-  self.logo = logo;
+  UIImageView* spinningView = [[UIImageView alloc]
+    initWithImage:[UIImage imageNamed:@"AlbumReflashIcon"]];
+  spinningView.contentMode = UIViewContentModeScaleAspectFit;
+  [self addSubview:spinningView];
+  self.spinningView = spinningView;
+
+  self.rotateAnimation = [[CABasicAnimation alloc] init];
+  self.rotateAnimation.keyPath = @"transform.rotation.z";
+  self.rotateAnimation.fromValue = @0;
+  self.rotateAnimation.toValue = @(M_PI * 2);
+  self.rotateAnimation.duration = 1.0;
+  self.rotateAnimation.repeatCount = MAXFLOAT;
+
+  self.mj_y = -self.mj_h - self.ignoredScrollViewContentInsetTop;
 }
 
 #pragma mark 在这里设置子控件的位置和尺寸
@@ -38,14 +57,35 @@ SpinningLoadingView ()
 {
   [super placeSubviews];
 
-  self.logo.bounds = CGRectMake(0, 0, self.bounds.size.width, 100);
-  self.logo.center = CGPointMake(self.mj_w * 0.5, -self.logo.mj_h + 20);
+  //这个方法会在下拉状态被不停地调用..
+  //这里用frame的话下拉旋转的时候会变大变小..日了狗了
+  self.spinningView.bounds = CGRectMake(0, 0, kSpinningSize, kSpinningSize);
+  self.spinningView.center = CGPointMake(kSpinningPosition, kSpinningPosition);
 }
 
 #pragma mark 监听scrollView的contentOffset改变
 - (void)scrollViewContentOffsetDidChange:(NSDictionary*)change
 {
   [super scrollViewContentOffsetDidChange:change];
+
+  self.mj_y = -self.mj_h - self.ignoredScrollViewContentInsetTop;
+
+  CGFloat pullingY = fabs(self.scrollView.mj_offsetY + 64 +
+                          self.ignoredScrollViewContentInsetTop);
+  //  NSLog(@"mj_y: %f", self.mj_y);
+  if (pullingY >= kViewHeight) {
+    CGFloat marginY = -kViewHeight - (pullingY - kViewHeight) -
+                      self.ignoredScrollViewContentInsetTop;
+    //    NSLog(@"marginY: %f", marginY);
+    self.mj_y = marginY;
+  }
+
+  CGFloat rotateAngle = pullingY / kViewHeight * M_PI;
+  CGAffineTransform transform = CGAffineTransformIdentity;
+  //设置旋转角度
+  transform = CGAffineTransformRotate(transform, rotateAngle);
+
+  self.spinningView.transform = transform;
 }
 
 #pragma mark 监听scrollView的contentSize改变
@@ -67,12 +107,14 @@ SpinningLoadingView ()
   switch (state) {
     case MJRefreshStateIdle:
       // 3. 停止转圈
+      [self.spinningView.layer removeAnimationForKey:kRotateAnimationKey];
       break;
     case MJRefreshStatePulling:
-      // 1. 一边移动一边根据下拉长度转圈，移动到固定位置后停止移动
       break;
     case MJRefreshStateRefreshing:
       // 2. 一直转圈
+      [self.spinningView.layer addAnimation:self.rotateAnimation
+                                     forKey:kRotateAnimationKey];
       break;
     default:
       break;
@@ -83,8 +125,6 @@ SpinningLoadingView ()
 - (void)setPullingPercent:(CGFloat)pullingPercent
 {
   [super setPullingPercent:pullingPercent];
-
-  //根据比例来转圈...
 }
 
 @end

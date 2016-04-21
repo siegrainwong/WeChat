@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CoverHeaderView : UIView
-+ (instancetype)coverHeader;
++ (instancetype)coverHeaderWithCover:(UIImage*)cover
+                              avatar:(UIImage*)image
+                                name:(NSString*)name;
 @end

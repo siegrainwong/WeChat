@@ -18,11 +18,24 @@ CoverHeaderView ()
 
 @implementation CoverHeaderView
 #pragma mark - init
-+ (instancetype)coverHeader
++ (instancetype)coverHeaderWithCover:(UIImage*)cover
+                              avatar:(UIImage*)avatar
+                                name:(NSString*)name
 {
-  return [[[NSBundle mainBundle] loadNibNamed:@"CoverHeaderView"
-                                        owner:nil
-                                      options:nil] lastObject];
+  CoverHeaderView* view =
+    [[[NSBundle mainBundle] loadNibNamed:@"CoverHeaderView"
+                                   owner:nil
+                                 options:nil] lastObject];
+
+  view.coverImageView.image = cover;
+  view.nameLabel.text = name;
+
+  view.avatarButton.layer.borderWidth = 1;
+  view.avatarButton.layer.borderColor =
+    [UIColor colorWithWhite:0.95 alpha:1].CGColor;
+  [view.avatarButton setImage:avatar forState:UIControlStateNormal];
+
+  return view;
 }
 
 @end

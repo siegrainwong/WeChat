@@ -10,7 +10,7 @@
 
 #import "MJRefreshComponent.h"
 
-@interface MJRefreshHeader : MJRefreshComponent
+@interface SGRefreshHeader : MJRefreshComponent
 /** 创建header */
 + (instancetype)headerWithRefreshingBlock:
   (MJRefreshComponentRefreshingBlock)refreshingBlock;
@@ -25,7 +25,4 @@
 
 /** 忽略多少scrollView的contentInset的top */
 @property (assign, nonatomic) CGFloat ignoredScrollViewContentInsetTop;
-
-/** Siegrain:是否不在PlaceSubviews时设置视图高度，是的话视图高度就交给我们负责*/
-@property (assign, nonatomic) BOOL dontSetYWhenPlaceSubviews;
 @end

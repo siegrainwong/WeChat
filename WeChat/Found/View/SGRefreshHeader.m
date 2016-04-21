@@ -8,26 +8,26 @@
 //  Copyright (c) 2015年 小码哥. All rights reserved.
 //
 
-#import "MJRefreshHeader.h"
+#import "SGRefreshHeader.h"
 
 @interface
-MJRefreshHeader ()
+SGRefreshHeader ()
 @property (assign, nonatomic) CGFloat insetTDelta;
 @end
 
-@implementation MJRefreshHeader
+@implementation SGRefreshHeader
 #pragma mark - 构造方法
 + (instancetype)headerWithRefreshingBlock:
   (MJRefreshComponentRefreshingBlock)refreshingBlock
 {
-  MJRefreshHeader* cmp = [[self alloc] init];
+  SGRefreshHeader* cmp = [[self alloc] init];
   cmp.refreshingBlock = refreshingBlock;
   return cmp;
 }
 + (instancetype)headerWithRefreshingTarget:(id)target
                           refreshingAction:(SEL)action
 {
-  MJRefreshHeader* cmp = [[self alloc] init];
+  SGRefreshHeader* cmp = [[self alloc] init];
   [cmp setRefreshingTarget:target refreshingAction:action];
   return cmp;
 }
@@ -49,8 +49,7 @@ MJRefreshHeader ()
   [super placeSubviews];
 
   // 设置y值(当自己的高度发生改变了，肯定要重新调整Y值，所以放到placeSubviews方法中设置y值)
-  if (!self.dontSetYWhenPlaceSubviews)
-    self.mj_y = -self.mj_h - self.ignoredScrollViewContentInsetTop;
+  self.mj_y = -self.mj_h - self.ignoredScrollViewContentInsetTop;
 }
 
 - (void)scrollViewContentOffsetDidChange:(NSDictionary*)change
@@ -125,32 +124,33 @@ MJRefreshHeader ()
                                               forKey:self.lastUpdatedTimeKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    // 恢复inset和offset
-    [UIView animateWithDuration:MJRefreshSlowAnimationDuration
-      animations:^{
-        self.scrollView.mj_insetT += self.insetTDelta;
-        // 自动调整透明度
-        if (self.isAutomaticallyChangeAlpha)
-          self.alpha = 0.0;
-      }
-      completion:^(BOOL finished) {
-        self.pullingPercent = 0.0;
-      }];
+    //    // 恢复inset和offset
+    //    [UIView animateWithDuration:MJRefreshSlowAnimationDuration
+    //      animations:^{
+    //        self.scrollView.mj_insetT += self.insetTDelta;
+    //
+    //        // 自动调整透明度
+    //        if (self.isAutomaticallyChangeAlpha)
+    //          self.alpha = 0.0;
+    //      }
+    //      completion:^(BOOL finished) {
+    //        self.pullingPercent = 0.0;
+    //      }];
   }
   else if (state == MJRefreshStateRefreshing)
   {
-    [UIView animateWithDuration:MJRefreshFastAnimationDuration
-      animations:^{
-        // 增加滚动区域
-        CGFloat top = self.scrollViewOriginalInset.top + self.mj_h;
-        self.scrollView.mj_insetT = top;
-
-        // 设置滚动位置
-        self.scrollView.mj_offsetY = -top;
-      }
-      completion:^(BOOL finished) {
-        [self executeRefreshingCallback];
-      }];
+    //    [UIView animateWithDuration:MJRefreshFastAnimationDuration
+    //      animations:^{
+    //        // 增加滚动区域
+    //        CGFloat top = self.scrollViewOriginalInset.top + self.mj_h;
+    //        self.scrollView.mj_insetT = top;
+    //
+    //        // 设置滚动位置
+    //        self.scrollView.mj_offsetY = -top;
+    //      }
+    //      completion:^(BOOL finished) {
+    //        [self executeRefreshingCallback];
+    //      }];
   }
 }
 
