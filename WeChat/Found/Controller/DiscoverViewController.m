@@ -8,6 +8,7 @@
 
 #import "Constants.h"
 #import "DiscoverViewController.h"
+#import "MomentsTableViewController.h"
 
 @interface
 DiscoverViewController ()<UITableViewDelegate, UITableViewDataSource>
@@ -61,7 +62,7 @@ DiscoverViewController ()<UITableViewDelegate, UITableViewDataSource>
 
   [self.view addSubview:_tableView];
 }
-#pragma mark - tableview datasource
+#pragma mark - tableview
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
   return _dataArr.count;
@@ -106,7 +107,6 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
   return 44;
 }
 
-//设置头视图高度
 - (CGFloat)tableView:(UITableView*)tableView
   heightForHeaderInSection:(NSInteger)section
 {
@@ -114,6 +114,17 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
     return 15;
 
   return 5;
+}
+
+- (void)tableView:(UITableView*)tableView
+  didSelectRowAtIndexPath:(NSIndexPath*)indexPath
+{
+  MomentsTableViewController* destinationVC =
+    [[MomentsTableViewController alloc] init];
+  destinationVC.hidesBottomBarWhenPushed = true;
+  destinationVC.navigationItem.title = @"朋友圈";
+
+  [self.navigationController pushViewController:destinationVC animated:true];
 }
 
 @end

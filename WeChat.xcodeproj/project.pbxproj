@@ -22,8 +22,10 @@
 		F962F64C1CB53218005D73EA /* InsetsTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F962F64B1CB53218005D73EA /* InsetsTextField.m */; };
 		F97BF8A01CC4E45C00403E47 /* Messages+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = F97BF89D1CC4E45C00403E47 /* Messages+CoreDataProperties.m */; };
 		F97BF8A11CC4E45C00403E47 /* Messages.m in Sources */ = {isa = PBXBuildFile; fileRef = F97BF89F1CC4E45C00403E47 /* Messages.m */; };
+		F996B0951CC8B9A200164929 /* Empty.xib in Resources */ = {isa = PBXBuildFile; fileRef = F996B0941CC8B9A200164929 /* Empty.xib */; };
 		F9A2AD1E1CB65981002CE5F8 /* BaseMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2AD1D1CB65981002CE5F8 /* BaseMessageTableViewCell.m */; };
 		F9B263311CC3A0E20013EEF2 /* IQDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B2632F1CC3A0E20013EEF2 /* IQDatabaseManager.m */; };
+		F9B9746E1CC8C0ED0090D19E /* MomentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9746D1CC8C0ED0090D19E /* MomentsTableViewController.m */; };
 		F9C9CBD81CB254A900ABF0E0 /* TextMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C9CBD71CB254A900ABF0E0 /* TextMessageTableViewCell.m */; };
 		F9DA96021CB513E2008033A6 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DA96011CB513E2008033A6 /* DateUtil.m */; };
 		F9E02DD91CBE246600B14B7E /* libTuringSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DD81CBE246600B14B7E /* libTuringSDK.a */; };
@@ -155,11 +157,14 @@
 		F97BF89D1CC4E45C00403E47 /* Messages+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Messages+CoreDataProperties.m"; sourceTree = "<group>"; };
 		F97BF89E1CC4E45C00403E47 /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Messages.h; sourceTree = "<group>"; };
 		F97BF89F1CC4E45C00403E47 /* Messages.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Messages.m; sourceTree = "<group>"; };
+		F996B0941CC8B9A200164929 /* Empty.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Empty.xib; sourceTree = "<group>"; };
 		F9A2AD1C1CB65981002CE5F8 /* BaseMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMessageTableViewCell.h; sourceTree = "<group>"; };
 		F9A2AD1D1CB65981002CE5F8 /* BaseMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMessageTableViewCell.m; sourceTree = "<group>"; };
 		F9B2632E1CC3A0E20013EEF2 /* IQDatabaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQDatabaseManager.h; sourceTree = "<group>"; };
 		F9B2632F1CC3A0E20013EEF2 /* IQDatabaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQDatabaseManager.m; sourceTree = "<group>"; };
 		F9B263301CC3A0E20013EEF2 /* IQDatabaseManagerSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQDatabaseManagerSubclass.h; sourceTree = "<group>"; };
+		F9B9746C1CC8C0ED0090D19E /* MomentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentsTableViewController.h; sourceTree = "<group>"; };
+		F9B9746D1CC8C0ED0090D19E /* MomentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentsTableViewController.m; sourceTree = "<group>"; };
 		F9C9CBD61CB254A900ABF0E0 /* TextMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextMessageTableViewCell.h; sourceTree = "<group>"; };
 		F9C9CBD71CB254A900ABF0E0 /* TextMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextMessageTableViewCell.m; sourceTree = "<group>"; };
 		F9DA96001CB513E2008033A6 /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
@@ -753,6 +758,8 @@
 			children = (
 				F9E0739F1CA9161F00468EDC /* DiscoverViewController.h */,
 				F9E073A01CA9161F00468EDC /* DiscoverViewController.m */,
+				F9B9746C1CC8C0ED0090D19E /* MomentsTableViewController.h */,
+				F9B9746D1CC8C0ED0090D19E /* MomentsTableViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -825,6 +832,7 @@
 				F9E073971CA915BC00468EDC /* BaseViewController.m */,
 				F9E073A51CA9167300468EDC /* MainTabBarController.h */,
 				F9E073A61CA9167300468EDC /* MainTabBarController.m */,
+				F996B0941CC8B9A200164929 /* Empty.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -968,6 +976,7 @@
 				F9E073671CA90D6200468EDC /* 26.jpg in Resources */,
 				F9E072ED1CA90BD800468EDC /* LaunchScreen.storyboard in Resources */,
 				F9E0737C1CA90D6200468EDC /* pic7.jpg in Resources */,
+				F996B0951CC8B9A200164929 /* Empty.xib in Resources */,
 				F918F3FE1CB112C1003855FE /* EditorView.xib in Resources */,
 				F9E0735D1CA90D6200468EDC /* 23.jpg in Resources */,
 				F9E073621CA90D6200468EDC /* 7.jpg in Resources */,
@@ -1101,6 +1110,7 @@
 				F9E02DEC1CBE24FC00B14B7E /* CADebugMacros.cpp in Sources */,
 				F918F4011CB139DA003855FE /* ChatroomViewController.m in Sources */,
 				F9E072DC1CA90BD800468EDC /* main.m in Sources */,
+				F9B9746E1CC8C0ED0090D19E /* MomentsTableViewController.m in Sources */,
 				F9B263311CC3A0E20013EEF2 /* IQDatabaseManager.m in Sources */,
 				F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */,
 				F90B41771CAD0C0E00ECF391 /* UIImage+Common.m in Sources */,
@@ -1244,6 +1254,7 @@
 			baseConfigurationReference = 9EA824567924F7CE92751CEC /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WeChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1262,6 +1273,7 @@
 			baseConfigurationReference = D173503D2BF6FCA5B3A2572B /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = WeChat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
