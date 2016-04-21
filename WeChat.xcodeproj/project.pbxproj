@@ -26,6 +26,9 @@
 		F9A2AD1E1CB65981002CE5F8 /* BaseMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2AD1D1CB65981002CE5F8 /* BaseMessageTableViewCell.m */; };
 		F9B263311CC3A0E20013EEF2 /* IQDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B2632F1CC3A0E20013EEF2 /* IQDatabaseManager.m */; };
 		F9B9746E1CC8C0ED0090D19E /* MomentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B9746D1CC8C0ED0090D19E /* MomentsTableViewController.m */; };
+		F9B974711CC8C4780090D19E /* SpinningLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B974701CC8C4780090D19E /* SpinningLoadingView.m */; };
+		F9B974751CC8CB630090D19E /* CoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B974731CC8CB630090D19E /* CoverHeaderView.m */; };
+		F9B974761CC8CB630090D19E /* CoverHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B974741CC8CB630090D19E /* CoverHeaderView.xib */; };
 		F9C9CBD81CB254A900ABF0E0 /* TextMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C9CBD71CB254A900ABF0E0 /* TextMessageTableViewCell.m */; };
 		F9DA96021CB513E2008033A6 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DA96011CB513E2008033A6 /* DateUtil.m */; };
 		F9E02DD91CBE246600B14B7E /* libTuringSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DD81CBE246600B14B7E /* libTuringSDK.a */; };
@@ -165,6 +168,11 @@
 		F9B263301CC3A0E20013EEF2 /* IQDatabaseManagerSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQDatabaseManagerSubclass.h; sourceTree = "<group>"; };
 		F9B9746C1CC8C0ED0090D19E /* MomentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MomentsTableViewController.h; sourceTree = "<group>"; };
 		F9B9746D1CC8C0ED0090D19E /* MomentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MomentsTableViewController.m; sourceTree = "<group>"; };
+		F9B9746F1CC8C4780090D19E /* SpinningLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinningLoadingView.h; sourceTree = "<group>"; };
+		F9B974701CC8C4780090D19E /* SpinningLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinningLoadingView.m; sourceTree = "<group>"; };
+		F9B974721CC8CB630090D19E /* CoverHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoverHeaderView.h; sourceTree = "<group>"; };
+		F9B974731CC8CB630090D19E /* CoverHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoverHeaderView.m; sourceTree = "<group>"; };
+		F9B974741CC8CB630090D19E /* CoverHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoverHeaderView.xib; sourceTree = "<group>"; };
 		F9C9CBD61CB254A900ABF0E0 /* TextMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextMessageTableViewCell.h; sourceTree = "<group>"; };
 		F9C9CBD71CB254A900ABF0E0 /* TextMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextMessageTableViewCell.m; sourceTree = "<group>"; };
 		F9DA96001CB513E2008033A6 /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
@@ -774,6 +782,11 @@
 		F9E0738F1CA9155900468EDC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F9B9746F1CC8C4780090D19E /* SpinningLoadingView.h */,
+				F9B974701CC8C4780090D19E /* SpinningLoadingView.m */,
+				F9B974721CC8CB630090D19E /* CoverHeaderView.h */,
+				F9B974731CC8CB630090D19E /* CoverHeaderView.m */,
+				F9B974741CC8CB630090D19E /* CoverHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -976,6 +989,7 @@
 				F9E073671CA90D6200468EDC /* 26.jpg in Resources */,
 				F9E072ED1CA90BD800468EDC /* LaunchScreen.storyboard in Resources */,
 				F9E0737C1CA90D6200468EDC /* pic7.jpg in Resources */,
+				F9B974761CC8CB630090D19E /* CoverHeaderView.xib in Resources */,
 				F996B0951CC8B9A200164929 /* Empty.xib in Resources */,
 				F918F3FE1CB112C1003855FE /* EditorView.xib in Resources */,
 				F9E0735D1CA90D6200468EDC /* 23.jpg in Resources */,
@@ -1104,8 +1118,10 @@
 				F9E073AC1CA96AF000468EDC /* MeTableViewCell.m in Sources */,
 				F91775AB1CAA7EF900557A45 /* ContactsTableViewCell.m in Sources */,
 				F90B416B1CABC45600ECF391 /* GlassView.m in Sources */,
+				F9B974751CC8CB630090D19E /* CoverHeaderView.m in Sources */,
 				F918F3FC1CB112B0003855FE /* EditorView.m in Sources */,
 				F90B41731CAC1DC700ECF391 /* NSString+Pinyin.m in Sources */,
+				F9B974711CC8C4780090D19E /* SpinningLoadingView.m in Sources */,
 				F9E073A71CA9167300468EDC /* MainTabBarController.m in Sources */,
 				F9E02DEC1CBE24FC00B14B7E /* CADebugMacros.cpp in Sources */,
 				F918F4011CB139DA003855FE /* ChatroomViewController.m in Sources */,

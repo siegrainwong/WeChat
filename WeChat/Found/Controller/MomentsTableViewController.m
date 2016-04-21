@@ -7,6 +7,7 @@
 //
 
 #import "MomentsTableViewController.h"
+#import "SpinningLoadingView.h"
 
 @interface
 MomentsTableViewController ()
@@ -18,6 +19,14 @@ MomentsTableViewController ()
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+
+  self.tableView.mj_header = [SpinningLoadingView headerWithRefreshingBlock:^{
+
+  }];
+  UIView* view = [[UIView alloc] init];
+  view.backgroundColor = [UIColor redColor];
+  view.frame = CGRectMake(0, -50, self.tableView.bounds.size.width, 50);
+  [self.tableView.mj_header addSubview:view];
 }
 
 - (void)didReceiveMemoryWarning
