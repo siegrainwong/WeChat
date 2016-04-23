@@ -16,6 +16,8 @@ static NSUInteger const kSpinningSize = 30;
 
 /*
  朋友圈的转圈下拉加载
+ 我也是脑子残了拿MJRefresh来改
+ 体验不完美，下拉松开后有时菊花会朝上弹一截再回到原位
  */
 @interface
 SpinningLoadingView ()
@@ -32,7 +34,6 @@ SpinningLoadingView ()
 {
   [super prepare];
 
-  self.backgroundColor = [UIColor redColor];
   self.dontSetYWhenPlaceSubviews = true;
   self.mj_h = kViewHeight;
 
@@ -53,11 +54,11 @@ SpinningLoadingView ()
 }
 
 #pragma mark 在这里设置子控件的位置和尺寸
+/*这个方法会在下拉状态被不停地调用..*/
 - (void)placeSubviews
 {
   [super placeSubviews];
 
-  //这个方法会在下拉状态被不停地调用..
   //这里用frame的话下拉旋转的时候会变大变小..日了狗了
   self.spinningView.bounds = CGRectMake(0, 0, kSpinningSize, kSpinningSize);
   self.spinningView.center = CGPointMake(kSpinningPosition, kSpinningPosition);
@@ -72,11 +73,9 @@ SpinningLoadingView ()
 
   CGFloat pullingY = fabs(self.scrollView.mj_offsetY + 64 +
                           self.ignoredScrollViewContentInsetTop);
-  //  NSLog(@"mj_y: %f", self.mj_y);
   if (pullingY >= kViewHeight) {
     CGFloat marginY = -kViewHeight - (pullingY - kViewHeight) -
                       self.ignoredScrollViewContentInsetTop;
-    //    NSLog(@"marginY: %f", marginY);
     self.mj_y = marginY;
   }
 

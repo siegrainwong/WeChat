@@ -153,7 +153,6 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
       /*
        若要在修改约束的同时进行动画的话，需要调用其父视图的layoutIfNeeded方法，并在动画中再调用一次
        */
-
       [weakSelf.editorView mas_updateConstraints:^(MASConstraintMaker* make) {
         make.bottom.offset(-keyboardSize.height);
       }];

@@ -119,6 +119,9 @@ forRowAtIndexPath:(NSIndexPath*)indexPath
 - (void)tableView:(UITableView*)tableView
   didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
+  if (indexPath.section != 0)
+    return;
+
   MomentsTableViewController* destinationVC =
     [[MomentsTableViewController alloc] init];
   destinationVC.hidesBottomBarWhenPushed = true;
