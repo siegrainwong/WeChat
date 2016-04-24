@@ -10,9 +10,14 @@
 #import "MJRefresh/MJRefresh/Custom/Footer/Auto/MJRefreshAutoNormalFooter.h"
 #import "Masonry/Masonry/Masonry.h"
 #import "Moment.h"
+#import "MomentTableViewCell.h"
 #import "MomentsDataSource.h"
 #import "MomentsTableViewController.h"
 #import "SpinningLoadingView.h"
+#import "UIImage+RandomImage.h"
+#import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
+
+static NSString* const kIdentifier = @"Identifier";
 
 @interface
 MomentsTableViewController ()
@@ -36,7 +41,7 @@ MomentsTableViewController ()
     static MomentsDataSource* datasource = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-      datasource = [[MomentsDataSource alloc] init];
+        datasource = [[MomentsDataSource alloc] init];
     });
 
     return datasource;
@@ -52,6 +57,9 @@ MomentsTableViewController ()
 }
 - (void)buildTableview
 {
+    [self.tableView registerClass:[MomentTableViewCell class] forCellReuseIdentifier:kIdentifier];
+
+    //cover
     self.coverView = [CoverHeaderView
       coverHeaderWithCover:[UIImage imageNamed:@"cover"]
                     avatar:[UIImage imageNamed:@"siegrain_avatar"]
@@ -59,33 +67,35 @@ MomentsTableViewController ()
     self.tableView.contentInset = UIEdgeInsetsMake(self.contentInsetY, 0, 0, 0);
     self.tableView.tableHeaderView = self.coverView;
 
+    //pull-down refresh
     SpinningLoadingView* loadingView =
       [SpinningLoadingView headerWithRefreshingBlock:^{
-        dispatch_after(
-          dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
-          dispatch_get_main_queue(), ^{
-            [self loadData:true];
-            [self.tableView.mj_header endRefreshing];
-          });
+          dispatch_after(
+            dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+            dispatch_get_main_queue(), ^{
+                [self loadData:true];
+                [self.tableView.mj_header endRefreshing];
+            });
       }];
     loadingView.ignoredScrollViewContentInsetTop = self.contentInsetY;
     self.tableView.mj_header = loadingView;
 
+    //pull-up refresh
     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-      dispatch_after(
-        dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(),
-        ^{
-          [self loadData:false];
-          [self.tableView.mj_footer endRefreshing];
-        });
+        dispatch_after(
+          dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(),
+          ^{
+              [self loadData:false];
+              [self.tableView.mj_footer endRefreshing];
+          });
     }];
 }
 - (void)bindConstraints
 {
     [self.coverView mas_makeConstraints:^(MASConstraintMaker* make) {
-      make.right.left.top.offset(0);
-      make.width.equalTo(self.tableView.mas_width);
-      make.height.equalTo(self.tableView.mas_width).offset(30);
+        make.right.left.top.offset(0);
+        make.width.equalTo(self.tableView.mas_width);
+        make.height.equalTo(self.tableView.mas_width).offset(30);
     }];
 }
 
@@ -128,7 +138,11 @@ MomentsTableViewController ()
 - (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return 50;
+    CGFloat height = [tableView fd_heightForCellWithIdentifier:kIdentifier
+                                                 configuration:^(id cell) {
+                                                     [self configureCell:cell atIndexPath:indexPath];
+                                                 }];
+    return height;
 }
 - (NSInteger)tableView:(UITableView*)tableView
   numberOfRowsInSection:(NSInteger)section
@@ -138,11 +152,18 @@ MomentsTableViewController ()
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    UITableViewCell* cell =
-      [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                             reuseIdentifier:@"ss"];
-    cell.textLabel.text = self.momentsArray[indexPath.row].content;
+    MomentTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kIdentifier forIndexPath:indexPath];
+
+    [self configureCell:cell atIndexPath:indexPath];
+
     return cell;
+}
+- (void)configureCell:(MomentTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
+{
+    Moment* model = self.momentsArray[indexPath.row];
+    model.avatar = [UIImage randomImageInPath:@"Images/cell_icons"];
+
+    cell.model = model;
 }
 #pragma mark - scrollview
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView

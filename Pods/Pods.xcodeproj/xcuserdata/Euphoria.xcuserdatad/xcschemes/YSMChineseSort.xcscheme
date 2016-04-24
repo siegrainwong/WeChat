@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '0314377E0F0FF27DBBA4C33C'
+               BlueprintIdentifier = 'DCAEF07863879B8FF2B4774F'
                BlueprintName = 'YSMChineseSort'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libYSMChineseSort.a'>

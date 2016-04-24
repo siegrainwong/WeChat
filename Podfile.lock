@@ -1,14 +1,24 @@
 PODS:
+  - DACircularProgress (2.3.1)
+  - IDMPhotoBrowser (1.8.4):
+    - DACircularProgress
+    - pop
+    - SDWebImage
   - JSONModel (1.2.0)
   - Masonry (1.0.0)
   - MJRefresh (3.1.0)
   - PinYin4Objc (1.1.1)
+  - pop (1.0.9)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
   - TTTAttributedLabel (1.13.4)
   - UITableView+FDTemplateLayoutCell (1.4)
   - YSMChineseSort (0.1.1):
     - PinYin4Objc (~> 1.1.1)
 
 DEPENDENCIES:
+  - IDMPhotoBrowser
   - JSONModel
   - Masonry
   - MJRefresh
@@ -17,10 +27,14 @@ DEPENDENCIES:
   - YSMChineseSort (~> 0.1.0)
 
 SPEC CHECKSUMS:
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  IDMPhotoBrowser: b574fe3229754e701f32df271afbc4ac7e4e1997
   JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   PinYin4Objc: 3fa9673610368330e2dfb688b1d19a35c3930a78
+  pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030
   YSMChineseSort: ef532bfe993ff1b4dc9bcd644ead1a43b2632b88
