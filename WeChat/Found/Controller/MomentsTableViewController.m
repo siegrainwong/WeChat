@@ -18,6 +18,7 @@
 #import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
 
 static NSString* const kIdentifier = @"Identifier";
+static NSUInteger const kCoverViewHeight = 450;
 
 @interface
 MomentsTableViewController ()
@@ -29,6 +30,7 @@ MomentsTableViewController ()
 @end
 
 @implementation MomentsTableViewController
+#pragma mark - accessors
 - (NSMutableArray<Moment*>*)momentsArray
 {
     if (_momentsArray == nil) {
@@ -46,25 +48,48 @@ MomentsTableViewController ()
 
     return datasource;
 }
+#pragma mark - init
+/*
+ Mark: 
+ tableView似乎只认tableHeaderView的frame，不认约束，所以要在这里用systemLayoutSizeFittingSize算出约束高度后再重新赋值给tableHeaderView
+ */
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+
+    CoverHeaderView* headerView = (CoverHeaderView*)self.tableView.tableHeaderView;
+
+    /*
+	 黑历史：systemLayoutSizeFittingSize算出来有700多，没办法只有设成死值了
+	 实际原因是因为我没有给coverView添加Bottom约束，所以算出来的值不对
+	 */
+    CGFloat height = [headerView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    CGRect frame = headerView.frame;
+    frame.size.height = height;
+    headerView.frame = frame;
+
+    self.tableView.tableHeaderView = headerView;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.contentInsetY = -150;
 
     [self buildTableview];
-    [self bindConstraints];
     [self loadData:true];
+    [self bindConstraints];
 }
 - (void)buildTableview
 {
+    self.tableView.contentInset = UIEdgeInsetsMake(self.contentInsetY, 0, 0, 0);
     [self.tableView registerClass:[MomentTableViewCell class] forCellReuseIdentifier:kIdentifier];
+    self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 
     //cover
     self.coverView = [CoverHeaderView
       coverHeaderWithCover:[UIImage imageNamed:@"cover"]
                     avatar:[UIImage imageNamed:@"siegrain_avatar"]
                       name:@"Siegrain Wong"];
-    self.tableView.contentInset = UIEdgeInsetsMake(self.contentInsetY, 0, 0, 0);
     self.tableView.tableHeaderView = self.coverView;
 
     //pull-down refresh
@@ -94,8 +119,9 @@ MomentsTableViewController ()
 {
     [self.coverView mas_makeConstraints:^(MASConstraintMaker* make) {
         make.right.left.top.offset(0);
-        make.width.equalTo(self.tableView.mas_width);
-        make.height.equalTo(self.tableView.mas_width).offset(30);
+        make.width.equalTo(self.view);
+        make.height.offset(kCoverViewHeight);
+        make.bottom.offset(-10);
     }];
 }
 
@@ -143,6 +169,7 @@ MomentsTableViewController ()
                                                      [self configureCell:cell atIndexPath:indexPath];
                                                  }];
     return height;
+    //    return 100;
 }
 - (NSInteger)tableView:(UITableView*)tableView
   numberOfRowsInSection:(NSInteger)section
@@ -158,6 +185,7 @@ MomentsTableViewController ()
 
     return cell;
 }
+
 - (void)configureCell:(MomentTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
 {
     Moment* model = self.momentsArray[indexPath.row];

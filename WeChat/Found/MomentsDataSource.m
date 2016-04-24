@@ -24,7 +24,7 @@
 - (NSArray*)moments
 {
     NSMutableArray* result = [NSMutableArray array];
-    [result addObject:[Moment momentWithContent:@"我的博客：http://siegrain.wang\n我的Github：https://github.com/Seanwong933\n\n朋友圈数据来自煎蛋网和知乎，侵删，不接受送快递上门服务。"
+    [result addObject:[Moment momentWithContent:@"Blog：http://siegrain.wang\nGithub：https://github.com/Seanwong933\nEmail：siegrain@qq.com\n\n朋友圈数据来自煎蛋网和知乎，侵删，不接受送快递上门服务。"
                                            name:@"Siegrain Wong"
                                        pictures:@[ [UIImage imageNamed:@"siegrain_avatar"] ]
                                        comments:@[]]];
@@ -93,11 +93,11 @@
     ];
 
     [result addObjectsFromArray:[dataArray sortedArrayUsingComparator:^NSComparisonResult(id _Nonnull obj1, id _Nonnull obj2) {
-              int seed = arc4random_uniform(2);
-              if (seed)
-                  return NSOrderedDescending;
-              else
-                  return NSOrderedAscending;
+                int seed = arc4random_uniform(2);
+                if (seed)
+                    return NSOrderedDescending;
+                else
+                    return NSOrderedAscending;
             }]];
 
     return result;

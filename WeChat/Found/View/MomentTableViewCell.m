@@ -6,21 +6,37 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
-#import "IDMPhotoBrowser/Classes/IDMPhotoBrowser.h"
 #import "Masonry/Masonry/Masonry.h"
 #import "Moment.h"
 #import "MomentTableViewCell.h"
+#import "PhotosCollectionViewController.h"
 #import "TTTAttributedLabel/TTTAttributedLabel/TTTAttributedLabel.h"
 
+static NSString* const kBlogLink = @"http://siegrain.wang";
+static NSString* const kGithubLink = @"https://github.com/Seanwong933";
+
 @interface
-MomentTableViewCell ()
+MomentTableViewCell ()<TTTAttributedLabelDelegate>
 @property (strong, nonatomic) UIImageView* avatarImageView;
 @property (strong, nonatomic) TTTAttributedLabel* nameLabel;
 @property (strong, nonatomic) TTTAttributedLabel* contentLabel;
-@property (strong, nonatomic) IDMPhotoBrowser* photoBrowser;
+@property (strong, nonatomic) PhotosCollectionViewController* photosController;
 @end
 
 @implementation MomentTableViewCell
+#pragma mark - accessors
++ (UIColor*)wechatFontColor
+{
+    static UIColor* color = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(
+      &onceToken,
+      ^{
+          color = [UIColor colorWithRed:(54 / 255.0) green:(71 / 255.0) blue:(121 / 255.0) alpha:1];
+      });
+    return color;
+}
+
 #pragma mark - init
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier
 {
@@ -37,30 +53,43 @@ MomentTableViewCell ()
     self.avatarImageView.image = model.avatar;
     self.nameLabel.text = model.name;
     self.contentLabel.text = model.content;
+    self.photosController.photosArray = model.pictures;
 
-    //    __block NSMutableArray* idmPhotos = [NSMutableArray array];
-    //    [model.pictures enumerateObjectsUsingBlock:^(UIImage* obj, NSUInteger idx, BOOL* _Nonnull stop) {
-    //      [idmPhotos addObject:[IDMPhoto photoWithImage:obj]];
-    //    }];
+    if ([model.name isEqualToString:@"Siegrain Wong"]) {
+        NSRange blogRange = [model.content rangeOfString:kBlogLink];
+        NSRange githubRange = [model.content rangeOfString:kGithubLink];
+
+        if (blogRange.location != NSNotFound)
+            [self.contentLabel addLinkToURL:[NSURL URLWithString:kBlogLink] withRange:blogRange];
+        if (githubRange.location != NSNotFound)
+            [self.contentLabel addLinkToURL:[NSURL URLWithString:kGithubLink] withRange:githubRange];
+    }
 }
 
 #pragma mark - build
 - (void)buildCell
 {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+
     self.avatarImageView = [[UIImageView alloc] init];
     [self.contentView addSubview:self.avatarImageView];
 
     self.nameLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-    self.nameLabel.textColor = [UIColor colorWithRed:(54 / 255.0) green:(71 / 255.0) blue:(121 / 255.0) alpha:1];
+    self.nameLabel.textColor = [MomentTableViewCell wechatFontColor];
     self.nameLabel.font = [UIFont systemFontOfSize:15 weight:0.2];
     self.nameLabel.verticalAlignment = UIControlContentVerticalAlignmentTop;
     [self.contentView addSubview:self.nameLabel];
 
     self.contentLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    self.contentLabel.delegate = self;
     self.contentLabel.numberOfLines = 0;
     self.contentLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
     self.contentLabel.font = [UIFont systemFontOfSize:15];
+    self.contentLabel.linkAttributes = @{ (NSString*)kCTForegroundColorAttributeName : [MomentTableViewCell wechatFontColor] };
     [self.contentView addSubview:self.contentLabel];
+
+    self.photosController = [[PhotosCollectionViewController alloc] init];
+    [self.contentView addSubview:self.photosController.collectionView];
 }
 
 - (void)bindConstraints
@@ -70,8 +99,6 @@ MomentTableViewCell ()
         make.width.height.offset(40);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker* make) {
-        //        make.height.offset(30);
-
         make.left.equalTo(self.avatarImageView.mas_right).offset(10);
         make.top.equalTo(self.avatarImageView);
         make.right.offset(-10);
@@ -81,5 +108,10 @@ MomentTableViewCell ()
         make.left.right.equalTo(self.nameLabel);
         make.bottom.offset(-10);
     }];
+}
+#pragma mark - attributed label delegate
+- (void)attributedLabel:(TTTAttributedLabel*)label didSelectLinkWithURL:(NSURL*)url
+{
+    [[UIApplication sharedApplication] openURL:url];
 }
 @end

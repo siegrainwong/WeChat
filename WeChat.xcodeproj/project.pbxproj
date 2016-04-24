@@ -54,7 +54,6 @@
 		F9B974751CC8CB630090D19E /* CoverHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B974731CC8CB630090D19E /* CoverHeaderView.m */; };
 		F9B974761CC8CB630090D19E /* CoverHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9B974741CC8CB630090D19E /* CoverHeaderView.xib */; };
 		F9C9CBD81CB254A900ABF0E0 /* TextMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9C9CBD71CB254A900ABF0E0 /* TextMessageTableViewCell.m */; };
-		F9D0650A1CC933C7005CFDFD /* SGRefreshHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = F9D065091CC933C7005CFDFD /* SGRefreshHeader.m */; };
 		F9DA96021CB513E2008033A6 /* DateUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = F9DA96011CB513E2008033A6 /* DateUtil.m */; };
 		F9E02DD91CBE246600B14B7E /* libTuringSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F9E02DD81CBE246600B14B7E /* libTuringSDK.a */; };
 		F9E02DEC1CBE24FC00B14B7E /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F9E02DDC1CBE24FC00B14B7E /* CADebugMacros.cpp */; };
@@ -228,8 +227,6 @@
 		F9B974741CC8CB630090D19E /* CoverHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoverHeaderView.xib; sourceTree = "<group>"; };
 		F9C9CBD61CB254A900ABF0E0 /* TextMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextMessageTableViewCell.h; sourceTree = "<group>"; };
 		F9C9CBD71CB254A900ABF0E0 /* TextMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextMessageTableViewCell.m; sourceTree = "<group>"; };
-		F9D065081CC933C7005CFDFD /* SGRefreshHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGRefreshHeader.h; sourceTree = "<group>"; };
-		F9D065091CC933C7005CFDFD /* SGRefreshHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGRefreshHeader.m; sourceTree = "<group>"; };
 		F9DA96001CB513E2008033A6 /* DateUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateUtil.h; sourceTree = "<group>"; };
 		F9DA96011CB513E2008033A6 /* DateUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateUtil.m; sourceTree = "<group>"; };
 		F9E02DD81CBE246600B14B7E /* libTuringSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTuringSDK.a; path = WeChat/libTuringSDK.a; sourceTree = "<group>"; };
@@ -487,6 +484,25 @@
 				F921D4371CCBC9A80046A09B /* PhotosCollectionViewController.m */,
 			);
 			name = Cell;
+			sourceTree = "<group>";
+		};
+		F921D4391CCCB3BA0046A09B /* CoverHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				F9B974721CC8CB630090D19E /* CoverHeaderView.h */,
+				F9B974731CC8CB630090D19E /* CoverHeaderView.m */,
+				F9B974741CC8CB630090D19E /* CoverHeaderView.xib */,
+			);
+			name = CoverHeaderView;
+			sourceTree = "<group>";
+		};
+		F921D43A1CCCB3CA0046A09B /* SpinningView */ = {
+			isa = PBXGroup;
+			children = (
+				F9B9746F1CC8C4780090D19E /* SpinningLoadingView.h */,
+				F9B974701CC8C4780090D19E /* SpinningLoadingView.m */,
+			);
+			name = SpinningView;
 			sourceTree = "<group>";
 		};
 		F9808A681CCB8E1100C67C2D /* moments */ = {
@@ -882,14 +898,9 @@
 		F9E0738F1CA9155900468EDC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F921D43A1CCCB3CA0046A09B /* SpinningView */,
 				F921D4351CCBC8960046A09B /* Cell */,
-				F9B9746F1CC8C4780090D19E /* SpinningLoadingView.h */,
-				F9B974701CC8C4780090D19E /* SpinningLoadingView.m */,
-				F9B974721CC8CB630090D19E /* CoverHeaderView.h */,
-				F9B974731CC8CB630090D19E /* CoverHeaderView.m */,
-				F9B974741CC8CB630090D19E /* CoverHeaderView.xib */,
-				F9D065081CC933C7005CFDFD /* SGRefreshHeader.h */,
-				F9D065091CC933C7005CFDFD /* SGRefreshHeader.m */,
+				F921D4391CCCB3BA0046A09B /* CoverHeaderView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1244,7 +1255,6 @@
 				F9DA96021CB513E2008033A6 /* DateUtil.m in Sources */,
 				F90B416D1CABCE1E00ECF391 /* Constants.m in Sources */,
 				F9E02DED1CBE24FC00B14B7E /* CAStreamBasicDescription.cpp in Sources */,
-				F9D0650A1CC933C7005CFDFD /* SGRefreshHeader.m in Sources */,
 				F9E02DEE1CBE24FC00B14B7E /* CAXException.cpp in Sources */,
 				F97BF8A11CC4E45C00403E47 /* Messages.m in Sources */,
 				F9E073A11CA9161F00468EDC /* DiscoverViewController.m in Sources */,
