@@ -171,7 +171,7 @@ MomentsTableViewController ()
     height = [tableView fd_heightForCellWithIdentifier:kIdentifier
                                       cacheByIndexPath:indexPath
                                          configuration:^(MomentTableViewCell* cell) {
-                                             cell.fd_enforceFrameLayout = false;
+                                             cell.fd_enforceFrameLayout = true;
                                              [self configureCell:cell atIndexPath:indexPath];
                                          }];
     model.height = @(height);
