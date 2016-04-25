@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class Comment;
+
 @interface CommentTableViewCell : UITableViewCell
--(void)cellDataWithName:(NSString*)name andContent:(NSString*)content;
+@property (strong, nonatomic) Comment* model;
 @end

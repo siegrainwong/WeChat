@@ -6,6 +6,7 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
+#import "Comment.h"
 #import "CommentTableViewCell.h"
 #import "CommentTableViewController.h"
 #import "MomentsDataSource.h"
@@ -36,7 +37,6 @@ CommentTableViewController ()
     rect.size = self.tableView.contentSize;
 
     self.tableView.frame = rect;
-    NSLog(@"回复表格：%f", self.tableView.contentSize.height);
 }
 - (instancetype)init
 {
@@ -69,10 +69,16 @@ CommentTableViewController ()
 #pragma mark - tableview
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    return [tableView fd_heightForCellWithIdentifier:kIdentifier
-                                       configuration:^(id cell) {
-                                           [self configureCell:cell atIndexPath:indexPath];
-                                       }];
+    Comment* model = self.comments[indexPath.row];
+    if (!model.height) {
+        model.height = [tableView
+          fd_heightForCellWithIdentifier:kIdentifier
+                           configuration:^(CommentTableViewCell* cell) {
+                               cell.fd_enforceFrameLayout = true;
+                               [self configureCell:cell atIndexPath:indexPath];
+                           }];
+    }
+    return model.height;
 }
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -90,7 +96,7 @@ CommentTableViewController ()
 
 - (void)configureCell:(CommentTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
 {
-    NSString* data = self.comments[indexPath.row];
-    [cell cellDataWithName:[self.dataSource randomName] andContent:data];
+    Comment* model = self.comments[indexPath.row];
+    cell.model = model;
 }
 @end

@@ -6,6 +6,7 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
+#import "Comment.h"
 #import "CommentTableViewController.h"
 #import "Masonry/Masonry/Masonry.h"
 #import "Moment.h"
@@ -35,7 +36,7 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
 @end
 
 @implementation MomentTableViewCell
-
+#pragma mark - accessors
 #pragma mark - init
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier
 {

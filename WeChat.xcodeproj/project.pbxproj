@@ -22,6 +22,7 @@
 		F921D4341CCBB6160046A09B /* MomentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F921D4331CCBB6160046A09B /* MomentTableViewCell.m */; };
 		F921D4381CCBC9A80046A09B /* PhotosCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F921D4371CCBC9A80046A09B /* PhotosCollectionViewController.m */; };
 		F941930C1CC3A108000EC067 /* WeChat.m in Sources */ = {isa = PBXBuildFile; fileRef = F941930B1CC3A108000EC067 /* WeChat.m */; };
+		F9525AEB1CCE8CC100EBA218 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = F9525AEA1CCE8CC100EBA218 /* Comment.m */; };
 		F956E6C51CCD3A1F00A27C64 /* CommentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F956E6C41CCD3A1F00A27C64 /* CommentTableViewController.m */; };
 		F956E6C81CCD3AA100A27C64 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F956E6C71CCD3AA100A27C64 /* CommentTableViewCell.m */; };
 		F956E6CB1CCD3C1A00A27C64 /* WeChatHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = F956E6CA1CCD3C1A00A27C64 /* WeChatHelper.m */; };
@@ -189,6 +190,8 @@
 		F94193091CC3A108000EC067 /* WechatConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatConstants.h; sourceTree = "<group>"; };
 		F941930A1CC3A108000EC067 /* WeChat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeChat.h; sourceTree = "<group>"; };
 		F941930B1CC3A108000EC067 /* WeChat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeChat.m; sourceTree = "<group>"; };
+		F9525AE91CCE8CC100EBA218 /* Comment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		F9525AEA1CCE8CC100EBA218 /* Comment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		F956E6C31CCD3A1F00A27C64 /* CommentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewController.h; sourceTree = "<group>"; };
 		F956E6C41CCD3A1F00A27C64 /* CommentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewController.m; sourceTree = "<group>"; };
 		F956E6C61CCD3AA100A27C64 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
@@ -925,6 +928,8 @@
 			children = (
 				F9808A651CCB875B00C67C2D /* Moment.h */,
 				F9808A661CCB875B00C67C2D /* Moment.m */,
+				F9525AE91CCE8CC100EBA218 /* Comment.h */,
+				F9525AEA1CCE8CC100EBA218 /* Comment.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1318,6 +1323,7 @@
 				F9E0739E1CA9161500468EDC /* ChatViewController.m in Sources */,
 				F956E6CB1CCD3C1A00A27C64 /* WeChatHelper.m in Sources */,
 				F90B41771CAD0C0E00ECF391 /* UIImage+Common.m in Sources */,
+				F9525AEB1CCE8CC100EBA218 /* Comment.m in Sources */,
 				F9E072E81CA90BD800468EDC /* WeChat.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

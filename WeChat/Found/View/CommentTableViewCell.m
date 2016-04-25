@@ -6,6 +6,7 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
+#import "Comment.h"
 #import "CommentTableViewCell.h"
 #import "Masonry/Masonry/Masonry.h"
 #import "WeChatHelper.h"
@@ -30,23 +31,22 @@ CommentTableViewCell ()
         self.backgroundColor = [UIColor clearColor];
 
         [self buildCell];
-        [self bindConstraints];
     }
     return self;
 }
-- (void)cellDataWithName:(NSString*)name andContent:(NSString*)content
+- (void)setModel:(Comment*)model
 {
-    if (_name != nil) return;
+    _model = model;
 
-    _name = name;
-    _content = content;
-
-    NSString* str = [NSString stringWithFormat:@"%@: %@", name, content];
+    NSString* str = [NSString stringWithFormat:@"%@: %@", model.name, model.content];
     NSMutableAttributedString* attrStr = [[NSMutableAttributedString alloc] initWithString:str];
-    [attrStr addAttribute:NSForegroundColorAttributeName value:[WeChatHelper wechatFontColor] range:NSMakeRange(0, name.length)];
+    [attrStr addAttribute:NSForegroundColorAttributeName
+                    value:[WeChatHelper wechatFontColor]
+                    range:NSMakeRange(0, model.name.length)];
     self.label.attributedText = attrStr;
 
-    [self.label sizeToFit];
+    CGSize size = [self.label sizeThatFits:CGSizeMake(self.frame.size.width, MAXFLOAT)];
+    self.label.frame = CGRectMake(2, 1, size.width, size.height);
 }
 - (void)buildCell
 {
@@ -56,13 +56,9 @@ CommentTableViewCell ()
     self.label.font = [UIFont systemFontOfSize:14];
     [self.contentView addSubview:self.label];
 }
-- (void)bindConstraints
+- (CGSize)sizeThatFits:(CGSize)size
 {
-    self.label.preferredMaxLayoutWidth = self.frame.size.width;
-    [self.label mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.edges.insets(UIEdgeInsetsMake(1, 5, 1, 5));
-    }];
-
-    [self.label setContentHuggingPriority:1000 forAxis:UILayoutConstraintAxisVertical];
+    CGFloat height = self.label.frame.size.height;
+    return CGSizeMake(self.frame.size.width, height);
 }
 @end

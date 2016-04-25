@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface MomentsDataSource : NSObject
-- (NSString*)randomName;
+//- (NSString*)randomName;
 - (NSArray*)moments;
 @end
