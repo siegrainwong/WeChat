@@ -17,7 +17,11 @@
 #import "UIImage+RandomImage.h"
 #import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
 
-static NSString* const kIdentifier = @"Identifier";
+static NSString* const kIdentifier = @"Identifier0";
+static NSString* const kIdentifierOnePicRow = @"Identifier1";
+static NSString* const kIdentifierTwoPicRow = @"Identifier2";
+static NSString* const kIdentifierThreePicRow = @"Identifier3";
+
 static NSUInteger const kCoverViewHeight = 450;
 
 @interface
@@ -27,6 +31,8 @@ MomentsTableViewController ()
 
 @property (strong, nonatomic) MomentsDataSource* datasource;
 @property (strong, nonatomic) NSMutableArray<Moment*>* momentsArray;
+
+@property (nonatomic, strong) MomentTableViewCell* prototypeCell;
 @end
 
 @implementation MomentsTableViewController
@@ -81,8 +87,12 @@ MomentsTableViewController ()
 }
 - (void)buildTableview
 {
-    self.tableView.contentInset = UIEdgeInsetsMake(self.contentInsetY, 0, 0, 0);
     [self.tableView registerClass:[MomentTableViewCell class] forCellReuseIdentifier:kIdentifier];
+    [self.tableView registerClass:[MomentTableViewCell class] forCellReuseIdentifier:kIdentifierOnePicRow];
+    [self.tableView registerClass:[MomentTableViewCell class] forCellReuseIdentifier:kIdentifierTwoPicRow];
+    [self.tableView registerClass:[MomentTableViewCell class] forCellReuseIdentifier:kIdentifierThreePicRow];
+
+    self.tableView.contentInset = UIEdgeInsetsMake(self.contentInsetY, 0, 0, 0);
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 
     //cover
@@ -132,21 +142,7 @@ MomentsTableViewController ()
     NSArray* datas = [self.datasource moments];
     [self.momentsArray addObjectsFromArray:datas];
 
-    if (isInitial)
-        [self.tableView reloadData];
-    else {
-        NSMutableArray* indexPaths = [NSMutableArray array];
-        for (NSUInteger i = 0; i < datas.count; i++) {
-            [indexPaths addObject:[NSIndexPath indexPathForRow:i inSection:0]];
-        }
-
-        [UIView setAnimationsEnabled:false];
-        [self.tableView beginUpdates];
-        [self.tableView insertRowsAtIndexPaths:indexPaths
-                              withRowAnimation:UITableViewRowAnimationNone];
-        [self.tableView endUpdates];
-        [UIView setAnimationsEnabled:true];
-    }
+    [self.tableView reloadData];
 
     /*
 	 tableview.header默认是在tableview.tableHeaerView后面的
@@ -161,22 +157,39 @@ MomentsTableViewController ()
 }
 
 #pragma mark - tableview
+- (CGFloat)tableView:(UITableView*)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    return [self tableView:tableView heightForRowAtIndexPath:indexPath];
+}
 - (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    Moment* model = self.momentsArray[indexPath.row];
-    CGFloat height = model.height.floatValue;
+    // 传统算高。。。
+    //    static MomentTableViewCell* templateCell;
+    //    static dispatch_once_t onceToken;
+    //    dispatch_once(&onceToken, ^{
+    //        templateCell = [tableView dequeueReusableCellWithIdentifier:kIdentifier];
+    //    });
+    //
+    //    [self configureCell:templateCell atIndexPath:indexPath];
+    //
+    //    //    [templateCell.contentView setNeedsLayout];
+    //    //    [templateCell.contentView layoutIfNeeded];
 
-    //    if (!height) {
-    height = [tableView fd_heightForCellWithIdentifier:kIdentifier
-                                      cacheByIndexPath:indexPath
-                                         configuration:^(MomentTableViewCell* cell) {
-                                             cell.fd_enforceFrameLayout = true;
-                                             [self configureCell:cell atIndexPath:indexPath];
-                                         }];
-    model.height = @(height);
-    //    }
-    return height;
+    Moment* model = self.momentsArray[indexPath.row];
+    if (model.height <= 0) {
+        // 根据当前数据，计算Cell的高度，注意+1
+        //        model.height = [templateCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+        model.height = [tableView
+          fd_heightForCellWithIdentifier:[self cellIdentifier:indexPath]
+                           configuration:^(id cell) {
+                               [self configureCell:cell atIndexPath:indexPath];
+                           }];
+        NSLog(@"%ld", model.height);
+    }
+
+    //    return model.height;
+    return 200;
 }
 - (NSInteger)tableView:(UITableView*)tableView
   numberOfRowsInSection:(NSInteger)section
@@ -186,7 +199,9 @@ MomentsTableViewController ()
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    MomentTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kIdentifier forIndexPath:indexPath];
+    MomentTableViewCell* cell = [tableView
+      dequeueReusableCellWithIdentifier:[self cellIdentifier:indexPath]
+                           forIndexPath:indexPath];
 
     [self configureCell:cell atIndexPath:indexPath];
 
@@ -196,14 +211,18 @@ MomentsTableViewController ()
 - (void)configureCell:(MomentTableViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
 {
     Moment* model = self.momentsArray[indexPath.row];
-    model.avatar = [UIImage randomImageInPath:@"Images/cell_icons"];
+    if (!model.avatar)
+        model.avatar = [UIImage randomImageInPath:@"Images/cell_icons"];
+
     model.indexPath = indexPath;
 
     [cell setModel:model];
 }
-#pragma mark - scrollview
-- (void)scrollViewDidScroll:(UIScrollView*)scrollView
+#pragma mark -
+- (NSString*)cellIdentifier:(NSIndexPath*)indexPath
 {
-    //  NSLog(@"%f", scrollView.contentOffset.y);
+    Moment* model = self.momentsArray[indexPath.row];
+    int rowCount = ceilf(model.pictures.count / 3.0);
+    return [NSString stringWithFormat:@"Identifier%d", rowCount];
 }
 @end

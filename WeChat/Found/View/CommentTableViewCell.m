@@ -8,12 +8,15 @@
 
 #import "CommentTableViewCell.h"
 #import "Masonry/Masonry/Masonry.h"
-#import "TTTAttributedLabel/TTTAttributedLabel/TTTAttributedLabel.h"
 #import "WeChatHelper.h"
 
 @interface
 CommentTableViewCell ()
-@property (strong, nonatomic) TTTAttributedLabel* label;
+/*
+ TTTAttributedLabel的lineBreakMode有Bug
+ 设置为NSLineBreakByCharWrapping无效
+ */
+@property (strong, nonatomic) UILabel* label;
 
 @property (copy, nonatomic) NSString* name;
 @property (copy, nonatomic) NSString* content;
@@ -38,31 +41,28 @@ CommentTableViewCell ()
     _name = name;
     _content = content;
 
-    NSString* namePart = [NSString stringWithFormat:@"%@: ", name];
-    self.label.text = [NSString stringWithFormat:@"%@%@", namePart, content];
-    NSRange nameRange = [self.label.text rangeOfString:namePart];
-    if (nameRange.location != NSNotFound)
-        [self.label addLinkToURL:[NSURL URLWithString:name] withRange:nameRange];
+    NSString* str = [NSString stringWithFormat:@"%@: %@", name, content];
+    NSMutableAttributedString* attrStr = [[NSMutableAttributedString alloc] initWithString:str];
+    [attrStr addAttribute:NSForegroundColorAttributeName value:[WeChatHelper wechatFontColor] range:NSMakeRange(0, name.length)];
+    self.label.attributedText = attrStr;
 
     [self.label sizeToFit];
-
-    //    [self setNeedsLayout];
-    //    [self layoutIfNeeded];
-    //    [self bindConstraints];
 }
 - (void)buildCell
 {
-    self.label = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
+    self.label = [[UILabel alloc] initWithFrame:CGRectZero];
     self.label.numberOfLines = 0;
-    self.label.lineBreakMode = kCTLineBreakByCharWrapping;
+    self.label.lineBreakMode = NSLineBreakByCharWrapping;
     self.label.font = [UIFont systemFontOfSize:14];
-    self.label.linkAttributes = @{ (NSString*)kCTForegroundColorAttributeName : [WeChatHelper wechatFontColor] };
     [self.contentView addSubview:self.label];
 }
 - (void)bindConstraints
 {
+    self.label.preferredMaxLayoutWidth = self.frame.size.width;
     [self.label mas_makeConstraints:^(MASConstraintMaker* make) {
         make.edges.insets(UIEdgeInsetsMake(1, 5, 1, 5));
     }];
+
+    [self.label setContentHuggingPriority:1000 forAxis:UILayoutConstraintAxisVertical];
 }
 @end

@@ -81,8 +81,8 @@
                              [self momentsImage:@"miyan-2"],
                              [self momentsImage:@"miyan-3"],
                              [self momentsImage:@"miyan-4"],
-                             //[self momentsImage:@"miyan-5"],
-                             //[self momentsImage:@"miyan-6"],
+                             [self momentsImage:@"miyan-5"],
+                             [self momentsImage:@"miyan-6"],
                          ]
                          comments:@[ @"强行让鲁鲁修当了眯眯眼。。。" ]],
         [Moment momentWithContent:@"杰伦大木表情包"

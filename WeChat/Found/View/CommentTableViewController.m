@@ -28,6 +28,16 @@ CommentTableViewController ()
     return _dataSource;
 }
 #pragma mark - init
+- (void)viewWillLayoutSubviews
+{
+    [super viewWillLayoutSubviews];
+
+    CGRect rect = self.tableView.frame;
+    rect.size = self.tableView.contentSize;
+
+    self.tableView.frame = rect;
+    NSLog(@"回复表格：%f", self.tableView.contentSize.height);
+}
 - (instancetype)init
 {
     if (self = [super init]) {

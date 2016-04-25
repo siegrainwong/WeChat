@@ -17,7 +17,7 @@
 @property (copy, nonatomic) NSArray* comments;
 
 @property (strong, nonatomic) NSIndexPath* indexPath;
-@property (strong, nonatomic) NSNumber* height;
+@property (assign, nonatomic) NSInteger height;
 
 + (instancetype)momentWithContent:(NSString*)content name:(NSString*)name pictures:(NSArray*)pictures comments:(NSArray*)comments;
 @end
