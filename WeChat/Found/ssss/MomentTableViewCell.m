@@ -28,8 +28,6 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
 
 @property (strong, nonatomic) UIImageView* commentsBubbleView;
 @property (strong, nonatomic) CommentTableViewController* commentsController;
-
-@property (strong, nonatomic) Moment* model;
 @end
 
 @implementation MomentTableViewCell
@@ -55,27 +53,17 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     self.timeLabel.text = @"1分钟前";
     self.commentsController.comments = model.comments;
 
-<<<<<<< HEAD
-    __weak typeof(self) weakSelf = self;
-=======
->>>>>>> origin/master
     //高亮链接
     if ([model.name isEqualToString:@"Siegrain Wong"]) {
         NSRange blogRange = [model.content rangeOfString:kBlogLink];
         NSRange githubRange = [model.content rangeOfString:kGithubLink];
 
         if (blogRange.location != NSNotFound)
-            [weakSelf.contentLabel addLinkToURL:[NSURL URLWithString:kBlogLink] withRange:blogRange];
+            [self.contentLabel addLinkToURL:[NSURL URLWithString:kBlogLink] withRange:blogRange];
         if (githubRange.location != NSNotFound)
-            [weakSelf.contentLabel addLinkToURL:[NSURL URLWithString:kGithubLink] withRange:githubRange];
+            [self.contentLabel addLinkToURL:[NSURL URLWithString:kGithubLink] withRange:githubRange];
     }
 
-<<<<<<< HEAD
-    [self setNeedsUpdateConstraints];
-    [self updateConstraintsIfNeeded];
-    //    [self setNeedsLayout];
-    //    [self layoutIfNeeded];
-=======
     //获取CollectionView的高度
     [self.photosController.collectionView mas_updateConstraints:^(MASConstraintMaker* make) {
         CGSize size = self.photosController.collectionView.collectionViewLayout.collectionViewContentSize;
@@ -96,10 +84,10 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
         //        }];
     }
 
-    //    [self setNeedsLayout];
-    //    [self layoutIfNeeded];
-    [self bindConstraints];
->>>>>>> origin/master
+    [self.contentLabel sizeToFit];
+
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 
 #pragma mark - build
@@ -138,16 +126,6 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     self.likeCommentLogoView.image = [UIImage imageNamed:@"AlbumOperateMore"];
     [self.contentView addSubview:self.likeCommentLogoView];
 
-<<<<<<< HEAD
-    //    self.commentsBubbleView = [[UIImageView alloc] init];
-    //    self.commentsBubbleView.userInteractionEnabled = true;
-    //    UIImage* bubbleImage = [UIImage imageNamed:@"LikeCmtBg"];
-    //    self.commentsBubbleView.image = [bubbleImage stretchableImageWithLeftCapWidth:30 topCapHeight:30];
-    //    [self.contentView addSubview:self.commentsBubbleView];
-    //
-    //    self.commentsController = [[CommentTableViewController alloc] init];
-    //    [self.commentsBubbleView addSubview:self.commentsController.tableView];
-=======
     self.commentsBubbleView = [[UIImageView alloc] init];
     self.commentsBubbleView.userInteractionEnabled = true;
     UIImage* bubbleImage = [UIImage imageNamed:@"LikeCmtBg"];
@@ -158,133 +136,54 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     [self.commentsBubbleView addSubview:self.commentsController.tableView];
 
     MASAttachKeys(self.avatarImageView, self.nameLabel, self.contentLabel, self.photosController.collectionView, self.timeLabel, self.likeCommentLogoView, self.commentsBubbleView, self.commentsController.tableView);
->>>>>>> origin/master
 }
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
 
-    self.contentLabel.preferredMaxLayoutWidth = self.contentLabel.frame.size.width;
-
-    [super layoutSubviews];
-}
 - (void)bindConstraints
 {
-<<<<<<< HEAD
-    MASAttachKeys(self.avatarImageView, self.nameLabel, self.contentLabel, self.photosController.collectionView,
-                  self.timeLabel, self.likeCommentLogoView //, self.commentsBubbleView, self.commentsController.tableView
-                  );
-
-    __weak typeof(self) weakSelf = self;
     [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
         make.top.left.offset(10);
         make.width.height.offset(40);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.left.equalTo(weakSelf.avatarImageView.mas_right).offset(10);
-        make.height.offset(20);
-        make.top.equalTo(weakSelf.avatarImageView);
-        make.right.offset(-10);
-    }];
-    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.equalTo(weakSelf.nameLabel.mas_bottom).offset(5);
-        make.left.right.equalTo(weakSelf.nameLabel);
-    }];
-    [self.photosController.collectionView mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.equalTo(weakSelf.contentLabel.mas_bottom).offset(5);
-        make.left.equalTo(weakSelf.nameLabel);
-        CGFloat maxWidth = 3 * (kPhotoSize + kCellSpacing);
-        make.width.offset(maxWidth);
-    }];
-    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.equalTo(weakSelf.photosController.collectionView.mas_bottom).offset(5);
-        make.left.equalTo(weakSelf.nameLabel);
-        make.width.lessThanOrEqualTo(weakSelf.contentView);
-        make.height.offset(20);
-        make.bottom.offset(-10).priorityLow();
-    }];
-    [self.likeCommentLogoView mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.equalTo(weakSelf.timeLabel);
-        make.right.equalTo(weakSelf.nameLabel).offset(4);
-        make.width.height.offset(25);
-    }];
-    //    [self.commentsBubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
-    //        make.top.equalTo(weakSelf.timeLabel.mas_bottom).offset(5);
-    //        make.left.right.equalTo(weakSelf.nameLabel);
-    //        //self-sizing cell的bottom约束必须要比其他约束的优先级低，不然约束要报错
-    //        make.bottom.offset(-10).priorityLow();
-    //    }];
-    //    [self.commentsController.tableView mas_makeConstraints:^(MASConstraintMaker* make) {
-    //        make.top.offset(7);
-    //        make.left.offset(3);
-    //        make.right.offset(-5);
-    //        make.bottom.offset(-5).priorityLow();
-    //    }];
-}
-- (void)updateConstraints
-{
-    [super updateConstraints];
-    __weak typeof(self) weakSelf = self;
-    [self.photosController.collectionView mas_updateConstraints:^(MASConstraintMaker* make) {
-        CGSize size = weakSelf.photosController.collectionView.collectionViewLayout.collectionViewContentSize;
-        NSLog(@"%f", size.height);
-        make.height.offset(size.height);
-=======
-    [self.avatarImageView mas_updateConstraints:^(MASConstraintMaker* make) {
-        make.top.left.offset(10);
-        make.width.height.offset(40);
-    }];
-    [self.nameLabel mas_updateConstraints:^(MASConstraintMaker* make) {
         make.left.equalTo(self.avatarImageView.mas_right).offset(10);
         make.height.offset(20);
         make.top.equalTo(self.avatarImageView);
         make.right.offset(-10);
     }];
-    [self.contentLabel mas_updateConstraints:^(MASConstraintMaker* make) {
+    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker* make) {
         make.top.equalTo(self.nameLabel.mas_bottom).offset(5);
         make.left.right.equalTo(self.nameLabel);
         make.height.lessThanOrEqualTo(self.contentView);
     }];
-    [self.photosController.collectionView mas_updateConstraints:^(MASConstraintMaker* make) {
+    [self.photosController.collectionView mas_makeConstraints:^(MASConstraintMaker* make) {
         make.top.equalTo(self.contentLabel.mas_bottom).offset(5);
         make.left.equalTo(self.nameLabel);
         CGFloat maxWidth = 3 * (kPhotoSize + kCellSpacing);
         make.width.greaterThanOrEqualTo(@(maxWidth));
     }];
-    [self.timeLabel mas_updateConstraints:^(MASConstraintMaker* make) {
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker* make) {
         make.top.equalTo(self.photosController.collectionView.mas_bottom).offset(5);
         make.left.equalTo(self.nameLabel);
         make.width.lessThanOrEqualTo(self.contentView);
         make.height.offset(20);
     }];
-    [self.likeCommentLogoView mas_updateConstraints:^(MASConstraintMaker* make) {
+    [self.likeCommentLogoView mas_makeConstraints:^(MASConstraintMaker* make) {
         make.top.equalTo(self.timeLabel);
         make.right.equalTo(self.nameLabel).offset(4);
         make.width.height.offset(25);
     }];
-    [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
+    [self.commentsBubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
         make.top.equalTo(self.timeLabel.mas_bottom).offset(5);
         make.left.right.equalTo(self.nameLabel);
         //self-sizing cell的bottom约束必须要比其他约束的优先级低，不然约束要报错
         make.bottom.offset(-10).priorityLow();
     }];
-    [self.commentsController.tableView mas_updateConstraints:^(MASConstraintMaker* make) {
+    [self.commentsController.tableView mas_makeConstraints:^(MASConstraintMaker* make) {
         make.top.offset(7);
         make.left.offset(3);
         make.right.offset(-5);
         make.bottom.offset(0).priorityLow();
->>>>>>> origin/master
     }];
-    //    if (self.model.comments.count > 0) {
-    //        [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
-    //            CGSize size = weakSelf.commentsController.tableView.contentSize;
-    //            make.height.offset(size.height + 15);
-    //        }];
-    //    } else {
-    //        [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
-    //            make.height.offset(0);
-    //        }];
-    //    }
 }
 #pragma mark - attributed label delegate
 - (void)attributedLabel:(TTTAttributedLabel*)label didSelectLinkWithURL:(NSURL*)url

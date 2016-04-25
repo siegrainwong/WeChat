@@ -45,10 +45,10 @@ CommentTableViewCell ()
         [self.label addLinkToURL:[NSURL URLWithString:name] withRange:nameRange];
 
     [self.label sizeToFit];
-//
-//    [self setNeedsLayout];
-//    [self layoutIfNeeded];
-//    [self bindConstraints];
+
+    //    [self setNeedsLayout];
+    //    [self layoutIfNeeded];
+    //    [self bindConstraints];
 }
 - (void)buildCell
 {

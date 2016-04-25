@@ -167,15 +167,14 @@ MomentsTableViewController ()
     Moment* model = self.momentsArray[indexPath.row];
     CGFloat height = model.height.floatValue;
 
-    //    if (!height) {
-    height = [tableView fd_heightForCellWithIdentifier:kIdentifier
-                                      cacheByIndexPath:indexPath
-                                         configuration:^(MomentTableViewCell* cell) {
-                                             cell.fd_enforceFrameLayout = false;
-                                             [self configureCell:cell atIndexPath:indexPath];
-                                         }];
-    model.height = @(height);
-    //    }
+    if (!height) {
+        height = [tableView fd_heightForCellWithIdentifier:kIdentifier
+                                          cacheByIndexPath:indexPath
+                                             configuration:^(id cell) {
+                                                 [self configureCell:cell atIndexPath:indexPath];
+                                             }];
+        model.height = @(height);
+    }
     return height;
 }
 - (NSInteger)tableView:(UITableView*)tableView
@@ -199,7 +198,7 @@ MomentsTableViewController ()
     model.avatar = [UIImage randomImageInPath:@"Images/cell_icons"];
     model.indexPath = indexPath;
 
-    [cell setModel:model];
+    cell.model = model;
 }
 #pragma mark - scrollview
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView

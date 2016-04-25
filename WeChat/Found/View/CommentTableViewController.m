@@ -60,8 +60,7 @@ CommentTableViewController ()
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     return [tableView fd_heightForCellWithIdentifier:kIdentifier
-                                       configuration:^(CommentTableViewCell* cell) {
-//                                           cell.fd_enforceFrameLayout = NO;
+                                       configuration:^(id cell) {
                                            [self configureCell:cell atIndexPath:indexPath];
                                        }];
 }
