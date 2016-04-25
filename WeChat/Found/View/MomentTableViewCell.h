@@ -11,5 +11,6 @@
 @class Moment;
 
 @interface MomentTableViewCell : UITableViewCell
-@property (strong, nonatomic) Moment* model;
+
+- (void)setModel:(Moment*)model;
 @end

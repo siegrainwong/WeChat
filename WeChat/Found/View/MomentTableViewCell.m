@@ -6,11 +6,13 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
+#import "CommentTableViewController.h"
 #import "Masonry/Masonry/Masonry.h"
 #import "Moment.h"
 #import "MomentTableViewCell.h"
 #import "PhotosCollectionViewController.h"
 #import "TTTAttributedLabel/TTTAttributedLabel/TTTAttributedLabel.h"
+#import "WeChatHelper.h"
 
 static NSString* const kBlogLink = @"http://siegrain.wang";
 static NSString* const kGithubLink = @"https://github.com/Seanwong933";
@@ -21,21 +23,16 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
 @property (strong, nonatomic) TTTAttributedLabel* nameLabel;
 @property (strong, nonatomic) TTTAttributedLabel* contentLabel;
 @property (strong, nonatomic) PhotosCollectionViewController* photosController;
+@property (strong, nonatomic) UILabel* timeLabel;
+@property (strong, nonatomic) UIImageView* likeCommentLogoView;
+
+@property (strong, nonatomic) UIImageView* commentsBubbleView;
+@property (strong, nonatomic) CommentTableViewController* commentsController;
+
+@property (strong, nonatomic) Moment* model;
 @end
 
 @implementation MomentTableViewCell
-#pragma mark - accessors
-+ (UIColor*)wechatFontColor
-{
-    static UIColor* color = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(
-      &onceToken,
-      ^{
-          color = [UIColor colorWithRed:(54 / 255.0) green:(71 / 255.0) blue:(121 / 255.0) alpha:1];
-      });
-    return color;
-}
 
 #pragma mark - init
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier
@@ -54,16 +51,26 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     self.nameLabel.text = model.name;
     self.contentLabel.text = model.content;
     self.photosController.photosArray = model.pictures;
+    self.photosController.parentCellIndexPath = model.indexPath;
+    self.timeLabel.text = @"1分钟前";
+    self.commentsController.comments = model.comments;
 
+    __weak typeof(self) weakSelf = self;
+    //高亮链接
     if ([model.name isEqualToString:@"Siegrain Wong"]) {
         NSRange blogRange = [model.content rangeOfString:kBlogLink];
         NSRange githubRange = [model.content rangeOfString:kGithubLink];
 
         if (blogRange.location != NSNotFound)
-            [self.contentLabel addLinkToURL:[NSURL URLWithString:kBlogLink] withRange:blogRange];
+            [weakSelf.contentLabel addLinkToURL:[NSURL URLWithString:kBlogLink] withRange:blogRange];
         if (githubRange.location != NSNotFound)
-            [self.contentLabel addLinkToURL:[NSURL URLWithString:kGithubLink] withRange:githubRange];
+            [weakSelf.contentLabel addLinkToURL:[NSURL URLWithString:kGithubLink] withRange:githubRange];
     }
+
+    [self setNeedsUpdateConstraints];
+    [self updateConstraintsIfNeeded];
+    //    [self setNeedsLayout];
+    //    [self layoutIfNeeded];
 }
 
 #pragma mark - build
@@ -75,7 +82,7 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     [self.contentView addSubview:self.avatarImageView];
 
     self.nameLabel = [[TTTAttributedLabel alloc] initWithFrame:CGRectZero];
-    self.nameLabel.textColor = [MomentTableViewCell wechatFontColor];
+    self.nameLabel.textColor = [WeChatHelper wechatFontColor];
     self.nameLabel.font = [UIFont systemFontOfSize:15 weight:0.2];
     self.nameLabel.verticalAlignment = UIControlContentVerticalAlignmentTop;
     [self.contentView addSubview:self.nameLabel];
@@ -85,29 +92,111 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     self.contentLabel.numberOfLines = 0;
     self.contentLabel.verticalAlignment = TTTAttributedLabelVerticalAlignmentTop;
     self.contentLabel.font = [UIFont systemFontOfSize:15];
-    self.contentLabel.linkAttributes = @{ (NSString*)kCTForegroundColorAttributeName : [MomentTableViewCell wechatFontColor] };
+    self.contentLabel.linkAttributes = @{ (NSString*)kCTForegroundColorAttributeName : [WeChatHelper wechatFontColor] };
     [self.contentView addSubview:self.contentLabel];
 
-    self.photosController = [[PhotosCollectionViewController alloc] init];
+    UICollectionViewFlowLayout* flow = [[UICollectionViewFlowLayout alloc] init];
+    self.photosController = [[PhotosCollectionViewController alloc] initWithCollectionViewLayout:flow];
     [self.contentView addSubview:self.photosController.collectionView];
-}
 
+    self.timeLabel = [[UILabel alloc] init];
+    self.timeLabel.font = [UIFont systemFontOfSize:12];
+    self.timeLabel.textColor = [UIColor colorWithWhite:.5 alpha:1];
+    self.timeLabel.numberOfLines = 0;
+    [self.contentView addSubview:self.timeLabel];
+
+    self.likeCommentLogoView = [[UIImageView alloc] init];
+    self.likeCommentLogoView.image = [UIImage imageNamed:@"AlbumOperateMore"];
+    [self.contentView addSubview:self.likeCommentLogoView];
+
+    //    self.commentsBubbleView = [[UIImageView alloc] init];
+    //    self.commentsBubbleView.userInteractionEnabled = true;
+    //    UIImage* bubbleImage = [UIImage imageNamed:@"LikeCmtBg"];
+    //    self.commentsBubbleView.image = [bubbleImage stretchableImageWithLeftCapWidth:30 topCapHeight:30];
+    //    [self.contentView addSubview:self.commentsBubbleView];
+    //
+    //    self.commentsController = [[CommentTableViewController alloc] init];
+    //    [self.commentsBubbleView addSubview:self.commentsController.tableView];
+}
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+
+    self.contentLabel.preferredMaxLayoutWidth = self.contentLabel.frame.size.width;
+
+    [super layoutSubviews];
+}
 - (void)bindConstraints
 {
+    MASAttachKeys(self.avatarImageView, self.nameLabel, self.contentLabel, self.photosController.collectionView,
+                  self.timeLabel, self.likeCommentLogoView //, self.commentsBubbleView, self.commentsController.tableView
+                  );
+
+    __weak typeof(self) weakSelf = self;
     [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
         make.top.left.offset(10);
         make.width.height.offset(40);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.left.equalTo(self.avatarImageView.mas_right).offset(10);
-        make.top.equalTo(self.avatarImageView);
+        make.left.equalTo(weakSelf.avatarImageView.mas_right).offset(10);
+        make.height.offset(20);
+        make.top.equalTo(weakSelf.avatarImageView);
         make.right.offset(-10);
     }];
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.equalTo(self.nameLabel.mas_bottom).offset(5);
-        make.left.right.equalTo(self.nameLabel);
-        make.bottom.offset(-10);
+        make.top.equalTo(weakSelf.nameLabel.mas_bottom).offset(5);
+        make.left.right.equalTo(weakSelf.nameLabel);
     }];
+    [self.photosController.collectionView mas_makeConstraints:^(MASConstraintMaker* make) {
+        make.top.equalTo(weakSelf.contentLabel.mas_bottom).offset(5);
+        make.left.equalTo(weakSelf.nameLabel);
+        CGFloat maxWidth = 3 * (kPhotoSize + kCellSpacing);
+        make.width.offset(maxWidth);
+    }];
+    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker* make) {
+        make.top.equalTo(weakSelf.photosController.collectionView.mas_bottom).offset(5);
+        make.left.equalTo(weakSelf.nameLabel);
+        make.width.lessThanOrEqualTo(weakSelf.contentView);
+        make.height.offset(20);
+        make.bottom.offset(-10).priorityLow();
+    }];
+    [self.likeCommentLogoView mas_makeConstraints:^(MASConstraintMaker* make) {
+        make.top.equalTo(weakSelf.timeLabel);
+        make.right.equalTo(weakSelf.nameLabel).offset(4);
+        make.width.height.offset(25);
+    }];
+    //    [self.commentsBubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
+    //        make.top.equalTo(weakSelf.timeLabel.mas_bottom).offset(5);
+    //        make.left.right.equalTo(weakSelf.nameLabel);
+    //        //self-sizing cell的bottom约束必须要比其他约束的优先级低，不然约束要报错
+    //        make.bottom.offset(-10).priorityLow();
+    //    }];
+    //    [self.commentsController.tableView mas_makeConstraints:^(MASConstraintMaker* make) {
+    //        make.top.offset(7);
+    //        make.left.offset(3);
+    //        make.right.offset(-5);
+    //        make.bottom.offset(-5).priorityLow();
+    //    }];
+}
+- (void)updateConstraints
+{
+    [super updateConstraints];
+    __weak typeof(self) weakSelf = self;
+    [self.photosController.collectionView mas_updateConstraints:^(MASConstraintMaker* make) {
+        CGSize size = weakSelf.photosController.collectionView.collectionViewLayout.collectionViewContentSize;
+        NSLog(@"%f", size.height);
+        make.height.offset(size.height);
+    }];
+    //    if (self.model.comments.count > 0) {
+    //        [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
+    //            CGSize size = weakSelf.commentsController.tableView.contentSize;
+    //            make.height.offset(size.height + 15);
+    //        }];
+    //    } else {
+    //        [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
+    //            make.height.offset(0);
+    //        }];
+    //    }
 }
 #pragma mark - attributed label delegate
 - (void)attributedLabel:(TTTAttributedLabel*)label didSelectLinkWithURL:(NSURL*)url

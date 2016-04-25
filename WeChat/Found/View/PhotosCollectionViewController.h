@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+static NSUInteger const kPhotoSize = 90;
+static NSUInteger const kCellSpacing = 5;
+
 @interface PhotosCollectionViewController : UICollectionViewController
 @property (copy, nonatomic) NSArray<UIImage*>* photosArray;
+@property (strong, nonatomic) NSIndexPath* parentCellIndexPath;
 @end
