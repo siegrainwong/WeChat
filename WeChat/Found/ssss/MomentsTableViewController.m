@@ -186,11 +186,8 @@ MomentsTableViewController ()
         cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     MomentTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:kIdentifier forIndexPath:indexPath];
-    //    if (cell == nil) {
-    //        cell = [[MomentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kIdentifier];
 
     [self configureCell:cell atIndexPath:indexPath];
-    //    }
 
     return cell;
 }
@@ -201,7 +198,7 @@ MomentsTableViewController ()
     model.avatar = [UIImage randomImageInPath:@"Images/cell_icons"];
     model.indexPath = indexPath;
 
-    [cell setModel:model];
+    cell.model = model;
 }
 #pragma mark - scrollview
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView
