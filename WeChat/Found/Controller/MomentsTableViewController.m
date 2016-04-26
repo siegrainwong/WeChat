@@ -185,11 +185,9 @@ MomentsTableViewController ()
                            configuration:^(id cell) {
                                [self configureCell:cell atIndexPath:indexPath];
                            }];
-        NSLog(@"%ld", model.height);
     }
 
-    //    return model.height;
-    return 200;
+    return model.height;
 }
 - (NSInteger)tableView:(UITableView*)tableView
   numberOfRowsInSection:(NSInteger)section
