@@ -6,8 +6,9 @@
 //  Copyright © 2016年 siegrain. weChat. All rights reserved.
 //
 
-#import "Masonry/Masonry/Masonry.h"
 #import "PhotoCollectionViewCell.h"
+#import "SDAutoLayout/SDAutoLayoutDemo/SDAutoLayout/UIView+SDAutoLayout.h"
+#import "Masonry/Masonry/Masonry.h"
 
 @interface
 PhotoCollectionViewCell ()
@@ -42,5 +43,7 @@ PhotoCollectionViewCell ()
     [self.imageView mas_updateConstraints:^(MASConstraintMaker* make) {
         make.top.left.right.bottom.offset(0);
     }];
+    //    self.imageView.sd_layout
+    //      .spaceToSuperView(UIEdgeInsetsMake(0, 0, 0, 0));
 }
 @end

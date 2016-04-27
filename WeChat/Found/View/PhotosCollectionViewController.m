@@ -9,6 +9,7 @@
 #import "IDMPhotoBrowser/Classes/IDMPhotoBrowser.h"
 #import "PhotoCollectionViewCell.h"
 #import "PhotosCollectionViewController.h"
+#import "SDAutoLayout/SDAutoLayoutDemo/SDAutoLayout/UIView+SDAutoLayout.h"
 
 static NSString* const kIdentifier = @"Identifier";
 
@@ -58,6 +59,13 @@ PhotosCollectionViewController ()<IDMPhotoBrowserDelegate>
     }
     return _photosArray;
 }
+- (void)setPhotosArray:(NSArray<UIImage*>*)photosArray
+{
+    _photosArray = photosArray;
+
+    [self configureViewSize];
+    [self.collectionView reloadData];
+}
 #pragma mark - init
 - (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout*)layout
 {
@@ -74,25 +82,6 @@ PhotosCollectionViewController ()<IDMPhotoBrowserDelegate>
         flow.minimumInteritemSpacing = 2.5;
     }
     return self;
-}
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-}
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-- (void)setPhotosArray:(NSArray<UIImage*>*)photosArray
-{
-    _photosArray = photosArray;
-
-    [self.collectionView reloadData];
 }
 #pragma mark - collectionview
 - (NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section
@@ -117,7 +106,6 @@ PhotosCollectionViewController ()<IDMPhotoBrowserDelegate>
 - (void)collectionView:(UICollectionView*)collectionView didSelectItemAtIndexPath:(NSIndexPath*)indexPath
 {
     NSInteger tag = [self cellTagAtIndexPath:indexPath];
-    NSLog(@"%ld", tag);
     //    [self.photoBrowser setInitialPageIndex:tag];
     //由于PhotosCollectionViewController只是Cell种的一个子控制器，所以需要找到当前的presentedController进行present操作
     [self.topController presentViewController:self.photoBrowser animated:YES completion:nil];
@@ -126,5 +114,41 @@ PhotosCollectionViewController ()<IDMPhotoBrowserDelegate>
 - (NSInteger)cellTagAtIndexPath:(NSIndexPath*)indexPath
 {
     return [[NSString stringWithFormat:@"%ld%ld", self.parentCellIndexPath.row + 1, indexPath.row + 1] integerValue];
+}
+- (void)configureViewSize
+{
+    if (self.calculatedSize) return;
+
+    UICollectionViewFlowLayout* flow = (UICollectionViewFlowLayout*)self.collectionViewLayout;
+    NSInteger count = self.photosArray.count;
+    NSInteger itemsPerRow = [self itemsPerRow];
+    CGSize size = CGSizeZero;
+    if (count == 0)
+        size = CGSizeZero;
+    else if (count == 1) {
+        flow.itemSize = CGSizeMake(kPhotoSizeSingle, kPhotoSizeSingle);
+        size = CGSizeMake(kPhotoSizeSingle, kPhotoSizeSingle);
+    } else {
+        flow.itemSize = CGSizeMake(kPhotoSize, kPhotoSize);
+        CGFloat width = itemsPerRow * (kPhotoSize + kCellSpacing);
+        CGFloat height = ceilf((float)count / (float)itemsPerRow) * (kPhotoSize + kCellSpacing);
+        size = CGSizeMake(width, height);
+    }
+
+    self.collectionView.fixedWidth = @(size.width);
+    self.collectionView.width = size.width;
+    self.collectionView.fixedHeight = @(size.height);
+    self.collectionView.height = size.height;
+}
+- (NSInteger)itemsPerRow
+{
+    NSInteger count = self.photosArray.count;
+    if (count < 3) {
+        return count;
+    } else if (count <= 4) {
+        return 2;
+    } else {
+        return 3;
+    }
 }
 @end

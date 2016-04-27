@@ -12,6 +12,7 @@
 #import "Moment.h"
 #import "MomentTableViewCell.h"
 #import "PhotosCollectionViewController.h"
+#import "SDAutoLayout/SDAutoLayoutDemo/SDAutoLayout/UIView+SDAutoLayout.h"
 #import "TTTAttributedLabel/TTTAttributedLabel/TTTAttributedLabel.h"
 #import "WeChatHelper.h"
 
@@ -45,7 +46,7 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self buildCell];
-        [self bindConstraints];
+        [self bindConstraintsSD];
     }
     return self;
 }
@@ -121,15 +122,15 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     self.likeCommentLogoView = [[UIImageView alloc] init];
     self.likeCommentLogoView.image = [UIImage imageNamed:@"AlbumOperateMore"];
     [self.contentView addSubview:self.likeCommentLogoView];
-
-    self.commentsBubbleView = [[UIImageView alloc] init];
-    self.commentsBubbleView.userInteractionEnabled = true;
-    UIImage* bubbleImage = [UIImage imageNamed:@"LikeCmtBg"];
-    self.commentsBubbleView.image = [bubbleImage stretchableImageWithLeftCapWidth:30 topCapHeight:30];
-    [self.contentView addSubview:self.commentsBubbleView];
-
-    self.commentsController = [[CommentTableViewController alloc] init];
-    [self.commentsBubbleView addSubview:self.commentsController.tableView];
+    //
+    //    self.commentsBubbleView = [[UIImageView alloc] init];
+    //    self.commentsBubbleView.userInteractionEnabled = true;
+    //    UIImage* bubbleImage = [UIImage imageNamed:@"LikeCmtBg"];
+    //    self.commentsBubbleView.image = [bubbleImage stretchableImageWithLeftCapWidth:30 topCapHeight:30];
+    //    [self.contentView addSubview:self.commentsBubbleView];
+    //
+    //    self.commentsController = [[CommentTableViewController alloc] init];
+    //    [self.commentsBubbleView addSubview:self.commentsController.tableView];
 }
 - (void)bindConstraints
 {
@@ -194,19 +195,78 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
         make.bottom.offset(0).priorityLow();
     }];
 }
+- (void)bindConstraintsSD
+{
+    UIView* contentView = self.contentView;
+    self.avatarImageView.sd_layout
+      .topSpaceToView(contentView, 10)
+      .leftSpaceToView(contentView, 10)
+      .widthIs(kAvatarSize)
+      .heightIs(kAvatarSize);
+
+    self.nameLabel.sd_layout
+      .leftSpaceToView(self.avatarImageView, 10)
+      .rightSpaceToView(contentView, 10)
+      .topEqualToView(self.avatarImageView)
+      .heightIs(18);
+
+    self.contentLabel.sd_layout
+      .leftEqualToView(self.nameLabel)
+      .topSpaceToView(self.nameLabel, 5)
+      .rightSpaceToView(contentView, 10)
+      .autoHeightRatio(0);
+
+    self.photosController.collectionView.sd_layout
+      .leftEqualToView(self.nameLabel)
+      .topSpaceToView(self.contentLabel, 5);
+
+    self.timeLabel.sd_layout
+      .topSpaceToView(self.photosController.collectionView, 5)
+      .leftEqualToView(self.nameLabel)
+      .heightIs(15)
+      .autoHeightRatio(0);
+
+    self.likeCommentLogoView.sd_layout
+      .rightSpaceToView(contentView, 10)
+      .centerYEqualToView(self.timeLabel)
+      .heightIs(25)
+      .widthIs(25);
+
+    //    self.commentsBubbleView.sd_layout
+    //      .topSpaceToView(self.timeLabel, 5)
+    //      .leftEqualToView(self.nameLabel)
+    //      .rightSpaceToView(contentView, 10);
+}
 - (void)updateConstraints
 {
-    __weak typeof(self) weakSelf = self;
-    if (self.model.comments.count > 0) {
-        [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
-            CGSize size = weakSelf.commentsController.tableView.contentSize;
-            make.height.offset(size.height + 15);
-        }];
-    } else {
-        [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
-            make.height.offset(0);
-        }];
-    }
+    //    __weak typeof(self) weakSelf = self;
+    //    if (self.model.comments.count > 0) {
+    //        [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
+    //            CGSize size = weakSelf.commentsController.tableView.contentSize;
+    //            make.height.offset(size.height + 15);
+    //        }];
+    //    } else {
+    //        [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
+    //            make.height.offset(0);
+    //        }];
+    //    }
+
+    //    UIView* bottomView;
+    UIView* bottomView = self.timeLabel;
+    //    UIView* commentView = self.commentsController.tableView;
+    //    if (!self.model.comments.count) {
+    //        commentView.fixedWidth = @0;
+    //        commentView.fixedHeight = @0;
+    //        commentView.sd_layout.topSpaceToView(self.timeLabel, 0);
+    //        bottomView = self.timeLabel;
+    //    } else {
+    //        commentView.fixedHeight = nil;
+    //        commentView.fixedWidth = nil;
+    //        commentView.sd_layout.topSpaceToView(self.timeLabel, 5);
+    //        bottomView = commentView;
+    //    }
+    [self setupAutoHeightWithBottomView:bottomView bottomMargin:10];
+
     /*
 	 算高，算行数
 	 */
