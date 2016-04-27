@@ -19,6 +19,7 @@ static NSString* const kBlogLink = @"http://siegrain.wang";
 static NSString* const kGithubLink = @"https://github.com/Seanwong933";
 
 static NSUInteger const kAvatarSize = 40;
+static NSInteger const kContentLineCount = 6;
 
 @interface
 MomentTableViewCell ()<TTTAttributedLabelDelegate>
@@ -31,6 +32,8 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
 
 @property (strong, nonatomic) UIImageView* commentsBubbleView;
 @property (strong, nonatomic) CommentTableViewController* commentsController;
+
+@property (strong, nonatomic) UIButton* fullTextButton;
 
 @property (strong, nonatomic) Moment* model;
 @end
@@ -57,6 +60,7 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     self.photosController.parentCellIndexPath = model.indexPath;
     self.timeLabel.text = @"1分钟前";
     self.commentsController.comments = model.comments;
+    //    [self.fullTextButton setTitle:@"全文" forState:UIControlStateNormal];
 
     __weak typeof(self) weakSelf = self;
     //高亮链接
@@ -99,6 +103,12 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     self.contentLabel.linkAttributes = @{ (NSString*)kCTForegroundColorAttributeName : [WeChatHelper wechatFontColor] };
     [self.contentView addSubview:self.contentLabel];
 
+    //    self.fullTextButton = [[UIButton alloc] init];
+    //    self.fullTextButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    //    [self.fullTextButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    //    self.fullTextButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    //    [self.contentView addSubview:self.fullTextButton];
+
     UICollectionViewFlowLayout* flow = [[UICollectionViewFlowLayout alloc] init];
     self.photosController = [[PhotosCollectionViewController alloc] initWithCollectionViewLayout:flow];
     [self.contentView addSubview:self.photosController.collectionView];
@@ -123,26 +133,34 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
 }
 - (void)bindConstraints
 {
-    MASAttachKeys(self.avatarImageView, self.nameLabel, self.contentLabel, self.photosController.collectionView,
-                  self.timeLabel, self.likeCommentLogoView, self.commentsBubbleView, self.commentsController.tableView);
+    MASAttachKeys(self.avatarImageView, self.nameLabel, self.contentLabel,
+                  self.photosController.collectionView, self.timeLabel, self.likeCommentLogoView,
+                  self.commentsBubbleView, self.commentsController.tableView //, self.fullTextButton
+                  );
 
     __weak typeof(self) weakSelf = self;
     [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.left.offset(10);
+        make.top.left.equalTo(weakSelf.contentView).offset(10);
         make.width.height.offset(kAvatarSize);
     }];
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker* make) {
         make.left.equalTo(weakSelf.avatarImageView.mas_right).offset(10);
         make.top.equalTo(weakSelf.avatarImageView);
-        make.right.offset(-10);
+        make.right.equalTo(weakSelf.contentView).offset(-10);
         make.height.offset(22);
     }];
-    self.contentLabel.preferredMaxLayoutWidth = self.frame.size.width - kAvatarSize - 3 * 10;
+    self.contentLabel.preferredMaxLayoutWidth = self.contentView.frame.size.width;
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker* make) {
         make.top.equalTo(weakSelf.nameLabel.mas_bottom).offset(5);
         make.left.right.equalTo(weakSelf.nameLabel);
     }];
     [self.contentLabel setContentHuggingPriority:1000 forAxis:UILayoutConstraintAxisVertical];
+
+    //    [self.fullTextButton mas_makeConstraints:^(MASConstraintMaker* make) {
+    //        make.left.equalTo(weakSelf.nameLabel);
+    //        make.right.lessThanOrEqualTo(weakSelf.contentView);
+    //        make.height.offset(22);
+    //    }];
 
     int pictureRows = [[self.reuseIdentifier stringByReplacingOccurrencesOfString:@"Identifier" withString:@""] intValue];
     [self.photosController.collectionView mas_makeConstraints:^(MASConstraintMaker* make) {
@@ -164,13 +182,10 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
         make.width.height.offset(25);
     }];
     [self.commentsBubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
-        //        make.top.offset(5);
-        //        make.left.offset(5);
-        //        make.right.offset(-5);
         make.top.equalTo(weakSelf.timeLabel.mas_bottom).offset(5);
         make.left.right.equalTo(weakSelf.nameLabel);
         //self-sizing cell的bottom约束必须要比其他约束的优先级低，不然约束要报错
-        make.bottom.offset(-10).priorityLow();
+        make.bottom.equalTo(weakSelf.contentView).offset(-10).priorityLow();
     }];
     [self.commentsController.tableView mas_makeConstraints:^(MASConstraintMaker* make) {
         make.top.offset(9);
@@ -178,12 +193,9 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
         make.right.offset(-5);
         make.bottom.offset(0).priorityLow();
     }];
-    [self.commentsBubbleView setContentHuggingPriority:1000 forAxis:UILayoutConstraintAxisVertical];
 }
 - (void)updateConstraints
 {
-    [super updateConstraints];
-
     __weak typeof(self) weakSelf = self;
     if (self.model.comments.count > 0) {
         [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
@@ -195,6 +207,49 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
             make.height.offset(0);
         }];
     }
+    /*
+	 算高，算行数
+	 */
+    //    NSInteger lineCount = self.model.contentLineCount;
+    //    if (!lineCount) {
+    //        /*这里cell还没显示出来，默认frame宽度是320，所以要用screen来获取？*/
+    //        CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - kAvatarSize - 3 * 10;
+    //        CGSize maxSize = CGSizeMake(labelWidth, MAXFLOAT);
+    //        //        self.model.contentLabelSize = [self.contentLabel sizeThatFits:maxSize];
+    //
+    //        NSDictionary* textAttrs = @{ NSFontAttributeName : self.contentLabel.font };
+    //        self.model.contentLabelHeight = [self.contentLabel.text
+    //                                          boundingRectWithSize:maxSize
+    //                                                       options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+    //                                                    attributes:textAttrs
+    //                                                       context:nil]
+    //                                          .size.height;
+    //
+    //        NSInteger lineCount = self.model.contentLabelHeight / self.contentLabel.font.lineHeight;
+    //        //        NSLog(@"sizeThatFits:%f---%ld    boundingRectWithSize:%f---%ld", size.height, lineCount, textH, lineCount2);
+    //
+    //        self.model.contentLineCount = lineCount;
+    //    }
+    //    NSLog(@"%f---%ld", self.model.contentLabelHeight, self.model.contentLineCount);
+    //    if (lineCount > kContentLineCount) {
+    //        self.fullTextButton.hidden = false;
+    //        [self.fullTextButton mas_updateConstraints:^(MASConstraintMaker* make) {
+    //            make.top.offset(weakSelf.model.contentLabelHeight + 22 + 3 * 5 + 20);
+    //        }];
+    //        //        [self.contentLabel mas_updateConstraints:^(MASConstraintMaker* make) {
+    //        //            make.height.offset(self.model.contentLabelHeight + 22).priority(1000);
+    //        //        }];
+    //    } else {
+    //        self.fullTextButton.hidden = true;
+    //        [self.fullTextButton mas_updateConstraints:^(MASConstraintMaker* make) {
+    //            make.top.offset(weakSelf.model.contentLabelHeight);
+    //        }];
+    //        //        [self.contentLabel mas_updateConstraints:^(MASConstraintMaker* make) {
+    //        //            make.height.offset(self.model.contentLabelHeight + 1).priority(1000);
+    //        //        }];
+    //    }
+
+    [super updateConstraints];
 }
 #pragma mark - attributed label delegate
 - (void)attributedLabel:(TTTAttributedLabel*)label didSelectLinkWithURL:(NSURL*)url

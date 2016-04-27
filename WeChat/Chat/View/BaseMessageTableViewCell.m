@@ -104,6 +104,7 @@ BaseMessageTableViewCell ()
         if (self.alignement == MessageAlignementLeft) {
             //指view的左边在avatar的右边，边距为5
             make.left.equalTo(weakSelf.avatarImageView.mas_right).offset(5);
+            //这个地方必须制定contentView，不指定的话没有效果
             make.right.lessThanOrEqualTo(weakSelf.contentView).offset(-50);
         } else {
             make.right.equalTo(weakSelf.avatarImageView.mas_left).offset(-5);

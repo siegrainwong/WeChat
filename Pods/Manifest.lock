@@ -9,6 +9,7 @@ PODS:
   - MJRefresh (3.1.0)
   - PinYin4Objc (1.1.1)
   - pop (1.0.9)
+  - SDAutoLayout (1.52)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - JSONModel
   - Masonry
   - MJRefresh
+  - SDAutoLayout (~> 1.51)
   - TTTAttributedLabel
   - UITableView+FDTemplateLayoutCell
   - YSMChineseSort (~> 0.1.0)
@@ -34,6 +36,7 @@ SPEC CHECKSUMS:
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   PinYin4Objc: 3fa9673610368330e2dfb688b1d19a35c3930a78
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  SDAutoLayout: 7c92e8f149059e80010507e471e1b4b6c85a62bb
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   TTTAttributedLabel: 0a2ac7b2dd726d32a070dafb01446026b11e624f
   UITableView+FDTemplateLayoutCell: 234e1582bcc4e18461af91155123bb96538ed030

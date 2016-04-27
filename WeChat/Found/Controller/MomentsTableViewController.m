@@ -179,7 +179,7 @@ MomentsTableViewController ()
     Moment* model = self.momentsArray[indexPath.row];
     if (model.height <= 0) {
         // 根据当前数据，计算Cell的高度，注意+1
-        //        model.height = [templateCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
+        //                model.height = [templateCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
         model.height = [tableView
           fd_heightForCellWithIdentifier:[self cellIdentifier:indexPath]
                            configuration:^(id cell) {

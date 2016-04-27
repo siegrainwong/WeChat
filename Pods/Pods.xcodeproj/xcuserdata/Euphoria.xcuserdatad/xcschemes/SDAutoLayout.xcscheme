@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '44DF7264BBDE1CC6C0949320'
-               BlueprintName = 'YSMChineseSort-YSMChineseSort'
+               BlueprintIdentifier = 'F6087501A15BD671E2E7C878'
+               BlueprintName = 'SDAutoLayout'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'YSMChineseSort.bundle'>
+               BuildableName = 'libSDAutoLayout.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

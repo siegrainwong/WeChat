@@ -18,6 +18,8 @@
 
 @property (strong, nonatomic) NSIndexPath* indexPath;
 @property (assign, nonatomic) NSInteger height;
+@property (assign, nonatomic) NSInteger contentLineCount;
+@property (assign, nonatomic) CGFloat contentLabelHeight;
 
 + (instancetype)momentWithContent:(NSString*)content name:(NSString*)name pictures:(NSArray*)pictures comments:(NSArray*)comments;
 @end
