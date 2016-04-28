@@ -12,8 +12,8 @@ Blog: <a href="http://siegrain.wang/" target="_blank">Siegrain.Wang</a>
 3. 发现（朋友圈）
 
 # 项目演示
-![1](http://ww4.sinaimg.cn/mw690/0067hDr2gw1f3ckbs513rg308w0ftnpe.gif)  ![2](http://ww2.sinaimg.cn/mw690/0067hDr2gw1f3ckd79irsg308w0fte8a.gif)
-![3](http://ww1.sinaimg.cn/mw690/0067hDr2gw1f3ckenmehxg308w0ftqve.gif)  ![4](http://ww1.sinaimg.cn/mw690/0067hDr2gw1f3ckfgqv7ug308w0ftx6t.gif)
+![1](https://raw.githubusercontent.com/Seanwong933/WeChat/master/Gif/chat_1_chatting.gif)  ![2](https://github.com/Seanwong933/WeChat/blob/master/Gif/chat_2_scroll.gif?raw=true)
+![3](https://github.com/Seanwong933/WeChat/blob/master/Gif/moments_1_refresh.gif?raw=true)  ![4](https://github.com/Seanwong933/WeChat/blob/master/Gif/moments_2_photo&expand.gif?raw=true)
 
 # 部分截图
 ![](http://siegrain.wang/_image/fake%20wechat%20summary/pic1_home.png) ![](http://siegrain.wang/_image/fake%20wechat%20summary/pic2_contact.png)
