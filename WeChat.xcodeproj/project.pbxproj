@@ -51,6 +51,9 @@
 		F9808A901CCB963D00C67C2D /* jf-5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9808A891CCB963D00C67C2D /* jf-5.jpg */; };
 		F9808A911CCB963D00C67C2D /* jf-6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9808A8A1CCB963D00C67C2D /* jf-6.jpg */; };
 		F9808A921CCB963D00C67C2D /* jf-7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F9808A8B1CCB963D00C67C2D /* jf-7.jpg */; };
+		F98A70171CD117B30069E340 /* SDBrowserImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = F98A70111CD117B30069E340 /* SDBrowserImageView.m */; };
+		F98A70181CD117B30069E340 /* SDPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = F98A70131CD117B30069E340 /* SDPhotoBrowser.m */; };
+		F98A70191CD117B30069E340 /* SDWaitingView.m in Sources */ = {isa = PBXBuildFile; fileRef = F98A70161CD117B30069E340 /* SDWaitingView.m */; };
 		F996B0951CC8B9A200164929 /* Empty.xib in Resources */ = {isa = PBXBuildFile; fileRef = F996B0941CC8B9A200164929 /* Empty.xib */; };
 		F9A2AD1E1CB65981002CE5F8 /* BaseMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F9A2AD1D1CB65981002CE5F8 /* BaseMessageTableViewCell.m */; };
 		F9B263311CC3A0E20013EEF2 /* IQDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9B2632F1CC3A0E20013EEF2 /* IQDatabaseManager.m */; };
@@ -227,6 +230,13 @@
 		F9808A891CCB963D00C67C2D /* jf-5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jf-5.jpg"; sourceTree = "<group>"; };
 		F9808A8A1CCB963D00C67C2D /* jf-6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jf-6.jpg"; sourceTree = "<group>"; };
 		F9808A8B1CCB963D00C67C2D /* jf-7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "jf-7.jpg"; sourceTree = "<group>"; };
+		F98A70101CD117B30069E340 /* SDBrowserImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDBrowserImageView.h; sourceTree = "<group>"; };
+		F98A70111CD117B30069E340 /* SDBrowserImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDBrowserImageView.m; sourceTree = "<group>"; };
+		F98A70121CD117B30069E340 /* SDPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPhotoBrowser.h; sourceTree = "<group>"; };
+		F98A70131CD117B30069E340 /* SDPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPhotoBrowser.m; sourceTree = "<group>"; };
+		F98A70141CD117B30069E340 /* SDPhotoBrowserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPhotoBrowserConfig.h; sourceTree = "<group>"; };
+		F98A70151CD117B30069E340 /* SDWaitingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWaitingView.h; sourceTree = "<group>"; };
+		F98A70161CD117B30069E340 /* SDWaitingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWaitingView.m; sourceTree = "<group>"; };
 		F996B0941CC8B9A200164929 /* Empty.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Empty.xib; sourceTree = "<group>"; };
 		F9A2AD1C1CB65981002CE5F8 /* BaseMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseMessageTableViewCell.h; sourceTree = "<group>"; };
 		F9A2AD1D1CB65981002CE5F8 /* BaseMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseMessageTableViewCell.m; sourceTree = "<group>"; };
@@ -461,6 +471,7 @@
 		F91775A31CAA685800557A45 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				F98A700F1CD117B30069E340 /* SDPhotoBrowser */,
 				F9E02DD71CBE245800B14B7E /* TuringTest */,
 				F9DA96001CB513E2008033A6 /* DateUtil.h */,
 				F9DA96011CB513E2008033A6 /* DateUtil.m */,
@@ -568,6 +579,20 @@
 				F9808A6C1CCB8E1100C67C2D /* yunmo.jpg */,
 			);
 			path = moments;
+			sourceTree = "<group>";
+		};
+		F98A700F1CD117B30069E340 /* SDPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				F98A70101CD117B30069E340 /* SDBrowserImageView.h */,
+				F98A70111CD117B30069E340 /* SDBrowserImageView.m */,
+				F98A70121CD117B30069E340 /* SDPhotoBrowser.h */,
+				F98A70131CD117B30069E340 /* SDPhotoBrowser.m */,
+				F98A70141CD117B30069E340 /* SDPhotoBrowserConfig.h */,
+				F98A70151CD117B30069E340 /* SDWaitingView.h */,
+				F98A70161CD117B30069E340 /* SDWaitingView.m */,
+			);
+			path = SDPhotoBrowser;
 			sourceTree = "<group>";
 		};
 		F9B2632C1CC398E50013EEF2 /* DatabaseManager */ = {
@@ -1282,6 +1307,7 @@
 			files = (
 				F9E02DEF1CBE24FC00B14B7E /* JSONKit.m in Sources */,
 				F90B41701CABFF5400ECF391 /* SearchResultsController.m in Sources */,
+				F98A70171CD117B30069E340 /* SDBrowserImageView.m in Sources */,
 				F9808A671CCB875B00C67C2D /* Moment.m in Sources */,
 				F91775A81CAA68D800557A45 /* UIImage+RandomImage.m in Sources */,
 				F9E073A41CA9162800468EDC /* MeViewController.m in Sources */,
@@ -1297,6 +1323,7 @@
 				F90B416D1CABCE1E00ECF391 /* Constants.m in Sources */,
 				F9E02DED1CBE24FC00B14B7E /* CAStreamBasicDescription.cpp in Sources */,
 				F9E02DEE1CBE24FC00B14B7E /* CAXException.cpp in Sources */,
+				F98A70181CD117B30069E340 /* SDPhotoBrowser.m in Sources */,
 				F97BF8A11CC4E45C00403E47 /* Messages.m in Sources */,
 				F9E073A11CA9161F00468EDC /* DiscoverViewController.m in Sources */,
 				F962F64C1CB53218005D73EA /* InsetsTextField.m in Sources */,
@@ -1325,6 +1352,7 @@
 				F90B41771CAD0C0E00ECF391 /* UIImage+Common.m in Sources */,
 				F9525AEB1CCE8CC100EBA218 /* Comment.m in Sources */,
 				F9E072E81CA90BD800468EDC /* WeChat.xcdatamodeld in Sources */,
+				F98A70191CD117B30069E340 /* SDWaitingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,4 +13,6 @@
 @interface MomentTableViewCell : UITableViewCell
 
 - (void)setModel:(Moment*)model;
+
+@property (nonatomic, copy) void (^toggleTextExpand)(NSIndexPath *indexPath);
 @end

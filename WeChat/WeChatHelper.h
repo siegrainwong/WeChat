@@ -10,4 +10,5 @@
 
 @interface WeChatHelper : NSObject
 + (UIColor*)wechatFontColor;
++ (UIImage*)imageWithColor:(UIColor*)color;
 @end

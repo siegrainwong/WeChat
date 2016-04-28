@@ -34,6 +34,10 @@ MomentsTableViewController ()
 @end
 
 @implementation MomentsTableViewController
+- (void)dealloc
+{
+    NSLog(@"MomentsTableView Controller已释放。");
+}
 #pragma mark - accessors
 - (NSMutableArray<Moment*>*)momentsArray
 {
@@ -158,30 +162,9 @@ MomentsTableViewController ()
 - (CGFloat)tableView:(UITableView*)tableView
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    // 传统算高。。。
-    //    static MomentTableViewCell* templateCell;
-    //    static dispatch_once_t onceToken;
-    //    dispatch_once(&onceToken, ^{
-    //        templateCell = [tableView dequeueReusableCellWithIdentifier:kIdentifier];
-    //    });
-    //
-    //    [self configureCell:templateCell atIndexPath:indexPath];
-    //
-    //    //    [templateCell.contentView setNeedsLayout];
-    //    //    [templateCell.contentView layoutIfNeeded];
-
     Moment* model = self.momentsArray[indexPath.row];
-    if (model.height <= 0) {
-        // 根据当前数据，计算Cell的高度，注意+1
-        //                model.height = [templateCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height + 1;
-        //FD算高
-        //        model.height = [tableView
-        //          fd_heightForCellWithIdentifier:[self cellIdentifier:indexPath]
-        //                           configuration:^(id cell) {
-        //                               [self configureCell:cell atIndexPath:indexPath];
-        //                           }];
-        model.height = [self.tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[MomentTableViewCell class] contentViewWidth:[self cellContentViewWith]];
-    }
+
+    model.height = [self.tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[MomentTableViewCell class] contentViewWidth:[self cellContentViewWith]];
 
     return model.height;
 }
@@ -210,15 +193,21 @@ MomentsTableViewController ()
 
     model.indexPath = indexPath;
 
+    if (!cell.toggleTextExpand) {
+        /*在cell内部获取的tableview不起作用，所以封装成block扔到外面来*/
+        __weak typeof(self) weakSelf = self;
+        [cell setToggleTextExpand:^(NSIndexPath* indexPath) {
+            Moment* model = weakSelf.momentsArray[indexPath.row];
+            model.isContentExpanded = !model.isContentExpanded;
+            [UIView setAnimationsEnabled:false];
+            [weakSelf.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
+            [UIView setAnimationsEnabled:true];
+        }];
+    }
+
     [cell setModel:model];
 }
 #pragma mark -
-- (NSString*)cellIdentifier:(NSIndexPath*)indexPath
-{
-    Moment* model = self.momentsArray[indexPath.row];
-    int rowCount = ceilf(model.pictures.count / 3.0);
-    return [NSString stringWithFormat:@"Identifier%d", rowCount];
-}
 - (CGFloat)cellContentViewWith
 {
     CGFloat width = [UIScreen mainScreen].bounds.size.width;

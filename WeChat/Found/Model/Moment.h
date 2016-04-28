@@ -21,5 +21,7 @@
 @property (assign, nonatomic) NSInteger contentLineCount;
 @property (assign, nonatomic) CGFloat contentLabelHeight;
 
+@property (assign, nonatomic) BOOL isContentExpanded;
+
 + (instancetype)momentWithContent:(NSString*)content name:(NSString*)name pictures:(NSArray*)pictures comments:(NSArray*)comments;
 @end

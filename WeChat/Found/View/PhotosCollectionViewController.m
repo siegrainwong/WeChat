@@ -10,48 +10,23 @@
 #import "PhotoCollectionViewCell.h"
 #import "PhotosCollectionViewController.h"
 #import "SDAutoLayout/SDAutoLayoutDemo/SDAutoLayout/UIView+SDAutoLayout.h"
+#import "SDPhotoBrowser.h"
 
 static NSString* const kIdentifier = @"Identifier";
 
 @interface
-PhotosCollectionViewController ()<IDMPhotoBrowserDelegate>
-@property (strong, nonatomic) IDMPhotoBrowser* photoBrowser;
-@property (strong, nonatomic) NSMutableArray* idmPhotosArray;
-@property (weak, nonatomic) UIViewController* topController;
+PhotosCollectionViewController ()<SDPhotoBrowserDelegate>
 @end
 
 @implementation PhotosCollectionViewController
 @synthesize photosArray = _photosArray;
 
+- (void)dealloc
+{
+    NSLog(@"PhotosCollectionView Controller已释放。");
+}
+
 #pragma mark - accessors
-- (UIViewController*)topController
-{
-    if (_topController == nil) {
-        _topController = [UIApplication sharedApplication].keyWindow.rootViewController;
-        while (_topController.presentedViewController) {
-            _topController = _topController.presentedViewController;
-        }
-    }
-    return _topController;
-}
-- (NSMutableArray*)idmPhotosArray
-{
-    if (_idmPhotosArray == nil) {
-        _idmPhotosArray = [NSMutableArray array];
-        [self.photosArray enumerateObjectsUsingBlock:^(UIImage* obj, NSUInteger idx, BOOL* _Nonnull stop) {
-            [_idmPhotosArray addObject:[IDMPhoto photoWithImage:obj]];
-        }];
-    }
-    return _idmPhotosArray;
-}
-- (IDMPhotoBrowser*)photoBrowser
-{
-    if (_photoBrowser == nil) {
-        _photoBrowser = [[IDMPhotoBrowser alloc] initWithPhotos:self.idmPhotosArray];
-        _photoBrowser.delegate = self;
-    }
-    return _photoBrowser;
-}
 - (NSArray<UIImage*>*)photosArray
 {
     if (_photosArray == nil) {
@@ -100,21 +75,19 @@ PhotosCollectionViewController ()<IDMPhotoBrowserDelegate>
 
 - (void)configureCell:(PhotoCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
 {
-    cell.image = self.photosArray[indexPath.row];
-    cell.tag = [self cellTagAtIndexPath:indexPath];
+    cell.imageView.image = self.photosArray[indexPath.row];
+    cell.imageView.tag = indexPath.row;
 }
 - (void)collectionView:(UICollectionView*)collectionView didSelectItemAtIndexPath:(NSIndexPath*)indexPath
 {
-    NSInteger tag = [self cellTagAtIndexPath:indexPath];
-    //    [self.photoBrowser setInitialPageIndex:tag];
-    //由于PhotosCollectionViewController只是Cell种的一个子控制器，所以需要找到当前的presentedController进行present操作
-    [self.topController presentViewController:self.photoBrowser animated:YES completion:nil];
+    SDPhotoBrowser* browser = [[SDPhotoBrowser alloc] init];
+    browser.sourceImagesContainerView = self.collectionView;
+    browser.imageCount = self.photosArray.count;
+    browser.currentImageIndex = indexPath.row;
+    browser.delegate = self;
+    [browser show];
 }
 #pragma mark -
-- (NSInteger)cellTagAtIndexPath:(NSIndexPath*)indexPath
-{
-    return [[NSString stringWithFormat:@"%ld%ld", self.parentCellIndexPath.row + 1, indexPath.row + 1] integerValue];
-}
 - (void)configureViewSize
 {
     if (self.calculatedSize) return;
@@ -150,5 +123,10 @@ PhotosCollectionViewController ()<IDMPhotoBrowserDelegate>
     } else {
         return 3;
     }
+}
+#pragma mark - SDPhotoBrowserDelegate
+- (UIImage*)photoBrowser:(SDPhotoBrowser*)browser placeholderImageForIndex:(NSInteger)index
+{
+    return self.photosArray[index];
 }
 @end

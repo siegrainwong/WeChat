@@ -24,6 +24,10 @@ CommentTableViewCell ()
 @end
 
 @implementation CommentTableViewCell
+- (void)dealloc
+{
+    NSLog(@"CommentTableView Cell已释放。");
+}
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {

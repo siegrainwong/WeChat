@@ -10,6 +10,7 @@
 #import "CommentTableViewCell.h"
 #import "CommentTableViewController.h"
 #import "MomentsDataSource.h"
+#import "SDAutoLayout/SDAutoLayoutDemo/SDAutoLayout/UIView+SDAutoLayout.h"
 #import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
 
 static NSString* const kIdentifier = @"commentIdentifier";
@@ -20,6 +21,10 @@ CommentTableViewController ()
 @end
 
 @implementation CommentTableViewController
+- (void)dealloc
+{
+    NSLog(@"CommentTable ViewController已释放。");
+}
 #pragma mark - accessors
 - (MomentsDataSource*)dataSource
 {

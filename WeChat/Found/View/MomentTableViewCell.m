@@ -8,14 +8,19 @@
 
 #import "Comment.h"
 #import "CommentTableViewController.h"
-#import "Masonry/Masonry/Masonry.h"
 #import "Moment.h"
 #import "MomentTableViewCell.h"
 #import "PhotosCollectionViewController.h"
 #import "SDAutoLayout/SDAutoLayoutDemo/SDAutoLayout/UIView+SDAutoLayout.h"
 #import "TTTAttributedLabel/TTTAttributedLabel/TTTAttributedLabel.h"
 #import "WeChatHelper.h"
-
+/*
+ Mark:
+ 之前用的Masonry+FDTemplateLayout算高，频出Bug。
+ 也不知道是约束插件出了问题还是算高插件的问题。
+ 这破问题从项目开始折腾我到项目结束，至少延长了我一半的开发时间，真™操蛋。
+ 换了SD的约束和算高插件就好了，约束逻辑也完全是正常逻辑，非常感谢作者。
+ */
 static NSString* const kBlogLink = @"http://siegrain.wang";
 static NSString* const kGithubLink = @"https://github.com/Seanwong933";
 
@@ -41,6 +46,10 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
 
 @implementation MomentTableViewCell
 #pragma mark - accessors
+- (void)dealloc
+{
+    NSLog(@"MomentTableView Cell已释放。");
+}
 #pragma mark - init
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier
 {
@@ -61,7 +70,6 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     self.photosController.parentCellIndexPath = model.indexPath;
     self.timeLabel.text = @"1分钟前";
     self.commentsController.comments = model.comments;
-    //    [self.fullTextButton setTitle:@"全文" forState:UIControlStateNormal];
 
     __weak typeof(self) weakSelf = self;
     //高亮链接
@@ -104,11 +112,13 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     self.contentLabel.linkAttributes = @{ (NSString*)kCTForegroundColorAttributeName : [WeChatHelper wechatFontColor] };
     [self.contentView addSubview:self.contentLabel];
 
-    //    self.fullTextButton = [[UIButton alloc] init];
-    //    self.fullTextButton.titleLabel.font = [UIFont systemFontOfSize:15];
-    //    [self.fullTextButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    //    self.fullTextButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    //    [self.contentView addSubview:self.fullTextButton];
+    self.fullTextButton = [[UIButton alloc] init];
+    self.fullTextButton.titleLabel.font = [UIFont systemFontOfSize:15];
+    [self.fullTextButton setTitleColor:[WeChatHelper wechatFontColor] forState:UIControlStateNormal];
+    [self.fullTextButton setBackgroundImage:[WeChatHelper imageWithColor:[UIColor lightGrayColor]] forState:UIControlStateHighlighted];
+    self.fullTextButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [self.fullTextButton addTarget:self action:@selector(toggleTextExpand:) forControlEvents:UIControlEventTouchUpInside];
+    [self.contentView addSubview:self.fullTextButton];
 
     UICollectionViewFlowLayout* flow = [[UICollectionViewFlowLayout alloc] init];
     self.photosController = [[PhotosCollectionViewController alloc] initWithCollectionViewLayout:flow];
@@ -122,78 +132,15 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     self.likeCommentLogoView = [[UIImageView alloc] init];
     self.likeCommentLogoView.image = [UIImage imageNamed:@"AlbumOperateMore"];
     [self.contentView addSubview:self.likeCommentLogoView];
-    //
-    //    self.commentsBubbleView = [[UIImageView alloc] init];
-    //    self.commentsBubbleView.userInteractionEnabled = true;
-    //    UIImage* bubbleImage = [UIImage imageNamed:@"LikeCmtBg"];
-    //    self.commentsBubbleView.image = [bubbleImage stretchableImageWithLeftCapWidth:30 topCapHeight:30];
-    //    [self.contentView addSubview:self.commentsBubbleView];
-    //
-    //    self.commentsController = [[CommentTableViewController alloc] init];
-    //    [self.commentsBubbleView addSubview:self.commentsController.tableView];
-}
-- (void)bindConstraints
-{
-    MASAttachKeys(self.avatarImageView, self.nameLabel, self.contentLabel,
-                  self.photosController.collectionView, self.timeLabel, self.likeCommentLogoView,
-                  self.commentsBubbleView, self.commentsController.tableView //, self.fullTextButton
-                  );
 
-    __weak typeof(self) weakSelf = self;
-    [self.avatarImageView mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.left.equalTo(weakSelf.contentView).offset(10);
-        make.width.height.offset(kAvatarSize);
-    }];
-    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.left.equalTo(weakSelf.avatarImageView.mas_right).offset(10);
-        make.top.equalTo(weakSelf.avatarImageView);
-        make.right.equalTo(weakSelf.contentView).offset(-10);
-        make.height.offset(22);
-    }];
-    self.contentLabel.preferredMaxLayoutWidth = self.contentView.frame.size.width;
-    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.equalTo(weakSelf.nameLabel.mas_bottom).offset(5);
-        make.left.right.equalTo(weakSelf.nameLabel);
-    }];
-    [self.contentLabel setContentHuggingPriority:1000 forAxis:UILayoutConstraintAxisVertical];
+    self.commentsBubbleView = [[UIImageView alloc] init];
+    self.commentsBubbleView.userInteractionEnabled = true;
+    UIImage* bubbleImage = [UIImage imageNamed:@"LikeCmtBg"];
+    self.commentsBubbleView.image = [bubbleImage stretchableImageWithLeftCapWidth:30 topCapHeight:30];
+    [self.contentView addSubview:self.commentsBubbleView];
 
-    //    [self.fullTextButton mas_makeConstraints:^(MASConstraintMaker* make) {
-    //        make.left.equalTo(weakSelf.nameLabel);
-    //        make.right.lessThanOrEqualTo(weakSelf.contentView);
-    //        make.height.offset(22);
-    //    }];
-
-    int pictureRows = [[self.reuseIdentifier stringByReplacingOccurrencesOfString:@"Identifier" withString:@""] intValue];
-    [self.photosController.collectionView mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.equalTo(weakSelf.contentLabel.mas_bottom).offset(5);
-        make.left.equalTo(weakSelf.nameLabel);
-        CGFloat rowSize = kPhotoSize + kCellSpacing;
-        make.width.offset(rowSize * 3);
-        make.height.offset(rowSize * pictureRows);
-    }];
-    [self.timeLabel mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.equalTo(weakSelf.photosController.collectionView.mas_bottom).offset(5);
-        make.left.equalTo(weakSelf.nameLabel);
-        make.width.lessThanOrEqualTo(weakSelf.contentView);
-        make.height.offset(22);
-    }];
-    [self.likeCommentLogoView mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.equalTo(weakSelf.timeLabel);
-        make.right.equalTo(weakSelf.nameLabel).offset(4);
-        make.width.height.offset(25);
-    }];
-    [self.commentsBubbleView mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.equalTo(weakSelf.timeLabel.mas_bottom).offset(5);
-        make.left.right.equalTo(weakSelf.nameLabel);
-        //self-sizing cell的bottom约束必须要比其他约束的优先级低，不然约束要报错
-        make.bottom.equalTo(weakSelf.contentView).offset(-10).priorityLow();
-    }];
-    [self.commentsController.tableView mas_makeConstraints:^(MASConstraintMaker* make) {
-        make.top.offset(9);
-        make.left.offset(3);
-        make.right.offset(-5);
-        make.bottom.offset(0).priorityLow();
-    }];
+    self.commentsController = [[CommentTableViewController alloc] init];
+    [self.commentsBubbleView addSubview:self.commentsController.tableView];
 }
 - (void)bindConstraintsSD
 {
@@ -216,9 +163,15 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
       .rightSpaceToView(contentView, 10)
       .autoHeightRatio(0);
 
+    self.fullTextButton.sd_layout
+      .leftEqualToView(self.contentLabel)
+      .topSpaceToView(self.contentLabel, 5)
+      .widthIs(30)
+      .heightIs(18);
+
     self.photosController.collectionView.sd_layout
       .leftEqualToView(self.nameLabel)
-      .topSpaceToView(self.contentLabel, 5);
+      .topSpaceToView(self.fullTextButton, 5);
 
     self.timeLabel.sd_layout
       .topSpaceToView(self.photosController.collectionView, 5)
@@ -232,88 +185,76 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
       .heightIs(25)
       .widthIs(25);
 
-    //    self.commentsBubbleView.sd_layout
-    //      .topSpaceToView(self.timeLabel, 5)
-    //      .leftEqualToView(self.nameLabel)
-    //      .rightSpaceToView(contentView, 10);
+    self.commentsBubbleView.sd_layout
+      .topSpaceToView(self.timeLabel, 5)
+      .leftEqualToView(self.nameLabel)
+      .rightSpaceToView(contentView, 10);
+
+    self.commentsController.tableView.sd_layout
+      .spaceToSuperView(UIEdgeInsetsMake(9, 3, 0, 5));
 }
 - (void)updateConstraints
 {
-    //    __weak typeof(self) weakSelf = self;
-    //    if (self.model.comments.count > 0) {
-    //        [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
-    //            CGSize size = weakSelf.commentsController.tableView.contentSize;
-    //            make.height.offset(size.height + 15);
-    //        }];
-    //    } else {
-    //        [self.commentsBubbleView mas_updateConstraints:^(MASConstraintMaker* make) {
-    //            make.height.offset(0);
-    //        }];
-    //    }
-
-    //    UIView* bottomView;
-    UIView* bottomView = self.timeLabel;
-    //    UIView* commentView = self.commentsController.tableView;
-    //    if (!self.model.comments.count) {
-    //        commentView.fixedWidth = @0;
-    //        commentView.fixedHeight = @0;
-    //        commentView.sd_layout.topSpaceToView(self.timeLabel, 0);
-    //        bottomView = self.timeLabel;
-    //    } else {
-    //        commentView.fixedHeight = nil;
-    //        commentView.fixedWidth = nil;
-    //        commentView.sd_layout.topSpaceToView(self.timeLabel, 5);
-    //        bottomView = commentView;
-    //    }
+    //评论框约束
+    UIView* bottomView;
+    UITableView* commentView = self.commentsController.tableView;
+    if (!self.model.comments.count) {
+        self.commentsBubbleView.fixedWidth = @0;
+        self.commentsBubbleView.fixedHeight = @0;
+        bottomView = self.timeLabel;
+    } else {
+        self.commentsBubbleView.fixedWidth = nil;
+        self.commentsBubbleView.fixedHeight = @(commentView.contentSize.height + 15);
+        bottomView = self.commentsBubbleView;
+    }
     [self setupAutoHeightWithBottomView:bottomView bottomMargin:10];
 
-    /*
-	 算高，算行数
-	 */
-    //    NSInteger lineCount = self.model.contentLineCount;
-    //    if (!lineCount) {
-    //        /*这里cell还没显示出来，默认frame宽度是320，所以要用screen来获取？*/
-    //        CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - kAvatarSize - 3 * 10;
-    //        CGSize maxSize = CGSizeMake(labelWidth, MAXFLOAT);
-    //        //        self.model.contentLabelSize = [self.contentLabel sizeThatFits:maxSize];
-    //
-    //        NSDictionary* textAttrs = @{ NSFontAttributeName : self.contentLabel.font };
-    //        self.model.contentLabelHeight = [self.contentLabel.text
-    //                                          boundingRectWithSize:maxSize
-    //                                                       options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
-    //                                                    attributes:textAttrs
-    //                                                       context:nil]
-    //                                          .size.height;
-    //
-    //        NSInteger lineCount = self.model.contentLabelHeight / self.contentLabel.font.lineHeight;
-    //        //        NSLog(@"sizeThatFits:%f---%ld    boundingRectWithSize:%f---%ld", size.height, lineCount, textH, lineCount2);
-    //
-    //        self.model.contentLineCount = lineCount;
-    //    }
-    //    NSLog(@"%f---%ld", self.model.contentLabelHeight, self.model.contentLineCount);
-    //    if (lineCount > kContentLineCount) {
-    //        self.fullTextButton.hidden = false;
-    //        [self.fullTextButton mas_updateConstraints:^(MASConstraintMaker* make) {
-    //            make.top.offset(weakSelf.model.contentLabelHeight + 22 + 3 * 5 + 20);
-    //        }];
-    //        //        [self.contentLabel mas_updateConstraints:^(MASConstraintMaker* make) {
-    //        //            make.height.offset(self.model.contentLabelHeight + 22).priority(1000);
-    //        //        }];
-    //    } else {
-    //        self.fullTextButton.hidden = true;
-    //        [self.fullTextButton mas_updateConstraints:^(MASConstraintMaker* make) {
-    //            make.top.offset(weakSelf.model.contentLabelHeight);
-    //        }];
-    //        //        [self.contentLabel mas_updateConstraints:^(MASConstraintMaker* make) {
-    //        //            make.height.offset(self.model.contentLabelHeight + 1).priority(1000);
-    //        //        }];
-    //    }
+    //文字展开
+    if (!self.model.contentLineCount) {
+        self.model.contentLabelHeight = [self calculateContentLabelHeight];
+        self.model.contentLineCount = self.model.contentLabelHeight / self.contentLabel.font.lineHeight;
+    }
+    if (self.model.contentLineCount > kContentLineCount) {
+        self.fullTextButton.sd_layout.heightIs(18);
+        self.fullTextButton.hidden = false;
+        if (self.model.isContentExpanded) {
+            self.contentLabel.sd_layout.maxHeightIs(MAXFLOAT);
+            [self.fullTextButton setTitle:@"收起" forState:UIControlStateNormal];
+        } else {
+            self.contentLabel.sd_layout.maxHeightIs(self.contentLabel.font.lineHeight * kContentLineCount);
+            [self.fullTextButton setTitle:@"全文" forState:UIControlStateNormal];
+        }
+    } else {
+        self.fullTextButton.sd_layout.heightIs(0);
+        self.fullTextButton.hidden = true;
+    }
 
     [super updateConstraints];
+}
+#pragma mark - expand contentLabel text
+- (void)toggleTextExpand:(UIButton*)sender
+{
+    MomentTableViewCell* cell = (MomentTableViewCell*)sender.superview.superview;
+    if (self.toggleTextExpand) {
+        self.toggleTextExpand(cell.model.indexPath);
+    }
 }
 #pragma mark - attributed label delegate
 - (void)attributedLabel:(TTTAttributedLabel*)label didSelectLinkWithURL:(NSURL*)url
 {
     [[UIApplication sharedApplication] openURL:url];
+}
+#pragma mark -
+- (CGFloat)calculateContentLabelHeight
+{
+    CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - kAvatarSize - 3 * 10;
+    CGSize maxSize = CGSizeMake(labelWidth, MAXFLOAT);
+    NSDictionary* textAttrs = @{ NSFontAttributeName : self.contentLabel.font };
+    return [self.contentLabel.text
+             boundingRectWithSize:maxSize
+                          options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
+                       attributes:textAttrs
+                          context:nil]
+      .size.height;
 }
 @end
