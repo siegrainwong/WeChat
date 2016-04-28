@@ -44,9 +44,9 @@ CommentTableViewController ()
     return _dataSource;
 }
 #pragma mark - init
-- (void)viewWillLayoutSubviews
+- (void)viewDidLayoutSubviews
 {
-    [super viewWillLayoutSubviews];
+    [super viewDidLayoutSubviews];
 
     CGRect rect = self.tableView.frame;
     rect.size = self.tableView.contentSize;

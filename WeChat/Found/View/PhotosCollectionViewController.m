@@ -60,7 +60,7 @@ PhotosCollectionViewController ()<SDPhotoBrowserDelegate>
         UICollectionViewFlowLayout* flow = (UICollectionViewFlowLayout*)layout;
         flow.itemSize = CGSizeMake(kPhotoSize, kPhotoSize);
         flow.minimumLineSpacing = kCellSpacing;
-        flow.minimumInteritemSpacing = 2.5;
+        flow.minimumInteritemSpacing = kCellSpacing / 2;
     }
     return self;
 }
@@ -110,7 +110,7 @@ PhotosCollectionViewController ()<SDPhotoBrowserDelegate>
     } else {
         flow.itemSize = CGSizeMake(kPhotoSize, kPhotoSize);
         CGFloat width = itemsPerRow * (kPhotoSize + kCellSpacing);
-        CGFloat height = ceilf((float)count / (float)itemsPerRow) * (kPhotoSize + kCellSpacing);
+        CGFloat height = ceilf((float)count / (float)itemsPerRow) * (kPhotoSize + kCellSpacing / 2);
         size = CGSizeMake(width, height);
     }
 

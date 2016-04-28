@@ -170,8 +170,9 @@ MomentsTableViewController ()
   heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     Moment* model = self.momentsArray[indexPath.row];
-
-    model.height = [self.tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[MomentTableViewCell class] contentViewWidth:[self cellContentViewWith]];
+    if (!model.height) {
+        model.height = [self.tableView cellHeightForIndexPath:indexPath model:model keyPath:@"model" cellClass:[MomentTableViewCell class] contentViewWidth:[self cellContentViewWith]];
+    }
 
     return model.height;
 }
@@ -206,6 +207,9 @@ MomentsTableViewController ()
         [cell setToggleTextExpand:^(NSIndexPath* indexPath) {
             Moment* model = weakSelf.momentsArray[indexPath.row];
             model.isContentExpanded = !model.isContentExpanded;
+            //height归0表示tableview需要重新计算该列的高度
+            model.height = 0;
+
             [UIView setAnimationsEnabled:false];
             [weakSelf.tableView reloadRowsAtIndexPaths:@[ indexPath ] withRowAnimation:UITableViewRowAnimationNone];
             [UIView setAnimationsEnabled:true];
