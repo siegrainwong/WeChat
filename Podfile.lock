@@ -4,7 +4,6 @@ PODS:
     - DACircularProgress
     - pop
     - SDWebImage
-  - JSONModel (1.2.0)
   - Masonry (1.0.0)
   - MJRefresh (3.1.0)
   - PinYin4Objc (1.1.1)
@@ -20,7 +19,6 @@ PODS:
 
 DEPENDENCIES:
   - IDMPhotoBrowser
-  - JSONModel
   - Masonry
   - MJRefresh
   - SDAutoLayout (~> 1.51)
@@ -31,7 +29,6 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   IDMPhotoBrowser: b574fe3229754e701f32df271afbc4ac7e4e1997
-  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
   Masonry: b529bb169217897b6354d4b56b1fada6d475b13d
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   PinYin4Objc: 3fa9673610368330e2dfb688b1d19a35c3930a78
