@@ -22,6 +22,10 @@ BaseMessageTableViewCell ()
 @end
 
 @implementation BaseMessageTableViewCell
+- (void)dealloc
+{
+    //    NSLog(@"BaseMessageCell V 已释放");
+}
 #pragma mark - init
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
               reuseIdentifier:(NSString*)reuseIdentifier

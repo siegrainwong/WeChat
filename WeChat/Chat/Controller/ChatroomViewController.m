@@ -40,6 +40,24 @@ ChatroomViewController ()<UITableViewDelegate, UITableViewDataSource>
 @end
 
 @implementation ChatroomViewController
+#pragma mark - release
+- (void)dealloc
+{
+    //    NSLog(@"chatroom VC 已释放");
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    self.context = nil;
+    self.apiConfig = nil;
+    self.apiRequest = nil;
+    self.chatModelArray = nil;
+
+    [self.editorView removeFromSuperview];
+    self.editorView = nil;
+
+    [self.tableView removeFromSuperview];
+    self.tableView = nil;
+}
 #pragma mark - accessors
 - (NSManagedObjectContext*)context
 {
