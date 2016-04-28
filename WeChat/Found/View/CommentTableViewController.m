@@ -23,7 +23,17 @@ CommentTableViewController ()
 @implementation CommentTableViewController
 - (void)dealloc
 {
-    NSLog(@"CommentTable ViewController已释放。");
+    //    NSLog(@"CommentTable ViewController已释放。");
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    self.dataSource = nil;
+    self.comments = nil;
+
+    [self.tableView removeFromSuperview];
+    self.tableView = nil;
+
+    //    NSLog(@"comments disappear");
 }
 #pragma mark - accessors
 - (MomentsDataSource*)dataSource
@@ -75,12 +85,14 @@ CommentTableViewController ()
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     Comment* model = self.comments[indexPath.row];
+
     if (!model.height) {
+        __weak typeof(self) weakSelf = self;
         model.height = [tableView
           fd_heightForCellWithIdentifier:kIdentifier
                            configuration:^(CommentTableViewCell* cell) {
                                cell.fd_enforceFrameLayout = true;
-                               [self configureCell:cell atIndexPath:indexPath];
+                               [weakSelf configureCell:cell atIndexPath:indexPath];
                            }];
     }
     return model.height;

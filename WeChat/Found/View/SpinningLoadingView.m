@@ -31,7 +31,7 @@ SpinningLoadingView ()
 #pragma mark - 重写方法
 - (void)dealloc
 {
-    NSLog(@"SpinningLoading View已释放。");
+    //    NSLog(@"SpinningLoading View已释放。");
 }
 #pragma mark 在这里做一些初始化配置（比如添加子控件）
 - (void)prepare

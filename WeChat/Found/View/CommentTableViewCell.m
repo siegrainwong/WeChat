@@ -26,7 +26,9 @@ CommentTableViewCell ()
 @implementation CommentTableViewCell
 - (void)dealloc
 {
-    NSLog(@"CommentTableView Cell已释放。");
+    self.model = nil;
+
+    //    NSLog(@"CommentTableView Cell已释放。");
 }
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier
 {

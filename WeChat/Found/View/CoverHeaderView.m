@@ -19,7 +19,7 @@ CoverHeaderView ()
 @implementation CoverHeaderView
 - (void)dealloc
 {
-    NSLog(@"CoverHeader View已释放。");
+    //    NSLog(@"CoverHeader View已释放。");
 }
 #pragma mark - init
 + (instancetype)coverHeaderWithCover:(UIImage*)cover

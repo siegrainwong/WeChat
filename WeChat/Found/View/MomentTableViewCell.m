@@ -48,7 +48,7 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
 #pragma mark - accessors
 - (void)dealloc
 {
-    NSLog(@"MomentTableView Cell已释放。");
+    //    NSLog(@"MomentTableView Cell已释放。");
 }
 #pragma mark - init
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier
@@ -67,7 +67,6 @@ MomentTableViewCell ()<TTTAttributedLabelDelegate>
     self.nameLabel.text = model.name;
     self.contentLabel.text = model.content;
     self.photosController.photosArray = model.pictures;
-    self.photosController.parentCellIndexPath = model.indexPath;
     self.timeLabel.text = @"1分钟前";
     self.commentsController.comments = model.comments;
 

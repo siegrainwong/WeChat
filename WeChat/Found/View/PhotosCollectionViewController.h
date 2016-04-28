@@ -14,7 +14,6 @@ static NSUInteger const kCellSpacing = 5;
 
 @interface PhotosCollectionViewController : UICollectionViewController
 @property (copy, nonatomic) NSArray<UIImage*>* photosArray;
-@property (strong, nonatomic) NSIndexPath* parentCellIndexPath;
 
 @property (assign, nonatomic) BOOL calculatedSize;
 @end

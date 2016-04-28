@@ -23,9 +23,15 @@ PhotosCollectionViewController ()<SDPhotoBrowserDelegate>
 
 - (void)dealloc
 {
-    NSLog(@"PhotosCollectionView Controller已释放。");
+    //    NSLog(@"PhotosCollectionView Controller已释放。");
 }
+- (void)viewDidDisappear:(BOOL)animated
+{
+    self.photosArray = nil;
 
+    [self.collectionView removeFromSuperview];
+    self.collectionView = nil;
+}
 #pragma mark - accessors
 - (NSArray<UIImage*>*)photosArray
 {

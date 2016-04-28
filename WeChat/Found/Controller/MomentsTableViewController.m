@@ -13,10 +13,9 @@
 #import "MomentTableViewCell.h"
 #import "MomentsDataSource.h"
 #import "MomentsTableViewController.h"
+#import "SDAutoLayout/SDAutoLayoutDemo/SDAutoLayout/UITableView+SDAutoTableViewCellHeight.h"
 #import "SpinningLoadingView.h"
 #import "UIImage+RandomImage.h"
-//#import "UITableView+FDTemplateLayoutCell/Classes/UITableView+FDTemplateLayoutCell.h"
-#import "SDAutoLayout/SDAutoLayoutDemo/SDAutoLayout/UITableView+SDAutoTableViewCellHeight.h"
 
 static NSString* const kIdentifier = @"Identifier";
 
@@ -29,14 +28,22 @@ MomentsTableViewController ()
 
 @property (strong, nonatomic) MomentsDataSource* datasource;
 @property (strong, nonatomic) NSMutableArray<Moment*>* momentsArray;
-
-@property (nonatomic, strong) MomentTableViewCell* prototypeCell;
 @end
 
 @implementation MomentsTableViewController
 - (void)dealloc
 {
-    NSLog(@"MomentsTableView Controller已释放。");
+    //    NSLog(@"MomentsTableView Controller已释放。");
+}
+- (void)viewDidDisappear:(BOOL)animated
+{
+    self.datasource = nil;
+    self.momentsArray = nil;
+
+    [self.tableView removeFromSuperview];
+    self.tableView = nil;
+
+    NSLog(@"moments disappear");
 }
 #pragma mark - accessors
 - (NSMutableArray<Moment*>*)momentsArray

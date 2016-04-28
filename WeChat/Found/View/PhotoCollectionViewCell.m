@@ -15,7 +15,7 @@ PhotoCollectionViewCell ()
 @implementation PhotoCollectionViewCell
 - (void)dealloc
 {
-    NSLog(@"PhotoCollectionView Cell已释放。");
+    //    NSLog(@"PhotoCollectionView Cell已释放。");
 }
 - (instancetype)initWithFrame:(CGRect)frame
 {
