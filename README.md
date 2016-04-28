@@ -31,4 +31,4 @@ Blog: <a href="http://siegrain.wang/" target="_blank">Siegrain.Wang</a>
     聊天记录通过`CoreData`进行存储，中间使用`IQDatabaseManager`帮助类方便操作
     
 **4. 刷新**
-上下拉刷新均使用`MJRefresh`，朋友圈下拉刷新通过扩展`MJRefresh`插件实现。
+    上下拉刷新均使用`MJRefresh`，朋友圈下拉刷新通过扩展`MJRefresh`插件实现。
