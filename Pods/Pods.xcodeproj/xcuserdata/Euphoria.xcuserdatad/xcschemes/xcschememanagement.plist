@@ -7,67 +7,93 @@
 		<key>DACircularProgress.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>IDMPhotoBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>Masonry.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>PinYin4Objc.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 		<key>SDAutoLayout.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>7</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 		<key>TTTAttributedLabel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>9</integer>
 		</dict>
 		<key>UITableView+FDTemplateLayoutCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>10</integer>
 		</dict>
 		<key>YSMChineseSort-YSMChineseSort.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>11</integer>
 		</dict>
 		<key>YSMChineseSort.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>12</integer>
 		</dict>
 		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<false />
+			<key>orderHint</key>
+			<integer>13</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -75,67 +101,67 @@
 		<key>0705D12BB767D8CA139B7F2DADD86A16</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>0CCBBF4BAA3FA48F98623D8875DC1DA7</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>13A902D0EF3D7EBD9D8F366EB9BC42E7</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>1C1F9CB74218C9124E7FD4DF080D31F0</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>3299CAC9360F1CB3904663183E4377FA</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>417D58D02B420460E8848FABE98D14A3</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>430EAC388BE8F7F7139A997947AB1B89</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>4968D8708486C692430E5A98C42B9FF6</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>53480ED0BE09FF49E34B1702D485CAAB</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>8D72A471326F35FFF008A2D0F666A609</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>8F74D9EA91F4C43190670066BAC37D44</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>9775596B3CA16905FC8F66DA8E2A3C67</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 		<key>ACAE27A34969E14A7DA9829402D7B9A0</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 	</dict>
 </dict>

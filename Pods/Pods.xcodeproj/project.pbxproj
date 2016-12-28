@@ -2018,6 +2018,7 @@
 			baseConfigurationReference = CFABD863253F7FEB954417058D8D72A8 /* YSMChineseSort.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Target Support Files/Pods/Pods-acknowledgements.plist";
 				PRODUCT_NAME = YSMChineseSort;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2030,6 +2031,7 @@
 			baseConfigurationReference = CFABD863253F7FEB954417058D8D72A8 /* YSMChineseSort.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Target Support Files/Pods/Pods-acknowledgements.plist";
 				PRODUCT_NAME = YSMChineseSort;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
